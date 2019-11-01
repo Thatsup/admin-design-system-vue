@@ -1,0 +1,7 @@
+@import url("https://use.typekit.net/bpi0kca.css");
+
+#root {
+    padding: 20px;
+    font-family: 'museo-sans';
+    -webkit-font-smoothing: antialiased;
+}
