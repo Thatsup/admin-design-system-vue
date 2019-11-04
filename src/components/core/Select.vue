@@ -1,14 +1,13 @@
 <template>
   <span class="select" :class="fieldClasses">
-    <div class="label" v-if="label">
+    <span class="label" v-if="label">
       {{ label }}
-    </div>
+    </span>
 
     <select
       :dir="transparent ? 'rtl' : 'ltr'"
       v-model="computedValue"
       v-bind="$attrs"
-      v-on="listeners"
       @blur="$emit('blur', $event)"
       @focus="$emit('focus', $event)"
     >
@@ -55,15 +54,6 @@ export default {
   },
 
   computed: {
-    listeners() {
-      return {
-        ...this.$listeners,
-        input: event => {
-          this.$emit("input", event.target.value);
-        }
-      };
-    },
-
     computedValue: {
       get() {
         return this.selected;
