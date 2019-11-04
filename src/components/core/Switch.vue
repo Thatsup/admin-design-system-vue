@@ -2,7 +2,7 @@
   <label
     ref="label"
     class="switch level"
-    :class="[size, { 'is-disabled': disabled }]"
+    :class="[size, { 'is-disabled': disabled, 'is-expanded': expanded }]"
     :disabled="disabled"
     @keydown.prevent.enter="$refs.label.click"
     @mousedown="isMouseDown = true"
@@ -55,6 +55,7 @@ export default {
       default: ""
     },
     required: Boolean,
+    expanded: Boolean,
     trueValue: {
       type: [String, Number, Boolean, Function, Object, Array, Symbol],
       default: true
@@ -94,7 +95,6 @@ export default {
 
 <style scoped>
 .switch {
-  width: 100%;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -199,5 +199,9 @@ export default {
 
 .switch[disabled] .check {
   opacity: 0.5;
+}
+
+.switch.is-expanded {
+  width: 100%;
 }
 </style>

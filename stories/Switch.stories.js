@@ -23,3 +23,37 @@ export const regular = () => ({
   `,
   methods: { action: action("changed") }
 });
+
+export const withInlineLabel = () => ({
+  components: { BaseSwitch, BaseField },
+  data() {
+    return {
+      active: false
+    };
+  },
+  template: `
+    <BaseField>
+      <BaseSwitch v-model="active" @input="action">
+        Flick it      
+      </BaseSwitch>
+    </BaseField>
+  `,
+  methods: { action: action("changed") }
+});
+
+export const expandedWithLabel = () => ({
+  components: { BaseSwitch, BaseField },
+  data() {
+    return {
+      active: false
+    };
+  },
+  template: `
+    <BaseField>
+      <BaseSwitch v-model="active" @input="action" expanded>
+        Flick it      
+      </BaseSwitch>
+    </BaseField>
+  `,
+  methods: { action: action("changed") }
+});
