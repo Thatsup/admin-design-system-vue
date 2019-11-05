@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: "TadSwitch",
+  name: "TadsSwitch",
   props: {
     value: {
       type: [String, Number, Boolean, Function, Object, Array, Symbol],

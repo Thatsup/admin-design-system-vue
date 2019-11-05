@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: "TadDropdownItem",
+  name: "TadsDropdownItem",
   props: {
     value: {
       type: [String, Number, Boolean, Object, Array, Symbol, Function],

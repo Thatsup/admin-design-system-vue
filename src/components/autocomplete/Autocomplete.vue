@@ -58,7 +58,7 @@ import FormElementMixin from "../utils/FormElementMixin";
 import TadsInput from "../core/Input.vue";
 
 export default {
-  name: "TadAutocomplete",
+  name: "TadsAutocomplete",
   mixins: [FormElementMixin],
   components: { TadsInput },
   inheritAttrs: false,
