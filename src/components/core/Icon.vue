@@ -2,6 +2,7 @@
 import { icons } from "../../icons";
 
 export default {
+  name: "TadsIcon",
   props: {
     name: {
       type: String,

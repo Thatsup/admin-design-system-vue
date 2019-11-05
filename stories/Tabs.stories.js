@@ -1,9 +1,9 @@
 import { action } from "@storybook/addon-actions";
 import { withKnobs, select } from "@storybook/addon-knobs";
 
-import BaseField from "../src/components/core/Field.vue";
-import BaseTabs from "../src/components/tabs/Tabs.vue";
-import BaseTab from "../src/components/tabs/Tab.vue";
+import TadsField from "../src/components/core/Field.vue";
+import TadsTabs from "../src/components/tabs/Tabs.vue";
+import TadsTab from "../src/components/tabs/Tab.vue";
 
 export default {
   title: "Components | Tabs",
@@ -11,23 +11,23 @@ export default {
 };
 
 export const regular = () => ({
-  components: { BaseTabs, BaseTab, BaseField },
+  components: { TadsTabs, TadsTab, TadsField },
   props: {
     position: {
       default: select("Position", ["left", "center", "right"], "center")
     }
   },
   template: `
-    <BaseTabs :position="position">
-        <BaseTab title="Tab 1">
+    <TadsTabs :position="position">
+        <TadsTab title="Tab 1">
             <h1>Heading 1</h1>        
             <h2>Heading 2</h2>        
-        </BaseTab>
+        </TadsTab>
         
-        <BaseTab title="Tab 2">
+        <TadsTab title="Tab 2">
             <pre>Some random code</pre>        
-        </BaseTab>
-    </BaseTabs>
+        </TadsTab>
+    </TadsTabs>
   `,
   methods: { action: action("changed") }
 });

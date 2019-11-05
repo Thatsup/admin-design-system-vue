@@ -17,6 +17,7 @@
 
 <script>
 export default {
+  name: "TadsTextarea",
   inheritAttrs: false,
   props: {
     value: {

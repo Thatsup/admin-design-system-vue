@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "BaseListItem",
+  name: "TadListItem",
   props: {
     title: {
       type: String,

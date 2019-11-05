@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  name: "BaseDropdown",
+  name: "TadDropdown",
   props: {
     value: {
       type: [String, Number, Boolean, Object, Array, Symbol, Function],

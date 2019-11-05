@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "BaseCheckbox",
+  name: "TadCheckbox",
   props: {
     value: {
       type: [String, Number, Boolean, Function, Object, Array, Symbol],

@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "BaseSelect",
+  name: "TadSelect",
   inheritAttrs: false,
   props: {
     value: {

@@ -1,37 +1,37 @@
 import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
-import BaseButton from "../src/components/core/Button.vue";
+import TadsButton from "../src/components/core/Button.vue";
 
 export const regular = () => ({
-  components: { BaseButton },
-  template: `<BaseButton @click="action">Click me</BaseButton>`,
+  components: { TadsButton },
+  template: `<TadsButton @click="action">Click me</TadsButton>`,
   methods: { action: action("clicked") }
 });
 
 export const primary = () => ({
-  components: { BaseButton },
-  template: `<BaseButton type="primary" @click="action">Click me</BaseButton>`,
+  components: { TadsButton },
+  template: `<TadsButton type="primary" @click="action">Click me</TadsButton>`,
   methods: { action: action("clicked") }
 });
 
 export const loading = () => ({
-  components: { BaseButton },
+  components: { TadsButton },
   data() {
     return { loading: false };
   },
-  template: `<BaseButton type="primary" @click="loading = !loading" :is-loading="loading">Persist heavy document</BaseButton>`,
+  template: `<TadsButton type="primary" @click="loading = !loading" :is-loading="loading">Persist heavy document</TadsButton>`,
   methods: { action: action("clicked") }
 });
 
 export const expanded = () => ({
-  components: { BaseButton },
-  template: `<BaseButton type="primary" @click="action" expanded>Click me</BaseButton>`,
+  components: { TadsButton },
+  template: `<TadsButton type="primary" @click="action" expanded>Click me</TadsButton>`,
   methods: { action: action("clicked") }
 });
 
 export const small = () => ({
-  components: { BaseButton },
-  template: `<BaseButton type="primary" @click="action" small>Click me</BaseButton>`,
+  components: { TadsButton },
+  template: `<TadsButton type="primary" @click="action" small>Click me</TadsButton>`,
   methods: { action: action("clicked") }
 });

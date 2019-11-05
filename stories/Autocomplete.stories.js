@@ -1,7 +1,7 @@
 import { action } from "@storybook/addon-actions";
 
-import BaseField from "../src/components/core/Field.vue";
-import BaseAutocomplete from "../src/components/autocomplete/Autocomplete.vue";
+import TadsField from "../src/components/core/Field.vue";
+import TadsAutocomplete from "../src/components/autocomplete/Autocomplete.vue";
 
 export default {
   title: "Components | Autocomplete"
@@ -39,7 +39,7 @@ let data = [
 ];
 
 export const regular = () => ({
-  components: { BaseAutocomplete, BaseField },
+  components: { TadsAutocomplete, TadsField },
   computed: {
     filteredPages() {
       return this.items.filter(option => {
@@ -61,25 +61,25 @@ export const regular = () => ({
   },
   template: `
       <div>
-        <BaseField label="Search for a Javascript framework">
-          <BaseAutocomplete
+        <TadsField label="Search for a Javascript framework">
+          <TadsAutocomplete
             v-model="query"
             field="name"
             :keep-first="true"
             :open-on-focus="true"
             :data="filteredPages"
             @select="option => selected = option">
-          </BaseAutocomplete>
-        </BaseField>
+          </TadsAutocomplete>
+        </TadsField>
          
-        <BaseField label="Selected">{{ selected }}</BaseField>
+        <TadsField label="Selected">{{ selected }}</TadsField>
       </div> 
   `,
   methods: { action: action("clicked") }
 });
 
 export const multiple = () => ({
-  components: { BaseAutocomplete, BaseField },
+  components: { TadsAutocomplete, TadsField },
   computed: {
     filteredPages() {
       return this.items.filter(option => {
@@ -101,15 +101,15 @@ export const multiple = () => ({
   },
   template: `
       <div>
-        <BaseField label="Search for a Javascript framework">
-          <BaseAutocomplete
+        <TadsField label="Search for a Javascript framework">
+          <TadsAutocomplete
             v-model="query"
             field="name"
             :clear-on-select="true"
             :data="filteredPages"
             @select="option => selected.push(option)">
-          </BaseAutocomplete>
-        </BaseField>
+          </TadsAutocomplete>
+        </TadsField>
          
         <ul>
             <li v-for="item in selected">&bull; {{ item }}</li>

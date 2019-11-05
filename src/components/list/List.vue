@@ -1,22 +1,22 @@
 <template>
   <div>
     <!-- Add -->
-    <BaseListItem v-if="add" :title="addTitle" class="add" @click="addHandler">
+    <TadsListItem v-if="add" :title="addTitle" class="add" @click="addHandler">
       <template v-slot:before>
         <div>
-          <BaseIcon name="add"></BaseIcon>
+          <TadsIcon name="add"></TadsIcon>
         </div>
       </template>
-    </BaseListItem>
+    </TadsListItem>
 
     <!-- List items are loading -->
     <div v-if="isLoading">
-      <BaseListItem v-for="n in skeletonAmount" :key="n">
+      <TadsListItem v-for="n in skeletonAmount" :key="n">
         <div class="loading-bars">
           <span class="loading-bar"></span>
           <span class="loading-bar"></span>
         </div>
-      </BaseListItem>
+      </TadsListItem>
     </div>
 
     <!-- We have data. Show list items! -->
@@ -27,12 +27,12 @@
 </template>
 
 <script>
-import BaseIcon from "../core/Icon";
-import BaseListItem from "./ListItem";
+import TadsIcon from "../core/Icon";
+import TadsListItem from "./ListItem";
 
 export default {
-  name: "BaseList",
-  components: { BaseListItem, BaseIcon },
+  name: "TadList",
+  components: { TadsListItem, TadsIcon },
   props: {
     items: {
       type: [Array, Boolean, Object],

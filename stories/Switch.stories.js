@@ -1,8 +1,8 @@
 import { action } from "@storybook/addon-actions";
 import { withKnobs } from "@storybook/addon-knobs";
 
-import BaseField from "../src/components/core/Field.vue";
-import BaseSwitch from "../src/components/core/Switch.vue";
+import TadsField from "../src/components/core/Field.vue";
+import TadsSwitch from "../src/components/core/Switch.vue";
 
 export default {
   title: "Components | Switch",
@@ -10,50 +10,50 @@ export default {
 };
 
 export const regular = () => ({
-  components: { BaseSwitch, BaseField },
+  components: { TadsSwitch, TadsField },
   data() {
     return {
       active: false
     };
   },
   template: `
-    <BaseField label="Flick it">
-      <BaseSwitch v-model="active" @input="action" />
-    </BaseField>
+    <TadsField label="Flick it">
+      <TadsSwitch v-model="active" @input="action" />
+    </TadsField>
   `,
   methods: { action: action("changed") }
 });
 
 export const withInlineLabel = () => ({
-  components: { BaseSwitch, BaseField },
+  components: { TadsSwitch, TadsField },
   data() {
     return {
       active: false
     };
   },
   template: `
-    <BaseField>
-      <BaseSwitch v-model="active" @input="action">
+    <TadsField>
+      <TadsSwitch v-model="active" @input="action">
         Flick it      
-      </BaseSwitch>
-    </BaseField>
+      </TadsSwitch>
+    </TadsField>
   `,
   methods: { action: action("changed") }
 });
 
 export const expandedWithLabel = () => ({
-  components: { BaseSwitch, BaseField },
+  components: { TadsSwitch, TadsField },
   data() {
     return {
       active: false
     };
   },
   template: `
-    <BaseField>
-      <BaseSwitch v-model="active" @input="action" expanded>
+    <TadsField>
+      <TadsSwitch v-model="active" @input="action" expanded>
         Flick it      
-      </BaseSwitch>
-    </BaseField>
+      </TadsSwitch>
+    </TadsField>
   `,
   methods: { action: action("changed") }
 });

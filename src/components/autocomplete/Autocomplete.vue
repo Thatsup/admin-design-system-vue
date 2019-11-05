@@ -1,6 +1,6 @@
 <template>
   <div class="autocomplete control" :class="{ 'is-expanded': expanded }">
-    <BaseInput
+    <TadsInput
       v-model="newValue"
       type="text"
       ref="input"
@@ -15,7 +15,7 @@
       @keydown.native.enter.prevent="enterPressed"
       @keydown.native.up.prevent="keyArrows('up')"
       @keydown.native.down.prevent="keyArrows('down')"
-    ></BaseInput>
+    ></TadsInput>
 
     <transition name="fade">
       <div
@@ -55,12 +55,12 @@
 <script>
 import { getValueByPath } from "../utils/helpers";
 import FormElementMixin from "../utils/FormElementMixin";
-import BaseInput from "../core/Input.vue";
+import TadsInput from "../core/Input.vue";
 
 export default {
-  name: "BaseAutocomplete",
+  name: "TadAutocomplete",
   mixins: [FormElementMixin],
-  components: { BaseInput },
+  components: { TadsInput },
   inheritAttrs: false,
   props: {
     value: {

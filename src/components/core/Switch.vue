@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: "BaseSwitch",
+  name: "TadSwitch",
   props: {
     value: {
       type: [String, Number, Boolean, Function, Object, Array, Symbol],

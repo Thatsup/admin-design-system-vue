@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "base-button",
+  name: "TadButton",
   inheritAttrs: false,
   props: {
     type: {

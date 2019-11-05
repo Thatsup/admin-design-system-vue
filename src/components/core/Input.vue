@@ -23,7 +23,7 @@
 import FormElementMixin from "../utils/FormElementMixin";
 // Input
 export default {
-  name: "BaseInput",
+  name: "TInput",
   mixins: [FormElementMixin],
   inheritAttrs: false,
   props: {

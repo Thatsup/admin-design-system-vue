@@ -1,12 +1,12 @@
 import { action } from "@storybook/addon-actions";
 import { withKnobs, text } from "@storybook/addon-knobs";
 
-import BaseIcon from "../src/components/core/Icon.vue";
+import TadsIcon from "../src/components/core/Icon.vue";
 import {icons} from "../src/icons";
 
 export default {
   title: "Components | Icon",
-  components: { BaseIcon },
+  components: { TadsIcon },
   decorators: [withKnobs]
 };
 
@@ -14,11 +14,11 @@ export const allIcons = () => ({
   data() {
     return { icons }
   },
-  components: { BaseIcon },
+  components: { TadsIcon },
   template: `
       <div>
         <div v-for="(icon, name) in icons">
-          <BaseIcon :name="name"></BaseIcon>
+          <TadsIcon :name="name"></TadsIcon>
           {{ name }}
         </div>
       </div> 
@@ -30,17 +30,17 @@ export const rotation = () => ({
   data() {
     return { icons }
   },
-  components: { BaseIcon },
+  components: { TadsIcon },
   template: `
       <div>
         <div>
           180deg
-          <BaseIcon name="chevron" rotate="180"></BaseIcon>
+          <TadsIcon name="chevron" rotate="180"></TadsIcon>
         </div> 
         
         <div>
           45deg
-          <BaseIcon name="chevron" rotate="45"></BaseIcon>
+          <TadsIcon name="chevron" rotate="45"></TadsIcon>
         </div> 
       </div>
   `,

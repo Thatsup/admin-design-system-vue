@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "BaseRadio",
+  name: "TadRadio",
   props: {
     value: {
       type: [String, Number, Boolean, Function, Object, Array, Symbol],

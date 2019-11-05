@@ -1,8 +1,8 @@
 import { action } from "@storybook/addon-actions";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 
-import BaseCheckbox from "../src/components/core/Checkbox.vue";
-import BaseField from "../src/components/core/Field.vue";
+import TadsCheckbox from "../src/components/core/Checkbox.vue";
+import TadsField from "../src/components/core/Field.vue";
 
 export default {
   title: "Components | Checkbox",
@@ -10,16 +10,16 @@ export default {
 };
 
 export const regular = () => ({
-  components: { BaseCheckbox, BaseField },
+  components: { TadsCheckbox, TadsField },
   props: {
     value: {
       default: boolean("Checked", false)
     }
   },
   template: `
-    <BaseField label="Check this out">
-      <BaseCheckbox :value="value"></BaseCheckbox>
-    </BaseField> 
+    <TadsField label="Check this out">
+      <TadsCheckbox :value="value"></TadsCheckbox>
+    </TadsField> 
   `,
   methods: { action: action("clicked") }
 });

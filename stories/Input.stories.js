@@ -1,46 +1,46 @@
 import { action } from "@storybook/addon-actions";
 import { withKnobs, text } from "@storybook/addon-knobs";
 
-import BaseField from "../src/components/core/Field.vue";
-import BaseInput from "../src/components/core/Input.vue";
+import TadsField from "../src/components/core/Field.vue";
+import TadsInput from "../src/components/core/Input.vue";
 
 export default {
   title: "Components | Input",
-  components: { BaseInput },
+  components: { TadsInput },
   decorators: [withKnobs]
 };
 
 export const regular = () => ({
-  components: { BaseInput, BaseField },
+  components: { TadsInput, TadsField },
   props: {
     value: {
       default: text("Text", "Jack Sparrow")
     }
   },
   template: `
-      <BaseField label="Whats your name?">
-          <BaseInput :value="value"></BaseInput>
-      </BaseField> 
+      <TadsField label="Whats your name?">
+          <TadsInput :value="value"></TadsInput>
+      </TadsField> 
   `,
   methods: { action: action("clicked") }
 });
 
 export const placeholder = () => ({
-  components: { BaseInput, BaseField },
+  components: { TadsInput, TadsField },
   template: `
-      <BaseField label="Whats your name?">
-          <BaseInput placeholder="Type your name"></BaseInput>
-      </BaseField> 
+      <TadsField label="Whats your name?">
+          <TadsInput placeholder="Type your name"></TadsInput>
+      </TadsField> 
   `,
   methods: { action: action("clicked") }
 });
 
 export const largeWithBorder = () => ({
-  components: { BaseInput, BaseField },
+  components: { TadsInput, TadsField },
   template: `
-      <BaseField label="Whats your name?">
-          <BaseInput value="Robin N." large border></BaseInput>
-      </BaseField> 
+      <TadsField label="Whats your name?">
+          <TadsInput value="Robin N." large border></TadsInput>
+      </TadsField> 
   `,
   methods: { action: action("clicked") }
 });

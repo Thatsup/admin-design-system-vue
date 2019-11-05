@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: "TadsAvatar",
   props: {
     showName: Boolean,
     user: {

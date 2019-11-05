@@ -1,25 +1,25 @@
 import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
-import BaseDropdown from "../src/components/core/dropdown/Dropdown.vue";
-import BaseDropdownItem from "../src/components/core/dropdown/DropdownItem.vue";
-import BaseButton from "../src/components/core/Button.vue";
+import TadsDropdown from "../src/components/core/dropdown/Dropdown.vue";
+import TadsDropdownItem from "../src/components/core/dropdown/DropdownItem.vue";
+import TadsButton from "../src/components/core/Button.vue";
 
 export default {
   title: "Components | Dropdown"
 };
 
 export const regular = () => ({
-  components: { BaseDropdown, BaseDropdownItem, BaseButton },
+  components: { TadsDropdown, TadsDropdownItem, TadsButton },
   template: `
-      <BaseDropdown>
+      <TadsDropdown>
         <template v-slot:trigger>
-            <BaseButton type="primary" small>Open dropdown</BaseButton>
+            <TadsButton type="primary" small>Open dropdown</TadsButton>
         </template>
         
-        <BaseDropdownItem @click="action">Item one</BaseDropdownItem>
-        <BaseDropdownItem @click="action">Item two</BaseDropdownItem>
-      </BaseDropdown>
+        <TadsDropdownItem @click="action">Item one</TadsDropdownItem>
+        <TadsDropdownItem @click="action">Item two</TadsDropdownItem>
+      </TadsDropdown>
 `,
   methods: { action: action("clicked") }
 });

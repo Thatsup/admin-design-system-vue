@@ -8,7 +8,7 @@
       @input="newValue = $event.target.value"
     />
 
-    <BaseInput
+    <TadsInput
       v-if="hasInput"
       v-model="newValue"
       type="number"
@@ -17,12 +17,16 @@
       :step="$attrs['step']"
       :style="inputStyles"
       class="ml-2"
-    ></BaseInput>
+    ></TadsInput>
   </div>
 </template>
 
 <script>
+import TadsInput from "./Input";
+
 export default {
+  name: "TadsRange",
+  components: { TadsInput },
   inheritAttrs: false,
   props: {
     value: {

@@ -9,7 +9,7 @@
 </template>
 <script>
 export default {
-  name: "BaseField",
+  name: "TadField",
   props: {
     label: {
       type: String,

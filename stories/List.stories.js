@@ -1,9 +1,9 @@
 import { action } from "@storybook/addon-actions";
 import { withKnobs } from "@storybook/addon-knobs";
 
-import BaseField from "../src/components/core/Field.vue";
-import BaseList from "../src/components/list/List.vue";
-import BaseListItem from "../src/components/list/ListItem.vue";
+import TadsField from "../src/components/core/Field.vue";
+import TadsList from "../src/components/list/List.vue";
+import TadsListItem from "../src/components/list/ListItem.vue";
 
 export default {
   title: "Components | List",
@@ -11,7 +11,7 @@ export default {
 };
 
 export const regular = () => ({
-  components: { BaseList, BaseListItem, BaseField },
+  components: { TadsList, TadsListItem, TadsField },
   data() {
     return {
       items: [
@@ -47,9 +47,9 @@ export const regular = () => ({
     };
   },
   template: `
-    <BaseList :items="items" :add="true" add-title="Add new item" :add-handler="() => {action('Added new item')}">
-      <BaseListItem v-for="item in items" :key="item.name" :title="item.name" @click="action('Clicked ' + item.name)" />
-    </BaseList>
+    <TadsList :items="items" :add="true" add-title="Add new item" :add-handler="() => {action('Added new item')}">
+      <TadsListItem v-for="item in items" :key="item.name" :title="item.name" @click="action('Clicked ' + item.name)" />
+    </TadsList>
   `,
   methods: { action: action("clicked") }
 });
