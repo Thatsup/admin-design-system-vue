@@ -1,12 +1,12 @@
 <script>
-import { icons } from "../../icons";
+import { icons } from "../../icons.js";
 
 export default {
   name: "TadsIcon",
   props: {
     name: {
       type: String,
-      default: null
+      required: true
     },
     rotate: {
       type: String,
@@ -18,12 +18,19 @@ export default {
       validator(value) {
         return ["14", "18", "24"].indexOf(value) > -1;
       }
-    }
+    },
+    solid: Boolean
   },
   computed: {
     style() {
       return {
         transform: `rotate(${this.rotate}deg)`
+      }
+    },
+    classes() {
+      return {
+        ["size-" + this.size]: this.size,
+        solid: this.solid
       }
     }
   },
@@ -36,7 +43,7 @@ export default {
 <template>
   <svg
     v-bind="$attrs"
-    :class="'size-' + size"
+    :class="classes"
     class="icon"
     viewBox="0 0 24 24"
     :width="size"
@@ -58,5 +65,12 @@ export default {
 
 .icon path {
   fill: currentcolor;
+}
+
+.icon.solid {
+  color: #fff;
+  background: var(--navy-700);
+  border-radius: 4px;
+  padding: 5px;
 }
 </style>

@@ -46,3 +46,18 @@ export const rotation = () => ({
   `,
   methods: { action: action("clicked") }
 });
+
+export const solid = () => ({
+  data() {
+    return { icons }
+  },
+  components: { TadsIcon },
+  template: `
+      <div>
+          <TadsIcon name="add" solid></TadsIcon>
+          <TadsIcon name="close" solid></TadsIcon>
+          <TadsIcon name="clients" solid></TadsIcon>
+      </div>
+  `,
+  methods: { action: action("clicked") }
+});
