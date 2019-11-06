@@ -18,8 +18,25 @@ export const regular = () => ({
     }
   },
   template: `
-      <TadsField label="Whats your name?">
+      <TadsField label="What's your name?">
           <TadsInput :value="value"></TadsInput>
+      </TadsField> 
+  `,
+  methods: { action: action("clicked") }
+});
+
+export const withError = () => ({
+  components: { TadsInput, TadsField },
+  data() {
+    return {
+      errors: {
+        name: ["Name must be at least 6 characters"]
+      }
+    }
+  },
+  template: `
+      <TadsField label="What's your name?" :errors="errors.name">
+          <TadsInput value="Robin"></TadsInput>
       </TadsField> 
   `,
   methods: { action: action("clicked") }
@@ -28,7 +45,7 @@ export const regular = () => ({
 export const placeholder = () => ({
   components: { TadsInput, TadsField },
   template: `
-      <TadsField label="Whats your name?">
+      <TadsField label="What's your name?">
           <TadsInput placeholder="Type your name"></TadsInput>
       </TadsField> 
   `,
@@ -38,9 +55,9 @@ export const placeholder = () => ({
 export const largeWithBorder = () => ({
   components: { TadsInput, TadsField },
   template: `
-      <TadsField label="Whats your name?">
+      <TadsField label="What's your name?">
           <TadsInput value="Robin N." large border></TadsInput>
       </TadsField> 
   `,
   methods: { action: action("clicked") }
-});
+})

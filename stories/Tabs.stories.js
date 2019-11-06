@@ -14,18 +14,19 @@ export const regular = () => ({
   components: { TadsTabs, TadsTab, TadsField },
   props: {
     position: {
-      default: select("Position", ["left", "center", "right"], "center")
+      default: select("Position", ["left", "center", "right"], "left")
     }
   },
   template: `
     <TadsTabs :position="position">
-        <TadsTab title="Tab 1">
-            <h1>Heading 1</h1>        
-            <h2>Heading 2</h2>        
+        <TadsTab title="Tab 1" active>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eaque et laborum, officia perspiciatis provident ut! Autem deleniti doloremque illo ipsam laudantium odio, odit officiis provident quis recusandae repellat voluptates.</p>
+            <br>       
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eaque et laborum, officia perspiciatis provident ut! Autem deleniti doloremque illo ipsam laudantium odio, odit officiis provident quis recusandae repellat voluptates.</p>       
         </TadsTab>
         
         <TadsTab title="Tab 2">
-            <pre>Some random code</pre>        
+            <img src="//placekitten.com/200" alt="">   
         </TadsTab>
     </TadsTabs>
   `,

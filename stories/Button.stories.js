@@ -2,6 +2,12 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
 import TadsButton from "../src/components/core/Button.vue";
+import {withKnobs} from "@storybook/addon-knobs";
+
+export default {
+  title: "Components | Button",
+  decorators: [withKnobs]
+};
 
 export const regular = () => ({
   components: { TadsButton },
@@ -17,10 +23,7 @@ export const primary = () => ({
 
 export const loading = () => ({
   components: { TadsButton },
-  data() {
-    return { loading: false };
-  },
-  template: `<TadsButton type="primary" @click="loading = !loading" :is-loading="loading">Persist heavy document</TadsButton>`,
+  template: `<TadsButton type="primary" @click="action" is-loading>Click me</TadsButton>`,
   methods: { action: action("clicked") }
 });
 

@@ -1,5 +1,5 @@
 import { action } from "@storybook/addon-actions";
-import { withKnobs } from "@storybook/addon-knobs";
+import {withKnobs, number} from "@storybook/addon-knobs";
 
 import TadsField from "../src/components/core/Field.vue";
 import TadsRange from "../src/components/core/Range.vue";
@@ -11,10 +11,10 @@ export default {
 
 export const regular = () => ({
   components: { TadsRange, TadsField },
-  data() {
-    return {
-      selected: 50
-    };
+  props: {
+    selected: {
+      default: number("Value", 50)
+    }
   },
   template: `
     <div>

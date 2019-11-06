@@ -57,6 +57,7 @@ export const solid = () => ({
           <TadsIcon name="add" solid></TadsIcon>
           <TadsIcon name="close" solid></TadsIcon>
           <TadsIcon name="clients" solid></TadsIcon>
+          <TadsIcon name="image" solid></TadsIcon>
       </div>
   `,
   methods: { action: action("clicked") }
