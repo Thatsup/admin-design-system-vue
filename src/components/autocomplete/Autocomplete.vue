@@ -427,6 +427,7 @@ a.dropdown-item {
   padding: 0.6rem 1.25rem;
   display: block;
   color: #525252;
+  cursor: pointer;
 }
 
 a.dropdown-item:hover {
