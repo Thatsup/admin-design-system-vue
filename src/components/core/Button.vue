@@ -75,6 +75,14 @@ export default {
   white-space: nowrap;
 }
 
+.button:hover {
+  opacity: 0.85;
+}
+
+.button:active {
+  opacity: 0.95;
+}
+
 .button.is-primary {
   background-color: var(--blue-600);
   border-color: transparent;
