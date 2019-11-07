@@ -7,7 +7,7 @@ stream.once('open', function(fd) {
 
   files.forEach(function(file) {
     var contents = fs.readFileSync(__dirname + '/svg/' + file, 'utf8');
-    const regex = /d="(.+)"/i
+    const regex = / d="([^']*?)"/i
     const match = contents.match(regex)
     const fileName = file.split('.')[0]//.replace('-', '')
 
