@@ -98,6 +98,11 @@ input[readonly] {
   color: var(--gray-700);
 }
 
+input[disabled] {
+  background: var(--gray-200);
+  cursor: not-allowed;
+}
+
 .has-error {
   border: 1px solid var(--red-600);
 }

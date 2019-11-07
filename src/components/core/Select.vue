@@ -171,4 +171,9 @@ export default {
   align-items: center;
   justify-content: space-between
 }
+
+.select select[disabled] {
+  background: var(--gray-200);
+  cursor: not-allowed;
+}
 </style>

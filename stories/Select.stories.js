@@ -21,6 +21,19 @@ export const regular = () => ({
   methods: { action: action("clicked") }
 });
 
+export const disabled = () => ({
+  components: { TadsSelect, TadsField },
+  template: `
+      <TadsField label="Select something">
+          <TadsSelect placeholder="Nothing selected" disabled>
+              <option value="one">One</option>
+              <option value="two">Two</option>
+           </TadsSelect>
+      </TadsField> 
+`,
+  methods: { action: action("clicked") }
+});
+
 export const expanded = () => ({
   components: { TadsSelect, TadsField },
   template: `
