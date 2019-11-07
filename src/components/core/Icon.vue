@@ -1,5 +1,5 @@
 <script>
-import { icons } from "../../icons.js";
+import { icons } from "../../assets/icons/icons.js";
 
 export default {
   name: "TadsIcon",
@@ -9,7 +9,7 @@ export default {
       required: true
     },
     rotate: {
-      type: String,
+      type: [Number, String],
       default: null
     },
     size: {
