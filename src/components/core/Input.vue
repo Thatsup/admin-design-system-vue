@@ -94,6 +94,12 @@ input {
   vertical-align: top;
 }
 
+input[type="text"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 input[readonly] {
   color: var(--gray-700);
 }
