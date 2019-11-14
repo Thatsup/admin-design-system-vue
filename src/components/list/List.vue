@@ -4,7 +4,7 @@
     <TadsListItem v-if="add" :title="addTitle" class="add" @click="addHandler">
       <template v-slot:before>
         <div>
-          <TadsIcon name="add"></TadsIcon>
+          <TadsIcon name="plus"></TadsIcon>
         </div>
       </template>
     </TadsListItem>
