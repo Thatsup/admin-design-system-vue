@@ -71,6 +71,6 @@ export default {
   color: #fff;
   background: var(--navy-700);
   border-radius: 4px;
-  padding: 5px;
+  padding: 6px;
 }
 </style>
