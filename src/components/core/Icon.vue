@@ -22,16 +22,10 @@ export default {
     solid: Boolean
   },
   computed: {
-    style() {
+    svgStyle() {
       return {
         transform: `rotate(${this.rotate}deg)`
-      }
-    },
-    classes() {
-      return {
-        ["size-" + this.size]: this.size,
-        solid: this.solid
-      }
+      };
     }
   },
   data() {
@@ -41,26 +35,32 @@ export default {
 </script>
 
 <template>
-  <svg
-    v-bind="$attrs"
-    :class="classes"
+  <span
     class="icon"
-    viewBox="0 0 24 24"
-    :width="size"
-    :height="size"
-    :style="style"
+    :class="{ solid: solid }"
+    :style="{ width: size + 'px', height: size + 'px' }"
   >
-    <path :d="icons[name]" />
-  </svg>
+    <svg
+      v-bind="$attrs"
+      viewBox="0 0 24 24"
+      :style="svgStyle"
+    >
+      <path :d="icons[name]" />
+    </svg>
+  </span>
 </template>
 
 <style scoped>
 .icon {
   display: inline-block;
+}
+
+.icon svg {
   vertical-align: middle;
   shape-rendering: inherit;
   transform: translate3d(0, 0, 0);
   fill: currentColor;
+  display: block;
 }
 
 .icon path {

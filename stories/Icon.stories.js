@@ -58,10 +58,30 @@ export const solid = () => ({
   components: { TadsIcon },
   template: `
       <div>
-          <TadsIcon name="plus" solid></TadsIcon>
+          <TadsIcon name="plus-heavy" solid></TadsIcon>
+          <TadsIcon name="minus-heavy" solid></TadsIcon>
+          <TadsIcon name="plus-heavy" solid rotate="45"></TadsIcon>
           <TadsIcon name="close" solid></TadsIcon>
           <TadsIcon name="clients" solid></TadsIcon>
           <TadsIcon name="image" solid></TadsIcon>
+      </div>
+  `,
+  methods: { action: action("clicked") }
+});
+
+export const multipleSizes = () => ({
+  data() {
+    return { icons }
+  },
+  components: { TadsIcon },
+  template: `
+      <div>
+          <TadsIcon name="image" size="14"></TadsIcon>
+          <TadsIcon name="image" size="18"></TadsIcon>
+          <TadsIcon name="image" size="22"></TadsIcon>
+          <TadsIcon name="image" size="26"></TadsIcon>
+          <TadsIcon name="image" size="30"></TadsIcon>
+          <TadsIcon name="image" size="34"></TadsIcon>
       </div>
   `,
   methods: { action: action("clicked") }
