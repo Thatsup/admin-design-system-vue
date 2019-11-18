@@ -14,10 +14,7 @@ export default {
     },
     size: {
       type: String,
-      default: "24",
-      validator(value) {
-        return ["14", "18", "24"].indexOf(value) > -1;
-      }
+      default: "24"
     },
     solid: Boolean
   },
