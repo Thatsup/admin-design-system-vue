@@ -3,7 +3,7 @@
     <!-- Add -->
     <TadsListItem v-if="add" :title="addTitle" class="add" @click="addHandler">
       <template v-slot:before>
-        <div>
+        <div class="is-flex">
           <TadsIcon name="plus"></TadsIcon>
         </div>
       </template>
