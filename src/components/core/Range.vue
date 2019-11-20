@@ -16,8 +16,9 @@
       :min="$attrs['min']"
       :step="$attrs['step']"
       :style="inputStyles"
+      placeholder="-"
       class="ml-2"
-    ></TadsInput>
+    />
   </div>
 </template>
 
@@ -31,7 +32,7 @@ export default {
   props: {
     value: {
       type: Number,
-      default: 0
+      default: null
     },
     hasInput: {
       type: Boolean

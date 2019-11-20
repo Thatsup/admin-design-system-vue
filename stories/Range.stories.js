@@ -29,3 +29,24 @@ export const regular = () => ({
   `,
   methods: { action: action("clicked") }
 });
+
+export const noDefaultValue = () => ({
+  components: { TadsRange, TadsField },
+  props: {
+    selected: {
+      default: number("Value", 50)
+    }
+  },
+  template: `
+    <div>
+      <TadsField label="Drag it">
+          <TadsRange min="1" max="500" has-input/>
+      </TadsField>
+      
+      <TadsField label="Selected:">
+        {{ selected }}
+      </TadsField>
+    </div>
+  `,
+  methods: { action: action("clicked") }
+});
