@@ -1,25 +1,38 @@
 <template>
-  <span class="select" :class="fieldClasses">
-    <span class="label" v-if="label">
-      {{ label }}
+  <div class="select-wrap">
+    <span class="select" :style="widthStyle" :class="fieldClasses">
+      <span class="label" v-if="label">
+        {{ label }}
+      </span>
+
+      <select
+        ref="select"
+        :dir="transparent && label ? 'rtl' : 'ltr'"
+        v-model="computedValue"
+        v-bind="$attrs"
+        @blur="$emit('blur', $event)"
+        @focus="$emit('focus', $event)"
+        :style="widthStyle"
+      >
+        <template v-if="placeholder">
+          <option :value="null" selected disabled hidden>
+            {{ placeholder }}
+          </option>
+        </template>
+
+        <slot></slot>
+      </select>
     </span>
 
-    <select
-      :dir="transparent ? 'rtl' : 'ltr'"
-      v-model="computedValue"
-      v-bind="$attrs"
-      @blur="$emit('blur', $event)"
-      @focus="$emit('focus', $event)"
-    >
-      <template v-if="placeholder">
-        <option :value="null" selected disabled hidden>
-          {{ placeholder }}
-        </option>
-      </template>
+    <br>
 
-      <slot></slot>
-    </select>
-  </span>
+    <!-- This is needed to measure the selected options text length to adjust the real select's width -->
+    <span class="select dummy" :class="fieldClasses" ref="dummySelect">
+      <select>
+        <option>{{ dummyText }}</option>
+      </select>
+    </span>
+  </div>
 </template>
 
 <script>
@@ -39,27 +52,43 @@ export default {
       type: [String, Number, Boolean],
       default: ""
     },
-    transparent: Boolean
+    transparent: Boolean,
+    autoWidth: Boolean,
+    maxWidth: Boolean
   },
   data() {
     return {
-      selected: this.value
+      selected: this.value,
+      width: false,
+      dummyText: null
     };
+  },
+
+  mounted() {
+    this.calculateWidth()
   },
 
   watch: {
     value(value) {
       this.selected = value;
+
+      this.$nextTick(() => {
+        this.calculateWidth()
+      })
     }
   },
 
   computed: {
+    widthStyle() {
+      return { width: this.width + "px" };
+    },
     computedValue: {
       get() {
         return this.selected;
       },
       set(value) {
         this.selected = value;
+        this.calculateWidth()
         this.$emit("input", value);
       }
     },
@@ -73,6 +102,29 @@ export default {
         "has-border": this.$attrs.hasOwnProperty("border"),
         level: this.label
       };
+    }
+  },
+
+  methods: {
+    calculateWidth() {
+      if (this.expanded || (this.transparent && this.label)) {
+        this.width = false
+        return
+      }
+
+      const select = this.$refs.select
+      this.dummyText = select.options[select.selectedIndex].text
+
+      this.$nextTick(() => {
+        this.width = this.calculateMaxWidth(this.$refs.dummySelect.offsetWidth)
+      })
+    },
+    calculateMaxWidth(width) {
+      if (!this.maxWidth) {
+        return width
+      }
+
+      return width > this.maxWidth ? this.maxWidth : width
     }
   }
 };
@@ -175,5 +227,21 @@ export default {
 .select select[disabled] {
   background: var(--gray-200);
   cursor: not-allowed;
+}
+
+.dummy select {
+  visibility: hidden !important;
+  height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin: 0 !important;
+  border-bottom: 0 !important;
+  border-top: 0 !important;
+}
+
+.dummy::after,
+.dummy::before {
+  opacity: 0;
+  visibility: hidden;
 }
 </style>
