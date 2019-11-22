@@ -231,6 +231,7 @@ export default {
 
 .dummy-wrap {
   display: block;
+  height: 0;
 }
 
 .dummy select {
