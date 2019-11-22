@@ -24,14 +24,14 @@
       </select>
     </span>
 
-    <br>
-
     <!-- This is needed to measure the selected options text length to adjust the real select's width -->
-    <span class="select dummy" :class="fieldClasses" ref="dummySelect">
+    <div class="dummy-wrap">
+      <span class="select dummy" :class="fieldClasses" ref="dummySelect">
       <select>
         <option>{{ dummyText }}</option>
       </select>
     </span>
+    </div>
   </div>
 </template>
 
@@ -54,7 +54,7 @@ export default {
     },
     transparent: Boolean,
     autoWidth: Boolean,
-    maxWidth: Boolean
+    maxWidth: Number
   },
   data() {
     return {
@@ -221,12 +221,16 @@ export default {
 .select.level {
   display: flex;
   align-items: center;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .select select[disabled] {
   background: var(--gray-200);
   cursor: not-allowed;
+}
+
+.dummy-wrap {
+  display: block;
 }
 
 .dummy select {
