@@ -27,7 +27,7 @@ export const regular = () => ({
 export const isTopLeft = () => ({
   components: { TadsDropdown, TadsDropdownItem, TadsButton },
   template: `
-      <TadsDropdown position="is-top-left" style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+      <TadsDropdown position="is-top-left" style="margin-left: 200px;margin-top: 200px;">
         <template v-slot:trigger>
             <TadsButton type="primary" small>Open dropdown</TadsButton>
         </template>
