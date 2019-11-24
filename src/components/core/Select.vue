@@ -7,7 +7,6 @@
 
       <select
         ref="select"
-        :dir="transparent && label ? 'rtl' : 'ltr'"
         v-model="computedValue"
         v-bind="$attrs"
         @blur="$emit('blur', $event)"
