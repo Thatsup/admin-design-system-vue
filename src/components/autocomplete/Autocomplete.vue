@@ -1,5 +1,5 @@
 <template>
-  <div class="autocomplete control" :class="{ 'is-expanded': expanded }">
+  <div class="autocomplete control" :class="{ 'is-expanded': expanded, [position]: position }">
     <TadsInput
       v-model="newValue"
       type="text"
@@ -78,6 +78,15 @@ export default {
     keepFirst: Boolean,
     clearOnSelect: Boolean,
     openOnFocus: Boolean,
+    position: {
+      type: String,
+      default: "bottom",
+      validator(value) {
+        return (
+          ["bottom", "top"].indexOf(value) > -1
+        );
+      }
+    },
     customFormatter: {
       type: Function,
       default: undefined
@@ -406,6 +415,13 @@ export default {
   position: absolute;
   top: 100%;
   z-index: 20;
+}
+
+.autocomplete.top .dropdown-menu {
+  top: auto;
+  bottom: 100%;
+  padding-bottom: 4px;
+  padding-top: 0;
 }
 
 .autocomplete .dropdown-content {

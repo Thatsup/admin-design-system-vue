@@ -118,3 +118,46 @@ export const multiple = () => ({
   `,
   methods: { action: action("clicked") }
 });
+
+
+export const dropdownOnTop = () => ({
+  components: { TadsAutocomplete, TadsField },
+  computed: {
+    filteredPages() {
+      return this.items.filter(option => {
+        return (
+            option.name
+                .toString()
+                .toLowerCase()
+                .indexOf(this.query.toLowerCase()) >= 0
+        );
+      });
+    }
+  },
+  data() {
+    return {
+      query: "",
+      selected: [],
+      items: data
+    };
+  },
+  template: `
+      <div style="padding-top: 400px;">
+        <TadsField label="Search for a Javascript framework">
+          <TadsAutocomplete
+            v-model="query"
+            position="top"
+            field="name"
+            :clear-on-select="true"
+            :data="filteredPages"
+            @select="option => selected.push(option)">
+          </TadsAutocomplete>
+        </TadsField>
+         
+        <ul>
+            <li v-for="item in selected">&bull; {{ item }}</li>
+        </ul>
+      </div> 
+  `,
+  methods: { action: action("clicked") }
+});
