@@ -206,6 +206,13 @@ export default {
   left: auto;
 }
 
+.dropdown.is-top-left .dropdown-menu {
+  top: auto;
+  bottom: 100%;
+  right: 0;
+  left: auto;
+}
+
 .dropdown.is-active .dropdown-menu,
 .dropdown.is-hoverable:hover .dropdown-menu {
   display: block;

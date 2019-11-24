@@ -23,3 +23,18 @@ export const regular = () => ({
 `,
   methods: { action: action("clicked") }
 });
+
+export const isTopLeft = () => ({
+  components: { TadsDropdown, TadsDropdownItem, TadsButton },
+  template: `
+      <TadsDropdown position="is-top-left" style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+        <template v-slot:trigger>
+            <TadsButton type="primary" small>Open dropdown</TadsButton>
+        </template>
+        
+        <TadsDropdownItem @click="action">Item one</TadsDropdownItem>
+        <TadsDropdownItem @click="action">Item two</TadsDropdownItem>
+      </TadsDropdown>
+`,
+  methods: { action: action("clicked") }
+});
