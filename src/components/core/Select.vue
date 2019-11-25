@@ -52,6 +52,7 @@ export default {
       default: ""
     },
     transparent: Boolean,
+    expanded: Boolean,
     autoWidth: Boolean,
     maxWidth: Number
   },
@@ -79,6 +80,10 @@ export default {
 
   computed: {
     widthStyle() {
+      if (this.expanded || (this.transparent && this.label)) {
+        return {};
+      }
+
       return { width: this.width + "px" };
     },
     computedValue: {
@@ -95,7 +100,7 @@ export default {
     fieldClasses() {
       return {
         "is-small": this.$attrs.hasOwnProperty("small"),
-        "is-expanded": this.$attrs.hasOwnProperty("expanded"),
+        "is-expanded": this.expanded,
         "is-large": this.$attrs.hasOwnProperty("large"),
         "is-transparent": this.transparent,
         "has-border": this.$attrs.hasOwnProperty("border"),
@@ -106,11 +111,6 @@ export default {
 
   methods: {
     calculateWidth() {
-      if (this.expanded || (this.transparent && this.label)) {
-        this.width = false
-        return
-      }
-
       const select = this.$refs.select
       this.dummyText = select.options[select.selectedIndex].text
 
