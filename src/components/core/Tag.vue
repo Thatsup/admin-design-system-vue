@@ -60,4 +60,13 @@ export default {
     background: var(--red-600);
   }
 }
+
+.blue {
+  color: var(--blue-600);
+  background: rgba(46, 166, 215, 0.25);
+
+  &::before {
+    background: var(--blue-600);
+  }
+}
 </style>

@@ -14,6 +14,7 @@ export const regular = () => ({
   template: `
      <div>
          <TadsTag>Not available</TadsTag>
+         <TadsTag color="blue">Confirmed</TadsTag>
          <TadsTag color="red">Inactive</TadsTag>
          <TadsTag color="yellow">Pending</TadsTag>
      </div> 
