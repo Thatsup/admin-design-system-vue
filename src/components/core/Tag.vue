@@ -22,6 +22,7 @@ export default {
   padding: 4px 13px;
   font-size: 12px;
   font-weight: 700;
+  display: inline-block;
 
   &::before {
     content: "";
@@ -67,6 +68,15 @@ export default {
 
   &::before {
     background: var(--blue-600);
+  }
+}
+
+.green {
+  color: var(--green-600);
+  background: rgba(99, 216, 113, 0.27);
+
+  &::before {
+    background: var(--green-600);
   }
 }
 </style>

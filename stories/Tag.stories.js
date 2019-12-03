@@ -15,6 +15,7 @@ export const regular = () => ({
      <div>
          <TadsTag>Not available</TadsTag>
          <TadsTag color="blue">Confirmed</TadsTag>
+         <TadsTag color="green">Accepted</TadsTag>
          <TadsTag color="red">Inactive</TadsTag>
          <TadsTag color="yellow">Pending</TadsTag>
      </div> 
