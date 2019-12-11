@@ -66,6 +66,8 @@ export default {
   margin: 0;
   padding: 0;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: auto;
 }
 
 .tabs > span {
