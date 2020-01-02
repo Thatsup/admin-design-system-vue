@@ -12,7 +12,7 @@
     v-bind="$attrs"
     rows="1"
     v-on="listeners"
-  ></textarea>
+  />
 </template>
 
 <script>
