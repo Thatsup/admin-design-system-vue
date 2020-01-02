@@ -1,6 +1,6 @@
 <template>
   <div :class="fieldClasses" class="field">
-    <label v-if="label" class="label">{{ label }}</label>
+    <label v-if="label != null" class="label">{{ label || '&nbsp;' }}</label>
 
     <slot></slot>
 
@@ -13,7 +13,7 @@ export default {
   props: {
     label: {
       type: String,
-      default: ""
+      default: null
     },
     strike: Boolean,
     errors: {
