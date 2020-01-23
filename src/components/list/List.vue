@@ -92,6 +92,22 @@ export default {
   padding: 0 !important;
 }
 
+.loading-bar::after {
+  content: "";
+  position: absolute;
+  background: linear-gradient(270deg, rgba(255,255,255,0), rgba(255,255,255,0.7), rgba(255,255,255,0));
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 100px;
+  animation: skeleton-shine 2s infinite;
+}
+
+@keyframes skeleton-shine {
+  0%{left:-100px;}
+  100%{left:100%}
+}
+
 .loading-bar:first-child {
   flex: 0 0 35%;
   max-width: 35%;
