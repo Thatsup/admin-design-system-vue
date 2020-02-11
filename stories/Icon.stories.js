@@ -1,20 +1,20 @@
-import { action } from "@storybook/addon-actions";
-import { withKnobs, text } from "@storybook/addon-knobs";
+import {action} from "@storybook/addon-actions";
+import {withKnobs, text} from "@storybook/addon-knobs";
 
 import TadsIcon from "../src/components/core/Icon.vue";
-import {icons} from "../src/assets/icons/icons.js";
+import {icons, aliases} from "../src/assets/icons/icons.js";
 
 export default {
   title: "Components | Icon",
-  components: { TadsIcon },
+  components: {TadsIcon},
   decorators: [withKnobs]
 };
 
 export const allIcons = () => ({
   data() {
-    return { icons }
+    return {icons, aliases};
   },
-  components: { TadsIcon },
+  components: {TadsIcon},
   template: `
       <div style="max-width: 1400px; margin-left: auto; margin-right: auto;">
         <p style="margin-bottom: 20px;">There are ${Object.keys(icons).length} icons</p>
@@ -23,39 +23,47 @@ export const allIcons = () => ({
           <li v-for="(icon, name) in icons" style="display: inline-flex;flex-direction: row; align-items: center; flex: 0 1 20%; min-width: 120px; padding: 0px 7.5px 20px;">
             <TadsIcon :name="name" style="margin-right: 10px;"></TadsIcon>
             {{ name }}
+            
+            <template v-for="(newname, alias) in aliases" v-if="newname === name">
+              | {{ alias }}
+            </template>
           </li>
         </ul> 
     </div> 
   `,
-  methods: { action: action("clicked") }
+  methods: {
+    getKeyByValue(object, value) {
+      return Object.keys(object).find(key => object[key] === value);
+    }
+  }
 });
 
 export const rotation = () => ({
   data() {
-    return { icons }
+    return {icons}
   },
-  components: { TadsIcon },
+  components: {TadsIcon},
   template: `
       <div>
-        <div>
-          <TadsIcon name="chevron"></TadsIcon>
-          0deg
-        </div>
-        
-        <div>
-          <TadsIcon name="chevron" rotate="180"></TadsIcon>
-          180deg
-        </div> 
+          <div>
+              <TadsIcon name="chevron"></TadsIcon>
+              0deg
+          </div>
+
+          <div>
+              <TadsIcon name="socialicons" rotate="180"></TadsIcon>
+              180deg
+          </div>
       </div>
   `,
-  methods: { action: action("clicked") }
+  methods: {action: action("clicked")}
 });
 
 export const solid = () => ({
   data() {
-    return { icons }
+    return {icons}
   },
-  components: { TadsIcon },
+  components: {TadsIcon},
   template: `
       <div>
           <TadsIcon name="plus-heavy" solid></TadsIcon>
@@ -66,14 +74,14 @@ export const solid = () => ({
           <TadsIcon name="image" solid></TadsIcon>
       </div>
   `,
-  methods: { action: action("clicked") }
+  methods: {action: action("clicked")}
 });
 
 export const multipleSizes = () => ({
   data() {
-    return { icons }
+    return {icons}
   },
-  components: { TadsIcon },
+  components: {TadsIcon},
   template: `
       <div>
           <TadsIcon name="image" size="14"></TadsIcon>
@@ -84,5 +92,5 @@ export const multipleSizes = () => ({
           <TadsIcon name="image" size="34"></TadsIcon>
       </div>
   `,
-  methods: { action: action("clicked") }
+  methods: {action: action("clicked")}
 });

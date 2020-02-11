@@ -1,5 +1,5 @@
 <script>
-import { icons } from "../../assets/icons/icons.js";
+import { icons, aliases } from "../../assets/icons/icons.js";
 
 export default {
   name: "TadsIcon",
@@ -23,10 +23,18 @@ export default {
       return {
         transform: `rotate(${this.rotate}deg)`
       };
+    },
+    svgPath() {
+      if (this.name in icons) {
+        return icons[this.name];
+      }
+
+      if (this.name in aliases) {
+        return icons[aliases[this.name]];
+      }
+
+      return null;
     }
-  },
-  data() {
-    return { icons };
   }
 };
 </script>
@@ -37,12 +45,8 @@ export default {
     :class="{ solid: solid }"
     :style="{ width: size + 'px', height: size + 'px' }"
   >
-    <svg
-      v-bind="$attrs"
-      viewBox="0 0 24 24"
-      :style="svgStyle"
-    >
-      <path :d="icons[name]" />
+    <svg v-bind="$attrs" viewBox="0 0 24 24" :style="svgStyle">
+      <path :d="svgPath" />
     </svg>
   </span>
 </template>
