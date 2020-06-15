@@ -51,6 +51,7 @@
 .input::placeholder {
   color: var(--blue-gray-500);
   font-style: italic;
+  opacity: 1;
 }
 
 .input[type="number"].transparent::-webkit-inner-spin-button,
