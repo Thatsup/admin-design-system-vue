@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
 
 import TadsSelect from "../src/components/core/Select.vue";
 import TadsField from "../src/components/core/Field.vue";

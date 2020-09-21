@@ -112,7 +112,12 @@ export default {
   methods: {
     calculateWidth() {
       const select = this.$refs.select
-      this.dummyText = select.options[select.selectedIndex].text
+
+      if (select.selectedIndex >= 0) {
+        this.dummyText = select.options[select.selectedIndex].text
+      } else {
+        this.dummyText = this.placeholder
+      }
 
       this.$nextTick(() => {
         this.width = this.calculateMaxWidth(this.$refs.dummySelect.offsetWidth)
