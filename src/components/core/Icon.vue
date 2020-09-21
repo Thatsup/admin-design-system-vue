@@ -13,8 +13,8 @@ export default {
       default: null
     },
     size: {
-      type: String,
-      default: "24"
+      type: [String, Number],
+      default: 24
     },
     solid: Boolean
   },

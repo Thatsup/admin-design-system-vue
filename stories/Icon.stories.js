@@ -84,9 +84,9 @@ export const multipleSizes = () => ({
   components: {TadsIcon},
   template: `
       <div>
-          <TadsIcon name="image" size="14"></TadsIcon>
-          <TadsIcon name="image" size="18"></TadsIcon>
-          <TadsIcon name="image" size="22"></TadsIcon>
+          <TadsIcon name="image" :size="14"></TadsIcon>
+          <TadsIcon name="image" :size="18"></TadsIcon>
+          <TadsIcon name="image" :size="22"></TadsIcon>
           <TadsIcon name="image" size="26"></TadsIcon>
           <TadsIcon name="image" size="30"></TadsIcon>
           <TadsIcon name="image" size="34"></TadsIcon>
