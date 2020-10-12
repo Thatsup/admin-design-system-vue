@@ -2,7 +2,14 @@
   <label
     ref="label"
     class="base-checkbox checkbox"
-    :class="[size, { 'is-disabled': disabled }]"
+    :class="[
+      size,
+      {
+        'is-disabled': disabled,
+        'no-value': computedValue === null || computedValue === '',
+        'is-placeholder-checked': !!placeholder
+      }
+    ]"
     :disabled="disabled"
     @keydown.prevent.enter="$refs.label.click"
   >
@@ -46,6 +53,11 @@ export default {
     size: {
       type: String,
       default: ""
+    },
+
+    placeholder: {
+      type: [String, Number, Boolean, Function, Object, Array, Symbol],
+      default: null
     },
     indeterminate: Boolean,
     disabled: Boolean,
@@ -123,6 +135,14 @@ export default {
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath style='fill:%23fff' d='M 0.04038059,0.6267767 0.14644661,0.52071068 0.42928932,0.80355339 0.3232233,0.90961941 z M 0.21715729,0.80355339 0.85355339,0.16715729 0.95961941,0.2732233 0.3232233,0.90961941 z'%3E%3C/path%3E%3C/svg%3E")
     no-repeat center center;
   border-color: #30a6d8;
+}
+
+.base-checkbox.checkbox.is-placeholder-checked.no-value input[type="checkbox"]:not(:checked) + .check {
+  background: #30a6d8
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath style='fill:%23fff' d='M 0.04038059,0.6267767 0.14644661,0.52071068 0.42928932,0.80355339 0.3232233,0.90961941 z M 0.21715729,0.80355339 0.85355339,0.16715729 0.95961941,0.2732233 0.3232233,0.90961941 z'%3E%3C/path%3E%3C/svg%3E")
+    no-repeat center center;
+  border-color: #30a6d8;
+  opacity: 0.3;
 }
 
 .base-checkbox.checkbox input[type="checkbox"]:indeterminate + .check {

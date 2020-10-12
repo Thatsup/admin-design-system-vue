@@ -23,3 +23,35 @@ export const regular = () => ({
   `,
   methods: { action: action("clicked") }
 });
+
+
+export const indeterminate = () => ({
+  components: { TadsCheckbox, TadsField },
+  props: {
+    value: {
+      default: boolean("Checked", false)
+    }
+  },
+  template: `
+    <TadsField label="Check this out">
+      <TadsCheckbox :value="value" indeterminate></TadsCheckbox>
+    </TadsField> 
+  `,
+  methods: { action: action("clicked") }
+});
+
+
+export const withPlaceholder = () => ({
+  components: { TadsCheckbox, TadsField },
+  props: {
+    value: {
+      default: null
+    },
+  },
+  template: `
+    <TadsField label="Check this out">
+      <TadsCheckbox :value="value" :placeholder="true"></TadsCheckbox>
+    </TadsField> 
+  `,
+  methods: { action: action("clicked") }
+});

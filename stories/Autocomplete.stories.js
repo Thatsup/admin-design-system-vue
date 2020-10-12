@@ -161,3 +161,44 @@ export const dropdownOnTop = () => ({
   `,
   methods: { action: action("clicked") }
 });
+
+export const withPlaceholder = () => ({
+  components: { TadsAutocomplete, TadsField },
+  computed: {
+    filteredPages() {
+      return this.items.filter(option => {
+        return (
+          option.name
+            .toString()
+            .toLowerCase()
+            .indexOf(this.query.toLowerCase()) >= 0
+        );
+      });
+    }
+  },
+  data() {
+    return {
+      query: "",
+      selected: {},
+      items: data
+    };
+  },
+  template: `
+      <div>
+        <TadsField label="Search for a Javascript framework">
+          <TadsAutocomplete
+            v-model="query"
+            field="name"
+            :keep-first="true"
+            :open-on-focus="true"
+            :data="filteredPages"
+            placeholder="Search..."
+            @select="option => selected = option">
+          </TadsAutocomplete>
+        </TadsField>
+         
+        <TadsField label="Selected">{{ selected }}</TadsField>
+      </div> 
+  `,
+  methods: { action: action("clicked") }
+});

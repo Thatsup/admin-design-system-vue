@@ -30,7 +30,7 @@ export const regular = () => ({
   methods: { action: action("clicked") }
 });
 
-export const noDefaultValue = () => ({
+export const withInput = () => ({
   components: { TadsRange, TadsField },
   props: {
     selected: {
@@ -40,7 +40,49 @@ export const noDefaultValue = () => ({
   template: `
     <div>
       <TadsField label="Drag it">
-          <TadsRange min="1" max="500" has-input/>
+          <TadsRange v-model="selected" min="1" max="500" has-input></TadsRange>
+      </TadsField>
+      
+      <TadsField label="Selected:">
+        {{ selected }}
+      </TadsField>
+    </div>
+  `,
+  methods: { action: action("clicked") }
+});
+
+export const noDefaultValue = () => ({
+  components: { TadsRange, TadsField },
+  props: {
+    selected: {
+      default: null
+    }
+  },
+  template: `
+    <div>
+      <TadsField label="Drag it">
+          <TadsRange v-model="selected" min="1" max="500" has-input></TadsRange>
+      </TadsField>
+      
+      <TadsField label="Selected:">
+        {{ selected }}
+      </TadsField>
+    </div>
+  `,
+  methods: { action: action("clicked") }
+});
+
+export const withPlaceholder = () => ({
+  components: { TadsRange, TadsField },
+  props: {
+    selected: {
+      default: null
+    }
+  },
+  template: `
+    <div>
+      <TadsField label="Drag it">
+          <TadsRange v-model="selected" min="1" max="500" placeholder="400" has-input></TadsRange>
       </TadsField>
       
       <TadsField label="Selected:">

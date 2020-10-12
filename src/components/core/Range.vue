@@ -2,7 +2,7 @@
   <div class="base-range" :class="wrapperClasses">
     <input
       type="range"
-      :value="value || newValue"
+      :value="value || newValue || placeholder"
       :step="$attrs['step']"
       v-bind="$attrs"
       @input="newValue = $event.target.value"
@@ -16,7 +16,7 @@
       :min="$attrs['min']"
       :step="$attrs['step']"
       :style="inputStyles"
-      placeholder="-"
+      :placeholder="placeholder || '-'"
       class="ml-2"
     />
   </div>
@@ -32,6 +32,10 @@ export default {
   props: {
     value: {
       type: Number,
+      default: null
+    },
+    placeholder: {
+      type: [Number,String],
       default: null
     },
     hasInput: {
