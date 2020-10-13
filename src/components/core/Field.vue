@@ -1,14 +1,28 @@
 <template>
   <div :class="fieldClasses" class="field">
-    <label v-if="label != null" class="label">{{ label || '&nbsp;' }}</label>
-
-    <slot></slot>
+    <label v-if="label != null" class="label" @click="labelClick">
+      {{ label || '&nbsp;' }}
+      <TadsIcon
+        v-if="toggleable"
+        name="caret"
+        :rotate="!!isOpen? 90 : 0"
+        :size="8"
+        class="ml-1"
+      />
+    </label>
+    
+    <div class="toggleable-content" v-if="toggleable">
+      <slot></slot>
+    </div>
+    <slot v-else />
 
     <div v-if="errors.length" class="error" v-text="errors[0]"></div>
   </div>
 </template>
 <script>
+import TadsIcon from "./Icon";
 export default {
+  components: { TadsIcon },
   name: "TadsField",
   props: {
     label: {
@@ -23,7 +37,20 @@ export default {
     inset: {
       type: Boolean,
       default: false
+    },
+    toggleable: {
+      type: Boolean,
+      default: false
+    },
+    open: {
+      type: Boolean,
+      default: true
     }
+  },
+  data() {
+    return {
+      isOpen: this.open
+    };
   },
   computed: {
     fieldClasses() {
@@ -31,15 +58,27 @@ export default {
         strike: this.strike && this.label,
         inset: this.inset,
         "no-label": !this.label,
-        "large-spacing": this.$attrs.hasOwnProperty("large-spacing")
+        "large-spacing": this.$attrs.hasOwnProperty("large-spacing"),
+        'is-toggleable': this.toggleable,
+        'is-closed': !this.isOpen
       };
-    }
+    },
   },
   watch: {
     errors(val) {
       // Reach into the slot child and set the has-error data.
       if (this.$children.length && this.$children[0].$data.hasError) {
         this.$children[0].$data.hasError = !!val.length;
+      }
+    },
+    open(newVal) {
+      this.isOpen = newVal;
+    }
+  },
+  methods: {
+    labelClick() {
+      if(this.toggleable) {
+        this.isOpen = !this.isOpen;
       }
     }
   }
@@ -49,6 +88,10 @@ export default {
 <style scoped>
 .field:not(:last-child) {
   margin-bottom: 23px;
+}
+
+.field.is-closed .toggleable-content {
+  display: none;
 }
 
 /* Field should only have one child, but if we have two, we'll put som margin on it. */
@@ -68,6 +111,10 @@ export default {
   margin-top: 39px;
 }
 
+.field.is-toggleable > .label {
+  cursor: pointer;
+  justify-content: space-between;
+}
 .label {
   display: flex;
   align-items: center;
@@ -85,6 +132,7 @@ export default {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
+  order: 1;
   /*margin-bottom: 16px;*/
 }
 
@@ -106,6 +154,15 @@ export default {
   transform: translateY(-50%);
   margin-left: var(--navigation-spacing);
   margin-right: calc(var(--navigation-spacing) * -1);
+  order: 1;
+}
+
+.strike.is-toggleable > .label:after {
+  margin-right: 0;
+}
+
+.strike > .label .icon {
+  order: 2;
 }
 
 .error {
