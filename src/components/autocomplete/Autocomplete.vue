@@ -92,7 +92,9 @@ export default {
       default: undefined
     },
     preselected: {
-      type: [Object, String, Number]
+      type: [Object, String, Number],
+      required: false,
+      default: null
     }
   },
   data() {
@@ -210,8 +212,9 @@ export default {
       document.addEventListener("click", this.clickedOutside);
       window.addEventListener("resize", this.calcDropdownInViewportVertical);
     }
-    if (this.preselected !== undefined) {
-      this.setSelected(this.preselected);
+    if (this.preselected !== null) {
+      this.selected = this.preselected;
+      this.newValue = this.getValue(this.selected);
     }
   },
   beforeDestroy() {

@@ -95,9 +95,8 @@ export const preselected = () => ({
   data() {
     return {
       query: "",
-      selected: {},
-      items: data,
-      preselected: data[Math.round(Math.random() * (data.length - 1))]
+      selected: data[Math.round(Math.random() * (data.length - 1))],
+      items: data
     };
   },
   template: `
@@ -109,7 +108,7 @@ export const preselected = () => ({
             :keep-first="true"
             :open-on-focus="true"
             :data="filteredPages"
-            :preselected="preselected"
+            :preselected="selected"
             @select="option => selected = option">
           </TadsAutocomplete>
         </TadsField>
