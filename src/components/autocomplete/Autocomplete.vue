@@ -90,6 +90,9 @@ export default {
     customFormatter: {
       type: Function,
       default: undefined
+    },
+    preselected: {
+      type: [Object, String, Number]
     }
   },
   data() {
@@ -206,6 +209,9 @@ export default {
     if (typeof window !== "undefined") {
       document.addEventListener("click", this.clickedOutside);
       window.addEventListener("resize", this.calcDropdownInViewportVertical);
+    }
+    if (this.preselected !== undefined) {
+      this.setSelected(this.preselected);
     }
   },
   beforeDestroy() {

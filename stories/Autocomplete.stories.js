@@ -78,6 +78,48 @@ export const regular = () => ({
   methods: { action: action("clicked") }
 });
 
+export const preselected = () => ({
+  components: { TadsAutocomplete, TadsField },
+  computed: {
+    filteredPages() {
+      return this.items.filter(option => {
+        return (
+          option.name
+            .toString()
+            .toLowerCase()
+            .indexOf(this.query.toLowerCase()) >= 0
+        );
+      });
+    }
+  },
+  data() {
+    return {
+      query: "",
+      selected: {},
+      items: data,
+      preselected: data[Math.round(Math.random() * (data.length - 1))]
+    };
+  },
+  template: `
+      <div>
+        <TadsField label="Search for a Javascript framework">
+          <TadsAutocomplete
+            v-model="query"
+            field="name"
+            :keep-first="true"
+            :open-on-focus="true"
+            :data="filteredPages"
+            :preselected="preselected"
+            @select="option => selected = option">
+          </TadsAutocomplete>
+        </TadsField>
+         
+        <TadsField label="Selected">{{ selected }}</TadsField>
+      </div> 
+  `,
+  methods: { action: action("clicked") }
+});
+
 export const multiple = () => ({
   components: { TadsAutocomplete, TadsField },
   computed: {
