@@ -14,6 +14,7 @@
     <input
       v-model="computedValue"
       type="checkbox"
+      :indeterminate.prop="indeterminate"
       :disabled="disabled"
       :name="name"
       :required="required"
@@ -54,6 +55,7 @@ export default {
       type: String,
       default: ""
     },
+    indeterminate: Boolean,
     required: Boolean,
     expanded: Boolean,
     trueValue: {
@@ -151,6 +153,16 @@ export default {
 .switch input[type="checkbox"]:checked + .check:before {
   -webkit-transform: translate3d(100%, 0, 0);
   transform: translate3d(100%, 0, 0);
+}
+
+.switch input[type="checkbox"]:indeterminate + .check:before {
+  -webkit-transform: translate3d(50%, 0, 0);
+  transform: translate3d(50%, 0, 0);
+}
+
+.switch input[type="checkbox"]:indeterminate + .check.is-elastic:before {
+  -webkit-transform: translate3d(18.18181818%, 0, 0);
+  transform: translate3d(18.18181818%, 0, 0);
 }
 
 .switch input[type="checkbox"]:checked + .check.is-elastic:before {

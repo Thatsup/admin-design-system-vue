@@ -24,6 +24,32 @@ export const regular = () => ({
   methods: { action: action("changed") }
 });
 
+export const indeterminate = () => ({
+  components: { TadsSwitch, TadsField },
+  data() {
+    return {
+      active: null,
+      indeterminate: true
+    };
+  },
+  watch: {
+    active(newVal) {
+      this.indeterminate = newVal === null;
+    }
+  },
+  template: `
+    <div>
+      <TadsField label="Flick it">
+        <TadsSwitch v-model="active" :indeterminate="indeterminate" />
+      </TadsField>
+      <div>
+        <a @click="indeterminate = true">Reset</a>
+      </div>
+    </div>
+  `,
+  methods: { action: action("changed") }
+});
+
 export const withInlineLabel = () => ({
   components: { TadsSwitch, TadsField },
   data() {
