@@ -10,7 +10,7 @@
         class="ml-1"
       />
     </label>
-    
+
     <div class="toggleable-content" v-if="toggleable">
       <slot></slot>
     </div>
@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import TadsIcon from "./Icon";
+import TadsIcon from "./Icon.vue";
 export default {
   components: { TadsIcon },
   name: "TadsField",
