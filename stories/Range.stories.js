@@ -12,18 +12,39 @@ export default {
 export const regular = () => ({
   components: { TadsRange, TadsField },
   props: {
-    selected: {
+    value: {
       default: number("Value", 50)
+    }
+  },
+  data() {
+    return {
+      newValue: this.value
+    }
+  },
+  computed: {
+    computedValue: {
+      get() {
+        return this.newValue
+      },
+      set(value) {
+        this.newValue = value;
+        this.$emit('input', value)
+      }
+    }
+  },
+  watch: {
+    value(newVal) {
+      this.newValue = newVal;
     }
   },
   template: `
     <div>
       <TadsField label="Drag it">
-        <TadsRange v-model="selected" min="1" max="500"></TadsRange>
+        <TadsRange v-model="newValue" min="1" max="500"></TadsRange>
       </TadsField>
       
       <TadsField label="Selected:">
-        {{ selected }}
+        {{ newValue }}
       </TadsField>
     </div>
   `,
@@ -33,18 +54,39 @@ export const regular = () => ({
 export const withInput = () => ({
   components: { TadsRange, TadsField },
   props: {
-    selected: {
+    value: {
       default: number("Value", 50)
+    }
+  },
+  data() {
+    return {
+      newValue: this.value
+    }
+  },
+  computed: {
+    computedValue: {
+      get() {
+        return this.newValue
+      },
+      set(value) {
+        this.newValue = value;
+        this.$emit('input', value)
+      }
+    }
+  },
+  watch: {
+    value(newVal) {
+      this.newValue = newVal;
     }
   },
   template: `
     <div>
       <TadsField label="Drag it">
-          <TadsRange v-model="selected" min="1" max="500" has-input></TadsRange>
+          <TadsRange v-model="newValue" min="1" max="500" has-input></TadsRange>
       </TadsField>
       
       <TadsField label="Selected:">
-        {{ selected }}
+        {{ newValue }}
       </TadsField>
     </div>
   `,
@@ -53,19 +95,19 @@ export const withInput = () => ({
 
 export const noDefaultValue = () => ({
   components: { TadsRange, TadsField },
-  props: {
-    selected: {
-      default: null
+  data() {
+    return {
+      newValue: null
     }
   },
   template: `
     <div>
       <TadsField label="Drag it">
-          <TadsRange v-model="selected" min="1" max="500" has-input></TadsRange>
+          <TadsRange v-model="newValue" min="1" max="500" has-input></TadsRange>
       </TadsField>
       
       <TadsField label="Selected:">
-        {{ selected }}
+        {{ newValue }}
       </TadsField>
     </div>
   `,
@@ -74,19 +116,19 @@ export const noDefaultValue = () => ({
 
 export const withPlaceholder = () => ({
   components: { TadsRange, TadsField },
-  props: {
-    selected: {
-      default: null
+  data() {
+    return {
+      newValue: null
     }
   },
   template: `
     <div>
       <TadsField label="Drag it">
-          <TadsRange v-model="selected" min="1" max="500" placeholder="400" has-input></TadsRange>
+          <TadsRange v-model="newValue" min="1" max="500" placeholder="400" has-input></TadsRange>
       </TadsField>
       
       <TadsField label="Selected:">
-        {{ selected }}
+        {{ newValue }}
       </TadsField>
     </div>
   `,

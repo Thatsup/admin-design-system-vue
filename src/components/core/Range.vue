@@ -2,15 +2,15 @@
   <div class="base-range" :class="wrapperClasses">
     <input
       type="range"
-      :value="value || newValue || placeholder"
+      :value="computedValue || placeholder"
       :step="$attrs['step']"
       v-bind="$attrs"
-      @input="newValue = $event.target.value"
+      @input="computedValue = $event.target.value"
     />
 
     <TadsInput
       v-if="hasInput"
-      v-model="newValue"
+      v-model="computedValue"
       type="number"
       :max="$attrs['max']"
       :min="$attrs['min']"
@@ -50,6 +50,20 @@ export default {
   },
 
   computed: {
+    computedValue: {
+        get() {
+            return this.newValue
+        },
+        set(newVal) {
+            let value = parseFloat(newVal);
+
+            if (isNaN(value)) {
+              value = null;
+            }
+            this.newValue = value
+            this.$emit('input', value)
+        }
+    },
     wrapperClasses() {
       return {
         level: this.hasInput,
@@ -68,16 +82,9 @@ export default {
       };
     }
   },
-
   watch: {
-    newValue(newVal) {
-      let val = parseFloat(newVal);
-
-      if (isNaN(val)) {
-        val = null;
-      }
-
-      this.$emit("input", val);
+    value(newVal) {
+        this.newValue = newVal;
     }
   }
 };
