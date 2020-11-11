@@ -14,7 +14,7 @@ stream.once("open", function() {
     let fileName = file.split(".")[0];
 
     if (fileName.includes("|")) {
-      let parts = fileName.split("|");
+      let parts = fileName.split("_");
       fileName = parts[0];
       parts.shift();
 
