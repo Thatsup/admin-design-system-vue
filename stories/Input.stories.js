@@ -46,18 +46,18 @@ export const placeholder = () => ({
   components: { TadsInput, TadsField },
   template: `
       <TadsField label="What's your name?">
-          <TadsInput placeholder="Type your name"></TadsInput>
+          <TadsInput @input="input" placeholder="Type your name"></TadsInput>
       </TadsField> 
   `,
-  methods: { action: action("clicked") }
+  methods: { input: action("input") }
 });
 
 export const largeWithBorder = () => ({
   components: { TadsInput, TadsField },
   template: `
       <TadsField label="What's your name?">
-          <TadsInput value="Robin N." large border></TadsInput>
+          <TadsInput @input="input" value="Robin N." large border></TadsInput>
       </TadsField> 
   `,
-  methods: { action: action("clicked") }
+  methods: { input: action("input") }
 })
