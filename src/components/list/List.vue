@@ -37,7 +37,7 @@ export default {
     items: {
       type: [Array, Boolean, Object],
       required: false,
-      default: null
+      default: false
     },
     addHandler: {
       type: Function,
@@ -60,7 +60,7 @@ export default {
       return this.loading || this.computedItems === null;
     },
     isEmpty() {
-      return this.computedItems === null;
+      return this.computedItems === null || this.computedItems.length === 0;
     },
     computedItems() {
       if (typeof this.items === "object" && this.items !== null) {
