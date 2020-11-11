@@ -51,6 +51,10 @@ export default {
 };
 </script>
 
+<style scoped lang="scss">
+@import "../../assets/sass/components/input.scss";
+</style>
+
 <style scoped>
 textarea {
   max-width: 100%;
