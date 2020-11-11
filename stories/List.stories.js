@@ -1,5 +1,5 @@
 import { action } from "@storybook/addon-actions";
-import { withKnobs } from "@storybook/addon-knobs";
+import { withKnobs, number } from "@storybook/addon-knobs";
 
 import TadsField from "../src/components/core/Field.vue";
 import TadsList from "../src/components/list/List.vue";
@@ -58,13 +58,39 @@ export const regular = () => ({
 
 export const loading = () => ({
   components: { TadsList, TadsListItem, TadsField },
+  props: {
+    skeletonAmount: {
+      default: number("skeletonAmount", 3)
+    }
+  },
   data() {
     return {
       items: dummyData
     };
   },
   template: `
-    <TadsList :items="[]" :add="true" add-title="Add new item" :add-handler="() => {action('Added new item')}">
+    <TadsList :loading="true" :skeleton-amount="skeletonAmount" :add="true" add-title="Add new item" :add-handler="() => {action('Added new item')}">
+      <TadsListItem v-for="item in items" :key="item.name" :title="item.name" @click="action('Clicked ' + item.name)" />
+    </TadsList>
+  `,
+  methods: { action: action("clicked") }
+});
+
+
+export const itemsLoading = () => ({
+  components: { TadsList, TadsListItem, TadsField },
+  data() {
+    return {
+      items: null
+    };
+  },
+  created() {
+    window.setTimeout(() => {
+      this.items = dummyData
+    }, 3000);
+  },
+  template: `
+    <TadsList :items="items" :add="true" add-title="Add new item" :add-handler="() => {action('Added new item')}">
       <TadsListItem v-for="item in items" :key="item.name" :title="item.name" @click="action('Clicked ' + item.name)" />
     </TadsList>
   `,

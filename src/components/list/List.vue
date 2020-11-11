@@ -36,7 +36,8 @@ export default {
   props: {
     items: {
       type: [Array, Boolean, Object],
-      default: () => []
+      required: false,
+      default: null
     },
     addHandler: {
       type: Function,
@@ -50,14 +51,13 @@ export default {
       type: Number,
       default: 3
     },
-    add: Boolean
+    add: Boolean,
+    loading: Boolean
   },
 
   computed: {
     isLoading() {
-      return (
-        Array.isArray(this.computedItems) && this.computedItems.length === 0
-      );
+      return this.loading || this.computedItems === null;
     },
     isEmpty() {
       return this.computedItems === null;
