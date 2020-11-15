@@ -13,7 +13,7 @@ stream.once("open", function() {
     const match = contents.match(regex);
     let fileName = file.split(".")[0];
 
-    if (fileName.includes("|")) {
+    if (fileName.includes("_")) {
       let parts = fileName.split("_");
       fileName = parts[0];
       parts.shift();
