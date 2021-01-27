@@ -1,5 +1,6 @@
 <template>
-  <button
+  <component
+    :is="is"
     class="button"
     :class="buttonClasses"
     v-bind="$attrs"
@@ -8,7 +9,7 @@
     <i v-if="icon" class="icon" :class="'icon-' + icon"></i>
 
     <slot></slot>
-  </button>
+  </component>
 </template>
 
 <script>
@@ -50,6 +51,9 @@ export default {
         "is-loading": this.isLoading,
         "is-small": this.$attrs.hasOwnProperty("small"),
       };
+    },
+    is() {
+      return this.$attrs['href'] ? 'a' : 'button'
     }
   }
 };

@@ -38,3 +38,9 @@ export const small = () => ({
   template: `<TadsButton type="primary" @click="action" small>Click me</TadsButton>`,
   methods: { action: action("clicked") }
 });
+
+export const link = () => ({
+  components: { TadsButton },
+  template: `<TadsButton type="primary" href="https://example.org" target="_blank">Click me</TadsButton>`,
+  methods: { action: action("clicked") }
+});
