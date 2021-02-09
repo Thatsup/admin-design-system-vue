@@ -15,32 +15,53 @@ export const regular = () => ({
   methods: { action: action("clicked") }
 });
 
-export const primary = () => ({
+export const colors = () => ({
   components: { TadsButton },
-  template: `<TadsButton type="primary" @click="action">Click me</TadsButton>`,
+  template: `
+    <div>
+      <TadsButton>Regular</TadsButton>
+      <TadsButton blue>Blue</TadsButton>
+      <TadsButton green>Green</TadsButton>
+      <TadsButton yellow>Yellow</TadsButton>
+      <TadsButton navy>Navy</TadsButton>
+      <TadsButton red>Red</TadsButton>
+    </div>
+  `,
+  methods: { action: action("clicked") }
+});
+
+export const sizes = () => ({
+  components: { TadsButton },
+  template: `
+    <div>
+      <TadsButton small blue @click="action">Small button</TadsButton><br>
+      <TadsButton style="margin-top: 10px;" blue @click="action">Regular button</TadsButton><br>
+      <TadsButton style="margin-top: 10px;" large blue @click="action">Large button</TadsButton><br>
+    </div>
+  `,
   methods: { action: action("clicked") }
 });
 
 export const loading = () => ({
   components: { TadsButton },
-  template: `<TadsButton type="primary" @click="action" is-loading>Click me</TadsButton>`,
+  template: `<TadsButton blue @click="action" is-loading>Click me</TadsButton>`,
   methods: { action: action("clicked") }
 });
 
 export const expanded = () => ({
   components: { TadsButton },
-  template: `<TadsButton type="primary" @click="action" expanded>Click me</TadsButton>`,
+  template: `<TadsButton blue @click="action" expanded>Click me</TadsButton>`,
   methods: { action: action("clicked") }
 });
 
 export const small = () => ({
   components: { TadsButton },
-  template: `<TadsButton type="primary" @click="action" small>Click me</TadsButton>`,
+  template: `<TadsButton blue @click="action" small>Click me</TadsButton>`,
   methods: { action: action("clicked") }
 });
 
 export const link = () => ({
   components: { TadsButton },
-  template: `<TadsButton type="primary" href="https://example.org" target="_blank">Click me</TadsButton>`,
+  template: `<TadsButton blue href="https://example.org" target="_blank">Click me</TadsButton>`,
   methods: { action: action("clicked") }
 });

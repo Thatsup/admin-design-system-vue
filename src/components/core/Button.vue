@@ -31,7 +31,18 @@ export default {
     },
     rounded: Boolean,
     expanded: Boolean,
-    isLoading: Boolean
+    isLoading: Boolean,
+
+    // Sizes
+    small: Boolean,
+    large: Boolean,
+
+    // Colors
+    blue: Boolean,
+    green: Boolean,
+    yellow: Boolean,
+    navy: Boolean,
+    red: Boolean
   },
   computed: {
     listeners(event) {
@@ -44,12 +55,22 @@ export default {
     },
     buttonClasses() {
       return {
-        ["is-" + this.type]: !!this.type,
-        ["is-" + this.size]: !!this.size,
+        ["is-" + this.type]: !!this.type, // Deprecated. Use Colors props instead
+        ["is-" + this.size]: !!this.size, // Deprecated. Use Sizes props instead
         "is-fullwidth": this.expanded,
         "is-rounded": this.rounded,
         "is-loading": this.isLoading,
-        "is-small": this.$attrs.hasOwnProperty("small"),
+
+        // Sizes
+        "is-small": this.small,
+        "is-large": this.large,
+
+        // Colors
+        "is-blue": this.blue,
+        "is-green": this.green,
+        "is-yellow": this.yellow,
+        "is-navy": this.navy,
+        "is-red": this.red,
       };
     },
     is() {
