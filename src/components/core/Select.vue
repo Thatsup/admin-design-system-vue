@@ -12,9 +12,15 @@
         @blur="$emit('blur', $event)"
         @focus="$emit('focus', $event)"
         :style="widthStyle"
+        :required="required"
       >
         <template v-if="placeholder">
-          <option :value="null" selected disabled hidden>
+          <option
+            :hidden="required ? 'hidden' : false"
+            :disabled="required ? 'disabled' : false"
+            :value="null"
+            selected
+          >
             {{ placeholder }}
           </option>
         </template>
@@ -54,7 +60,8 @@ export default {
     transparent: Boolean,
     expanded: Boolean,
     autoWidth: Boolean,
-    maxWidth: Number
+    maxWidth: Number,
+    required: Boolean
   },
   data() {
     return {
