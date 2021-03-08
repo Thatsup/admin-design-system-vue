@@ -104,7 +104,7 @@ export default {
   user-select: none;
 }
 
-.switch + .switch {
+.switch:not(.is-expanded) + .switch {
   margin-left: 0.5em;
 }
 
