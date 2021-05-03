@@ -94,3 +94,23 @@ export const multipleSizes = () => ({
   `,
   methods: {action: action("clicked")}
 });
+
+export const locks = () => ({
+  data() {
+    return {
+      icons,
+      locked: false,
+    }
+  },
+  components: {TadsIcon},
+  template: `
+      <div>
+          <TadsIcon 
+              @click.native="locked = !locked" 
+              :name="locked ? 'lock' : 'lock-open'" 
+              size="34"
+          ></TadsIcon>
+      </div>
+  `,
+  methods: {action: action("clicked")}
+});
