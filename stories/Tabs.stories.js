@@ -61,3 +61,27 @@ export const icons = () => ({
     </div>
   `
 });
+
+export const clickable = () => ({
+  components: { TadsTabs, TadsTab, TadsField },
+  methods: {
+    clicked() {
+      alert('Saved!')
+    }
+  },
+  template: `
+    <div>
+      <TadsTabs>
+        <TadsTab icon="edit" @click="clicked" />
+  
+        <TadsTab icon="heading" active>
+          <img src="//placekitten.com/200" alt="">
+        </TadsTab>
+
+        <TadsTab icon="check" tab-class="save">
+          <img src="//placekitten.com/200?design" alt="">
+        </TadsTab>
+      </TadsTabs>
+    </div>
+  `
+});

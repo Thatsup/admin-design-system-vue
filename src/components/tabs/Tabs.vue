@@ -6,8 +6,13 @@
         :key="index"
         v-bind="tab.dataAttrs"
         v-on="tab.$listeners"
-        :class="{ active: isActive(index), disabled: tab.disabled, icon: tab.icon, ['position-' + tab.position]: tab.position }"
-        @click="select(index)"
+        @click="select(index, tab)"
+        :class="[tab.tabClass, {
+          active: isActive(index),
+          disabled: tab.disabled,
+          icon: tab.icon,
+          ['position-' + tab.position]: tab.position
+        }]"
       >
         <template v-if="tab.icon">
           <TadsIcon :name="tab.icon" :size="18" />
@@ -54,6 +59,11 @@ export default {
     },
     select(index) {
       const tab = this.tabList[index];
+
+      if (tab.$listeners.click) {
+        return;
+      }
+
       if (!tab.isDisabled) {
         this.activeTabIndex = index;
       }
@@ -79,7 +89,7 @@ export default {
 }
 
 .tabs > span {
-  display: inline-block;
+  display: inline-flex;
   margin-bottom: -1px;
   padding: 1.2em 1.2em 0.7em;
   color: var(--gray-600);
@@ -88,7 +98,7 @@ export default {
 }
 
 .tabs > .icon {
-  padding: 0.5em 0.75em;
+  padding: 0.4em 0.75em;
 }
 
 .tabs > .position-right {

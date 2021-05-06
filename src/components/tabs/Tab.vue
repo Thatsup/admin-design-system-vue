@@ -35,6 +35,9 @@ export default {
     position: {
       type: String,
       required: false
+    },
+    tabClass: {
+      type: String
     }
   },
   data() {
