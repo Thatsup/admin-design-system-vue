@@ -10,7 +10,11 @@ export default {
   props: {
     title: {
       type: String,
-      required: true
+      required: false
+    },
+    icon: {
+      type: String,
+      required: false
     },
     active: {
       type: [Boolean, String],
@@ -27,6 +31,10 @@ export default {
     to: {
       type: Object,
       default: () => {}
+    },
+    position: {
+      type: String,
+      required: false
     }
   },
   data() {

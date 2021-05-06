@@ -32,3 +32,32 @@ export const regular = () => ({
   `,
   methods: { action: action("changed") }
 });
+
+export const icons = () => ({
+  components: { TadsTabs, TadsTab, TadsField },
+  template: `
+    <div>
+      <TadsTabs position="left">
+        <TadsTab icon="column" active>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eaque et laborum, officia perspiciatis provident ut! Autem deleniti doloremque illo ipsam laudantium odio, odit officiis provident quis recusandae repellat voluptates.</p>
+          <br>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eaque et laborum, officia perspiciatis provident ut! Autem deleniti doloremque illo ipsam laudantium odio, odit officiis provident quis recusandae repellat voluptates.</p>
+        </TadsTab>
+  
+        <TadsTab icon="heading">
+          <img src="//placekitten.com/200" alt="">
+        </TadsTab>
+
+        <TadsTab icon="edit" active position="right">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eaque et laborum, officia perspiciatis provident ut! Autem deleniti doloremque illo ipsam laudantium odio, odit officiis provident quis recusandae repellat voluptates.</p>
+          <br>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eaque et laborum, officia perspiciatis provident ut! Autem deleniti doloremque illo ipsam laudantium odio, odit officiis provident quis recusandae repellat voluptates.</p>
+        </TadsTab>
+
+        <TadsTab icon="design" position="right">
+          <img src="//placekitten.com/200" alt="">
+        </TadsTab>
+      </TadsTabs>
+    </div>
+  `
+});

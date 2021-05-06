@@ -6,10 +6,15 @@
         :key="index"
         v-bind="tab.dataAttrs"
         v-on="tab.$listeners"
-        :class="{ active: isActive(index), disabled: tab.disabled }"
+        :class="{ active: isActive(index), disabled: tab.disabled, icon: tab.icon, ['position-' + tab.position]: tab.position }"
         @click="select(index)"
       >
-        {{ tab.title }}
+        <template v-if="tab.icon">
+          <TadsIcon :name="tab.icon" :size="18" />
+        </template>
+        <template v-if="tab.title">
+          {{ tab.title }}
+        </template>
       </span>
     </nav>
     <div class="tab-content">
@@ -19,8 +24,10 @@
 </template>
 
 <script>
+import TadsIcon from "../core/Icon";
 export default {
   name: "TadsTabs",
+  components: { TadsIcon },
   props: {
     position: {
       type: String,
@@ -68,6 +75,7 @@ export default {
   font-weight: 500;
   white-space: nowrap;
   overflow: auto;
+  display: flex;
 }
 
 .tabs > span {
@@ -77,6 +85,20 @@ export default {
   color: var(--gray-600);
   cursor: pointer;
   border-bottom: 2px solid transparent;
+}
+
+.tabs > .icon {
+  padding: 0.5em 0.75em;
+}
+
+.tabs > .position-right {
+  border-left: 1px solid var(--blue-gray-300);
+  margin-left: auto;
+}
+
+.tabs > .position-right ~ .position-right {
+  border-left: none;
+  margin-left: inherit;
 }
 
 span.active,
