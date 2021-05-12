@@ -6,7 +6,7 @@
         :key="index"
         v-bind="tab.dataAttrs"
         v-on="tab.$listeners"
-        @click="select(index, tab)"
+        @click="select(index)"
         :class="[tab.tabClass, {
           active: isActive(index),
           disabled: tab.disabled,
@@ -51,7 +51,6 @@ export default {
   mounted() {
     this.select(0);
     this.activeTabIndex = this.getInitialActiveTab();
-    this.$root.$on("select-tab", index => this.select(index));
   },
   methods: {
     isActive(index) {
@@ -67,7 +66,9 @@ export default {
       if (!tab.isDisabled) {
         this.activeTabIndex = index;
       }
+
       this.$emit("changed", tab);
+      tab.$emit("selected");
     },
     getInitialActiveTab() {
       const index = this.tabList.findIndex(tab => tab.active);

@@ -71,7 +71,7 @@ export const clickable = () => ({
   },
   template: `
     <div>
-      <TadsTabs>
+      <TadsTabs disable-content>
         <TadsTab icon="edit" @click="clicked" />
   
         <TadsTab icon="heading" active>
@@ -81,6 +81,8 @@ export const clickable = () => ({
         <TadsTab icon="check" tab-class="save">
           <img src="//placekitten.com/200?design" alt="">
         </TadsTab>
+
+        <TadsTab icon="design"></TadsTab>
       </TadsTabs>
     </div>
   `
