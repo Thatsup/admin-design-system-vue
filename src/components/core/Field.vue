@@ -1,14 +1,14 @@
 <template>
   <div :class="fieldClasses" class="field">
     <label v-if="label != null" class="label" @click="labelClick">
-      {{ label || '&nbsp;' }}
       <TadsIcon
         v-if="toggleable"
         name="caret"
         :rotate="!!isOpen? 90 : 0"
         :size="8"
-        class="ml-1"
+        class="mr-1"
       />
+      {{ label || '&nbsp;' }}
     </label>
 
     <div class="toggleable-content" v-if="toggleable">
@@ -141,7 +141,7 @@ export default {
 }
 
 .strike > .label {
-  color: var(--blue-gray-600);
+  /*color: var(--blue-gray-600);*/
 }
 
 .strike > .label:after {
@@ -149,11 +149,10 @@ export default {
   z-index: 0;
   height: 1px;
   flex: 1;
-  background: var(--blue-gray-500);
+  background: var(--blue-gray-600);
   opacity: 0.5;
   transform: translateY(-50%);
-  margin-left: var(--navigation-spacing);
-  margin-right: calc(var(--navigation-spacing) * -1);
+  margin-left: 8px;
   order: 1;
 }
 
@@ -162,7 +161,7 @@ export default {
 }
 
 .strike > .label .icon {
-  order: 2;
+  order: 0;
 }
 
 .error {
