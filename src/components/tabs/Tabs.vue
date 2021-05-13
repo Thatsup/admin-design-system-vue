@@ -22,7 +22,7 @@
         </template>
       </span>
     </nav>
-    <div v-show="!!disableContent" class="tab-content">
+    <div v-show="!disableContent" class="tab-content">
       <slot></slot>
     </div>
   </div>
