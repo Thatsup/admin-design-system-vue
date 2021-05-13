@@ -53,7 +53,6 @@ export default {
     };
   },
   mounted() {
-    this.select(0);
     this.activeTabIndex = this.getInitialActiveTab();
   },
   methods: {
