@@ -22,7 +22,7 @@
         </template>
       </span>
     </nav>
-    <div class="tab-content">
+    <div v-show="!!disableContent" class="tab-content">
       <slot></slot>
     </div>
   </div>
@@ -34,6 +34,10 @@ export default {
   name: "TadsTabs",
   components: { TadsIcon },
   props: {
+    disableContent: {
+      type: Boolean,
+      default: false
+    },
     position: {
       type: String,
       default: "center",
