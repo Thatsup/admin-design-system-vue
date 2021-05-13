@@ -65,7 +65,7 @@ textarea {
   color: var(--navy-700);
   box-shadow: none;
   display: inline-flex;
-  font-size: 18px;
+  font-size: 16px;
   font-family: inherit;
   line-height: 1.5;
   padding: 8px 15px;

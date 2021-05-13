@@ -61,3 +61,13 @@ export const largeWithBorder = () => ({
   `,
   methods: { input: action("input") }
 })
+
+export const number = () => ({
+  components: { TadsInput, TadsField },
+  template: `
+      <TadsField label="What's your age?">
+          <TadsInput type="number" @input="input" :value="27" large border></TadsInput>
+      </TadsField> 
+  `,
+  methods: { input: action("input") }
+})

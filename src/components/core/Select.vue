@@ -161,7 +161,7 @@ export default {
   border: 1px solid transparent;
   border-radius: var(--radius);
   box-shadow: none;
-  font-size: 18px;
+  font-size: 16px;
   font-family: inherit;
   font-weight: 400;
   justify-content: flex-start;
@@ -181,15 +181,15 @@ export default {
   top: 50%;
   width: 0;
   height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 6px solid var(--navy-700);
-  border-radius: 2px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid var(--navy-700);
+  border-radius: 1px;
   pointer-events: none;
 }
 
 .label {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .select.is-expanded,

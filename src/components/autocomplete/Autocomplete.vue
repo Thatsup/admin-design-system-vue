@@ -448,7 +448,7 @@ export default {
 }
 
 a.dropdown-item {
-  font-size: 18px;
+  font-size: 16px;
   padding: 0.6rem 1.25rem;
   display: block;
   color: #525252;

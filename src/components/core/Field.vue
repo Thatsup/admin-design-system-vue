@@ -87,7 +87,7 @@ export default {
 
 <style scoped>
 .field:not(:last-child) {
-  margin-bottom: 23px;
+  margin-bottom: 10px;
 }
 
 .field.is-closed .toggleable-content {
@@ -96,7 +96,7 @@ export default {
 
 /* Field should only have one child, but if we have two, we'll put som margin on it. */
 .field > :first-child:not(:last-child) {
-  margin-bottom: 6px;
+  margin-bottom: 7px;
 }
 
 /*.field.no-label:last-child {*/
@@ -120,8 +120,10 @@ export default {
   align-items: center;
   position: relative;
   color: var(--navy-700);
-  font-weight: 500;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   white-space: nowrap;
   line-height: 1;
   margin-bottom: 5px;
