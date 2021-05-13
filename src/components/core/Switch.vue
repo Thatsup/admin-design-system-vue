@@ -10,7 +10,7 @@
     @mouseout="isMouseDown = false"
     @blur="isMouseDown = false"
   >
-    <span class="control-label text-lg"><slot /></span>
+    <span class="control-label"><slot /></span>
     <input
       v-model="computedValue"
       type="checkbox"
