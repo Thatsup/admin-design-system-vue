@@ -3,10 +3,11 @@ import { withKnobs, text } from "@storybook/addon-knobs";
 
 import TadsField from "../src/components/core/Field.vue";
 import TadsInput from "../src/components/core/Input.vue";
+import TadsTextarea from "../src/components/core/Textarea.vue";
 
 export default {
   title: "Components | Input",
-  components: { TadsInput },
+  components: { TadsInput, TadsTextarea },
   decorators: [withKnobs]
 };
 
@@ -42,21 +43,21 @@ export const withError = () => ({
   methods: { action: action("clicked") }
 });
 
-export const placeholder = () => ({
+export const small = () => ({
   components: { TadsInput, TadsField },
   template: `
       <TadsField label="What's your name?">
-          <TadsInput @input="input" placeholder="Type your name"></TadsInput>
+          <TadsInput @input="input" value="Robin N." small></TadsInput>
       </TadsField> 
   `,
   methods: { input: action("input") }
-});
+})
 
-export const largeWithBorder = () => ({
+export const large = () => ({
   components: { TadsInput, TadsField },
   template: `
       <TadsField label="What's your name?">
-          <TadsInput @input="input" value="Robin N." large border></TadsInput>
+          <TadsInput @input="input" value="Robin N." large></TadsInput>
       </TadsField> 
   `,
   methods: { input: action("input") }
@@ -68,6 +69,16 @@ export const number = () => ({
       <TadsField label="What's your age?">
           <TadsInput type="number" @input="input" :value="27" large border></TadsInput>
       </TadsField> 
+  `,
+  methods: { input: action("input") }
+})
+
+export const textarea = () => ({
+  components: { TadsField, TadsTextarea },
+  template: `
+    <TadsField label="Enter your question">
+      <TadsTextarea @input="input" value="Default message" placeholder="Question goes here" />
+    </TadsField>
   `,
   methods: { input: action("input") }
 })

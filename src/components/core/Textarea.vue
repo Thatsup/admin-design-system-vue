@@ -5,7 +5,7 @@
       'is-loading': loading,
       'has-error': hasError,
       'full-width': expanded,
-      transparent: $attrs.hasOwnProperty('transparent')
+      transparent: transparent
     }"
     :type="$attrs.type || 'text'"
     :value="value"
@@ -25,6 +25,7 @@ export default {
       default: ""
     },
     loading: Boolean,
+    transparent: Boolean,
     expanded: Boolean
   },
   data() {
@@ -59,6 +60,7 @@ export default {
 textarea {
   max-width: 100%;
   min-width: 100%;
+  height: auto;
 
   border: 1px solid transparent;
   border-radius: var(--radius);

@@ -11,10 +11,18 @@
   justify-content: flex-start;
   line-height: 1.5;
   width: 100%;
-  height: 36px;
+  height: 42px;
   padding: 8px 15px;
   position: relative;
   vertical-align: top;
+}
+
+.input--large {
+  height: 52px;
+}
+
+.input--small {
+  height: 36px;
 }
 
 .input[type="text"] {

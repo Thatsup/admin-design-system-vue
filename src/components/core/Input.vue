@@ -4,10 +4,10 @@
     :class="{
       'is-loading': loading,
       'has-error': hasError,
-      'has-border': $attrs.hasOwnProperty('border'),
-      'is-large': $attrs.hasOwnProperty('large'),
+      'has-border': border,
+      'input--large': large,
       'is-narrow': isNarrow,
-      transparent: $attrs.hasOwnProperty('transparent')
+      transparent: transparent
     }"
     :type="$attrs.type || 'text'"
     ref="input"
@@ -21,7 +21,7 @@
 
 <script>
 import FormElementMixin from "../utils/FormElementMixin";
-// Input
+
 export default {
   name: "TadsInput",
   mixins: [FormElementMixin],
@@ -32,7 +32,10 @@ export default {
       default: ""
     },
     loading: Boolean,
-    isNarrow: Boolean
+    isNarrow: Boolean,
+    border: Boolean,
+    transparent: Boolean,
+    large: Boolean
   },
   data() {
     return {
