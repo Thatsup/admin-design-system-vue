@@ -7,9 +7,7 @@
       'full-width': expanded,
       transparent: transparent
     }"
-    :type="$attrs.type || 'text'"
     :value="value"
-    v-bind="$attrs"
     rows="1"
     v-on="listeners"
   />
@@ -18,7 +16,6 @@
 <script>
 export default {
   name: "TadsTextarea",
-  inheritAttrs: false,
   props: {
     value: {
       type: [String, Number],
@@ -57,7 +54,7 @@ export default {
 </style>
 
 <style scoped>
-textarea {
+.input {
   max-width: 100%;
   min-width: 100%;
   height: auto;

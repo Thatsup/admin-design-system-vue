@@ -76,9 +76,15 @@ export const number = () => ({
 export const textarea = () => ({
   components: { TadsField, TadsTextarea },
   template: `
-    <TadsField label="Enter your question">
-      <TadsTextarea @input="input" value="Default message" placeholder="Question goes here" />
-    </TadsField>
+    <div>
+      <TadsField label="Enter your question">
+        <TadsTextarea @input="input" value="Default message" placeholder="Question goes here" />
+      </TadsField>
+  
+      <TadsField label="Enter your question">
+        <TadsTextarea @input="input" rows="3" value="Default message" placeholder="Question goes here" />
+      </TadsField>
+    </div>
   `,
   methods: { input: action("input") }
 })

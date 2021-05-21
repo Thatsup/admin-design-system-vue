@@ -6,6 +6,7 @@
       'has-error': hasError,
       'has-border': border,
       'input--large': large,
+      'input--small': small,
       'is-narrow': isNarrow,
       transparent: transparent
     }"
@@ -35,6 +36,7 @@ export default {
     isNarrow: Boolean,
     border: Boolean,
     transparent: Boolean,
+    small: Boolean,
     large: Boolean
   },
   data() {
