@@ -21,7 +21,7 @@ export const allIcons = () => ({
         
         <ul style="display: flex;flex-flow: row wrap;list-style: none;">
           <li v-for="(icon, name) in icons" style="display: inline-flex;flex-direction: row; align-items: center; flex: 0 1 20%; min-width: 120px; padding: 0px 7.5px 20px;">
-            <TadsIcon :name="name" style="margin-right: 10px;"></TadsIcon>
+            <TadsIcon :name="name" style="margin-right: 10px; flex-shrink: 0;"></TadsIcon>
             {{ name }}
             
             <template v-for="(newname, alias) in aliases" v-if="newname === name">
