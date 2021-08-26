@@ -55,3 +55,26 @@ export const withPlaceholder = () => ({
   `,
   methods: { action: action("clicked") }
 });
+
+export const multiple = () => ({
+  components: { TadsCheckbox, TadsField },
+  props: {
+    value: {
+      default: null
+    },
+  },
+  data() {
+    return {
+      checked: []
+    };
+  },
+  template: `
+    <TadsField label="Check this out">
+      <TadsCheckbox native-value="Jake" v-model="checked" placeholder="Jake"></TadsCheckbox>
+      <TadsCheckbox native-value="Tess" v-model="checked" placeholder="Tess"></TadsCheckbox>
+      <TadsCheckbox native-value="Paul" v-model="checked" placeholder="Paul"></TadsCheckbox>
+      <TadsCheckbox native-value="Miranda" v-model="checked" placeholder="Miranda"></TadsCheckbox>
+    </TadsField> 
+  `,
+  methods: { action: action("clicked") }
+});
