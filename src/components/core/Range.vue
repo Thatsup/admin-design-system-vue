@@ -67,7 +67,7 @@ export default {
     wrapperClasses() {
       return {
         level: this.hasInput,
-        "no-value": !this.newValue
+        "no-value": this.newValue === null
       };
     },
     inputStyles() {
