@@ -149,6 +149,8 @@ export default {
 }
 
 .select select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
   background-color: white;
   color: var(--navy-700);

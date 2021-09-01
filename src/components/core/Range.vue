@@ -96,6 +96,8 @@ export default {
 }
 
 input[type="range"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
   width: 100%;
   height: 2px;
