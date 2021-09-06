@@ -68,14 +68,19 @@ export const regular = () => ({
             :keep-first="true"
             :open-on-focus="true"
             :data="filteredPages"
-            @select="option => selected = option">
+            @select="option => selected = option"
+            @active="activeMethod"
+          >
           </TadsAutocomplete>
         </TadsField>
          
         <TadsField label="Selected">{{ selected }}</TadsField>
       </div> 
   `,
-  methods: { action: action("clicked") }
+  methods: {
+    action: action("clicked"),
+    activeMethod: action("activated")
+  }
 });
 
 export const preselected = () => ({
@@ -125,10 +130,10 @@ export const multiple = () => ({
     filteredPages() {
       return this.items.filter(option => {
         return (
-            option.name
-                .toString()
-                .toLowerCase()
-                .indexOf(this.query.toLowerCase()) >= 0
+          option.name
+            .toString()
+            .toLowerCase()
+            .indexOf(this.query.toLowerCase()) >= 0
         );
       });
     }
@@ -160,17 +165,16 @@ export const multiple = () => ({
   methods: { action: action("clicked") }
 });
 
-
 export const dropdownOnTop = () => ({
   components: { TadsAutocomplete, TadsField },
   computed: {
     filteredPages() {
       return this.items.filter(option => {
         return (
-            option.name
-                .toString()
-                .toLowerCase()
-                .indexOf(this.query.toLowerCase()) >= 0
+          option.name
+            .toString()
+            .toLowerCase()
+            .indexOf(this.query.toLowerCase()) >= 0
         );
       });
     }

@@ -347,6 +347,8 @@ export default {
         index = index > this.data.length - 1 ? this.data.length : index;
         index = index < 0 ? 0 : index;
 
+        this.$emit("active", this.data[index]);
+
         this.setHovered(this.data[index]);
 
         const list = this.$refs.dropdown.querySelector(".dropdown-content");
