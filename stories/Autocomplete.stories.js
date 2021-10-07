@@ -83,6 +83,53 @@ export const regular = () => ({
   }
 });
 
+export const small = () => ({
+  components: { TadsAutocomplete, TadsField },
+  computed: {
+    filteredPages() {
+      return this.items.filter(option => {
+        return (
+            option.name
+                .toString()
+                .toLowerCase()
+                .indexOf(this.query.toLowerCase()) >= 0
+        );
+      });
+    }
+  },
+  data() {
+    return {
+      query: "",
+      selected: {},
+      items: data
+    };
+  },
+  template: `
+      <div>
+        <TadsField label="Search for a Javascript framework">
+          <TadsAutocomplete
+            v-model="query"
+            field="name"
+            :keep-first="true"
+            :open-on-focus="true"
+            :data="filteredPages"
+            @select="option => selected = option"
+            @active="activeMethod"
+            small
+          >
+          </TadsAutocomplete>
+        </TadsField>
+         
+        <TadsField label="Selected">{{ selected }}</TadsField>
+      </div> 
+  `,
+  methods: {
+    action: action("clicked"),
+    activeMethod: action("activated")
+  }
+});
+
+
 export const preselected = () => ({
   components: { TadsAutocomplete, TadsField },
   computed: {

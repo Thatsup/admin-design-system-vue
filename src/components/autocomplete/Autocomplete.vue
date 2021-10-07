@@ -15,6 +15,8 @@
       @keydown.native.enter.prevent="enterPressed"
       @keydown.native.up.prevent="keyArrows('up')"
       @keydown.native.down.prevent="keyArrows('down')"
+      :small="small"
+      :large="large"
     ></TadsInput>
 
     <transition name="fade">
@@ -78,6 +80,8 @@ export default {
     keepFirst: Boolean,
     clearOnSelect: Boolean,
     openOnFocus: Boolean,
+    small: Boolean,
+    large: Boolean,
     position: {
       type: String,
       default: "bottom",

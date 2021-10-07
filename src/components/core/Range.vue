@@ -18,6 +18,8 @@
       :style="inputStyles"
       :placeholder="placeholder || '-'"
       class="ml-2"
+      :small="small"
+      :large="large"
     />
   </div>
 </template>
@@ -35,12 +37,12 @@ export default {
       default: null
     },
     placeholder: {
-      type: [Number,String],
+      type: [Number, String],
       default: null
     },
-    hasInput: {
-      type: Boolean
-    }
+    small: Boolean,
+    large: Boolean,
+    hasInput: Boolean
   },
 
   data() {

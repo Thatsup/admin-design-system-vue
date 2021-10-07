@@ -57,6 +57,8 @@ export default {
       type: [String, Number, Boolean],
       default: ""
     },
+    small: Boolean,
+    large: Boolean,
     transparent: Boolean,
     expanded: Boolean,
     autoWidth: Boolean,
@@ -106,9 +108,9 @@ export default {
 
     fieldClasses() {
       return {
-        "is-small": this.$attrs.hasOwnProperty("small"),
+        "is-small": this.small,
+        "is-large": this.large,
         "is-expanded": this.expanded,
-        "is-large": this.$attrs.hasOwnProperty("large"),
         "is-transparent": this.transparent,
         "has-border": this.$attrs.hasOwnProperty("border"),
         level: this.label
