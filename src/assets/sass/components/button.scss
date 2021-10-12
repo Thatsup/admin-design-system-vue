@@ -1,23 +1,26 @@
 @import "../variables";
 
 .button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  height: $regularInputHeight;
+  font-size: $regularInputFontSize;
+  font-family: inherit;
+  line-height: 1.5;
+  text-align: center;
+  padding: 0 15px;
+
+  color: var(--navy-700);
   background: #fff;
   border: 1px solid transparent;
   border-radius: var(--radius);
-  color: var(--navy-700);
+
   cursor: pointer;
   box-shadow: none;
-  display: inline-block;
-  height: $regularInputHeight;
-  font-size: $regularInputFontSize;
-  line-height: 1.5;
-  font-family: inherit;
   position: relative;
-  vertical-align: top;
-  text-align: center;
   outline: 0;
-  justify-content: center;
-  padding: 0 15px;
   white-space: nowrap;
   text-decoration: none;
 }
@@ -31,42 +34,43 @@
 }
 
 .button.is-primary,
-.button.is-blue {
+.button.color-blue {
   background-color: var(--blue-600);
   border-color: transparent;
   color: #fff;
 }
 
-.button.is-green {
+.button.color-green {
   background-color: var(--green-600);
   color: #fff;
 }
 
-.button.is-yellow {
+.button.color-yellow {
   background-color: var(--yellow-600);
   color: #fff;
 }
 
-.button.is-navy {
+.button.color-navy {
   background-color: var(--navy-700);
   color: #fff;
 }
 
-.button.is-primary.is-outlined {
+.button.is-primary.is-outlined,
+.button.color-blue.is-outlined {
   background-color: transparent;
   border-color: var(--blue-600);
   color: var(--blue-600);
 }
 
 .button.is-danger,
-.button.is-red {
+.button.color-red {
   background-color: var(--red-600);
   border-color: transparent;
   color: #fff;
 }
 
 .button.is-danger.is-outlined,
-.button.is-red.is-outlined {
+.button.color-red.is-outlined {
   background-color: transparent;
   border-color: var(--red-600);
   color: var(--red-600);
@@ -109,10 +113,10 @@
   left: calc(50% - 0.5em);
   top: calc(50% - 0.5em);
   animation: spinAround 0.5s infinite linear;
-  border: 2px solid var(--blue-600);
+  border: 2px solid transparent;
   border-radius: 290486px;
-  border-right-color: transparent;
-  border-top-color: transparent;
+  border-right-color: #fff;
+  border-top-color: #fff;
   content: "";
   display: block;
   height: 1em;
@@ -120,8 +124,9 @@
   width: 1em;
 }
 
-.button.is-primary.is-loading:after {
-  border-color: transparent transparent #fff #fff !important;
+.button.is-loading:not([class^="color-"]):not([class*=" color-"]):after {
+  border-right-color: var(--blue-600);
+  border-top-color: var(--blue-600);
 }
 
 @keyframes spinAround {

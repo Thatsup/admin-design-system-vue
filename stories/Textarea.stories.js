@@ -18,7 +18,7 @@ export const regular = () => ({
   },
   template: `
     <TadsField label="Write something awesome!">
-      <TadsTextarea v-model="text" @input="action" placeholder="Lorem ipsum dolor sit..." />
+      <TadsTextarea v-model="text" @input="action" placeholder="Lorem ipsum dolor sit..." rows="2" />
     </TadsField>
   `,
   methods: { action: action("changed") }

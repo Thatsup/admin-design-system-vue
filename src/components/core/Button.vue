@@ -66,11 +66,11 @@ export default {
         "is-large": this.large,
 
         // Colors
-        "is-blue": this.blue,
-        "is-green": this.green,
-        "is-yellow": this.yellow,
-        "is-navy": this.navy,
-        "is-red": this.red,
+        "color-blue": this.blue,
+        "color-green": this.green,
+        "color-yellow": this.yellow,
+        "color-navy": this.navy,
+        "color-red": this.red,
       };
     },
     is() {
