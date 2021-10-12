@@ -1,6 +1,4 @@
-$smallInputHeight: 36px;
-$regularInputHeight: 42px;
-$largeInputHeight: 52px;
+@import "../variables";
 
 .input {
   align-items: center;
@@ -16,18 +14,24 @@ $largeInputHeight: 52px;
   line-height: 1.5;
   width: 100%;
   height: $regularInputHeight;
-  padding: 8px 15px;
+  padding: 0 15px;
   position: relative;
   vertical-align: top;
 }
 
 .input--large {
   height: $largeInputHeight;
+  font-size: $largeInputFontSize;
 }
 
 .input--small {
   height: $smallInputHeight;
-  padding: 8px 12px;
+  font-size: $smallInputFontSize;
+  padding: 0 12px;
+}
+
+.is-small {
+
 }
 
 .input[type="text"] {
@@ -56,11 +60,6 @@ $largeInputHeight: 52px;
 
 .is-narrow {
   width: auto;
-}
-
-.is-large {
-  padding-bottom: 16px;
-  padding-top: 16px;
 }
 
 .input::placeholder {

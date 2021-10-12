@@ -12,12 +12,29 @@ export default {
 export const regular = () => ({
   components: { TadsSelect, TadsField },
   template: `
-      <TadsField label="Select something">
-          <TadsSelect placeholder="Nothing selected">
+    <div>
+    
+      <TadsField label="Select something small">
+          <TadsSelect placeholder="Nothing selected" expanded small>
               <option value="one">One</option>
               <option value="two">Two</option>
            </TadsSelect>
-      </TadsField> 
+      </TadsField>
+
+      <TadsField label="Select something">
+        <TadsSelect placeholder="Nothing selected" expanded>
+          <option value="one">One</option>
+          <option value="two">Two</option>
+        </TadsSelect>
+      </TadsField>
+
+      <TadsField label="Select something large">
+        <TadsSelect placeholder="Nothing selected" expanded large>
+          <option value="one">One</option>
+          <option value="two">Two</option>
+        </TadsSelect>
+      </TadsField>
+    </div>
 `,
   methods: { action: action("clicked") }
 });

@@ -1,3 +1,5 @@
+@import "../variables";
+
 .button {
   background: #fff;
   border: 1px solid transparent;
@@ -6,7 +8,8 @@
   cursor: pointer;
   box-shadow: none;
   display: inline-block;
-  font-size: 18px;
+  height: $regularInputHeight;
+  font-size: $regularInputFontSize;
   line-height: 1.5;
   font-family: inherit;
   position: relative;
@@ -14,7 +17,7 @@
   text-align: center;
   outline: 0;
   justify-content: center;
-  padding: 8px 15px;
+  padding: 0 15px;
   white-space: nowrap;
   text-decoration: none;
 }
@@ -88,13 +91,13 @@
 
 .button.is-small {
   border-radius: 3px;
-  font-size: 0.75rem;
+  height: $smallInputHeight;
+  font-size: $smallInputFontSize;
 }
 
 .button.is-large {
-  padding-bottom: 15px;
-  padding-top: 15px;
-  font-size: 18px;
+  height: $largeInputHeight;
+  font-size: $largeInputFontSize;
 }
 
 .button.is-loading {
