@@ -86,7 +86,7 @@ export default {
 </script>
 
 <style scoped>
-.field:not(:last-child) {
+.field {
   margin-bottom: 10px;
 }
 
@@ -94,27 +94,11 @@ export default {
   display: none;
 }
 
-/* Field should only have one child, but if we have two, we'll put som margin on it. */
-/*.field > :first-child:not(:last-child) {*/
-/*  margin-bottom: 7px;*/
-/*}*/
-
-/*.field.no-label:last-child {*/
-/*  margin-top: 1.8rem;*/
-/*}*/
-
-.field.large-spacing > .label {
-  margin-bottom: 25px;
-}
-
-.field.large-spacing:not(:first-child) {
-  margin-top: 39px;
-}
-
 .field.is-toggleable > .label {
   cursor: pointer;
   justify-content: space-between;
 }
+
 .label {
   display: flex;
   align-items: center;
@@ -140,10 +124,6 @@ export default {
 
 .inset > .label {
   margin-left: -1rem;
-}
-
-.strike > .label {
-  /*color: var(--blue-gray-600);*/
 }
 
 .strike > .label:after {
