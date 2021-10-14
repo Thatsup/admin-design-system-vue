@@ -1,7 +1,11 @@
 import { action } from "@storybook/addon-actions";
 import { withKnobs, text } from "@storybook/addon-knobs";
+import VTooltip from "v-tooltip";
+import "../src/assets/sass/tooltip.css";
+Vue.use(VTooltip);
 
 import TadsField from "../src/components/core/Field.vue";
+import Vue from "vue";
 
 export default {
   title: "Components | Field",
@@ -17,7 +21,7 @@ export const regular = () => ({
     }
   },
   template: `
-    <TadsField :label="label">
+    <TadsField :label="label" tooltip="Hello">
         <div>Field content</div>
     </TadsField>
   `

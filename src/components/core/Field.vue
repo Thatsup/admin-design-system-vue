@@ -9,6 +9,9 @@
         class="mr-1"
       />
       {{ label || '&nbsp;' }}
+      <span v-if="tooltip" v-tooltip="tooltip">
+        <TadsIcon name="info" size="12" />
+      </span>
     </label>
 
     <div class="toggleable-content" v-if="toggleable">
@@ -28,6 +31,10 @@ export default {
     label: {
       type: String,
       default: null
+    },
+    tooltip: {
+      type: String,
+      default: ""
     },
     strike: Boolean,
     errors: {
