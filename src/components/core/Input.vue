@@ -2,85 +2,51 @@
   <input
     class="input"
     :class="{
-      'is-loading': loading,
       'has-error': hasError,
       'has-border': border,
       'input--large': large,
       'input--small': small,
-      'is-narrow': isNarrow,
-      transparent: transparent
+      'input--full-width': expanded,
+      'transparent': transparent
     }"
-    :type="$attrs.type || 'text'"
+    type="text"
     ref="input"
-    :value="computedValue"
-    v-bind="$attrs"
-    @input="onInput"
-    @blur="onBlur"
-    @focus="onFocus"
+    v-model="localValue"
   />
 </template>
 
 <script>
-import FormElementMixin from "../utils/FormElementMixin";
+import "./input.css";
+import {computed} from "vue";
 
 export default {
   name: "TadsInput",
-  mixins: [FormElementMixin],
-  inheritAttrs: false,
   props: {
-    value: {
+    modelValue: {
       type: [String, Number],
       default: ""
     },
-    loading: Boolean,
-    isNarrow: Boolean,
     border: Boolean,
     transparent: Boolean,
     small: Boolean,
-    large: Boolean
+    large: Boolean,
+    hasError: Boolean,
+    expanded: {
+      type: Boolean,
+      default: true
+    },
   },
-  data() {
-    return {
-      newValue: this.value,
-      hasError: false
-    };
-  },
-  watch: {
-    /**
-     * When v-model is changed:
-     *   1. Set internal value.
-     */
-    value(value) {
-      this.newValue = value;
-    }
-  },
-  computed: {
-    computedValue: {
-      get() {
-        return this.newValue;
-      },
-      set(value) {
-        this.newValue = value;
-        this.$emit("input", value);
+  emits: ['update:modelValue'],
+  setup(props, context) {
+    const localValue = computed({
+      get: () => props.modelValue,
+      set: (value) => {
+        context.emit('update:modelValue', value)
       }
-    }
-  },
-  methods: {
-    /**
-     * Input's 'input' event listener, 'nextTick' is used to prevent event firing
-     * before ui update, helps when using masks (Cleavejs and potentially others).
-     */
-    onInput(event) {
-      this.$nextTick(() => {
-        if (event.target) {
-          this.computedValue = event.target.value;
-        }
-      });
-    }
+    });
+    return {
+      localValue
+    };
   }
 };
 </script>
-
-<style scoped lang="scss">
-@import "../../assets/sass/components/input.scss";
-</style>

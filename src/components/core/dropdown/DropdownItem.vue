@@ -1,39 +1,21 @@
 <template>
   <hr v-if="separator" class="dropdown-divider" />
   <a
-    v-else-if="!custom && !hasLink"
+    v-else
     class="dropdown-item"
     :class="anchorClasses"
     :role="ariaRoleItem"
     tabindex="0"
-    @click="selectItem"
   >
     <slot />
   </a>
-  <div
-    v-else
-    :class="itemClasses"
-    :role="ariaRoleItem"
-    tabindex="0"
-    @click="selectItem"
-  >
-    <slot />
-  </div>
 </template>
 
 <script>
 export default {
   name: "TadsDropdownItem",
   props: {
-    value: {
-      type: [String, Number, Boolean, Object, Array, Symbol, Function],
-      default: null
-    },
     separator: Boolean,
-    disabled: Boolean,
-    custom: Boolean,
-    paddingless: Boolean,
-    hasLink: Boolean,
     ariaRole: {
       type: String,
       default: ""
@@ -42,79 +24,43 @@ export default {
   computed: {
     anchorClasses() {
       return {
-        "is-disabled": this.$parent.disabled || this.disabled,
-        "is-paddingless": this.paddingless,
-        "is-active": this.value !== null && this.value === this.$parent.selected
-      };
-    },
-    itemClasses() {
-      return {
-        "dropdown-item": !this.hasLink,
-        "is-disabled": this.disabled,
-        "is-paddingless": this.paddingless,
-        "is-active":
-          this.value !== null && this.value === this.$parent.selected,
-        "has-link": this.hasLink
+        "is-disabled": this.$parent.disabled,
       };
     },
     ariaRoleItem() {
       return this.ariaRole === "menuitem" || this.ariaRole === "listitem"
         ? this.ariaRole
         : null;
-    },
-    /**
-     * Check if item can be clickable.
-     */
-    isClickable() {
-      return (
-        !this.$parent.disabled &&
-        !this.separator &&
-        !this.disabled &&
-        !this.custom
-      );
     }
   },
-  created() {
-    if (!this.$parent.$data.$isDropdown) {
-      this.$destroy();
-      throw new Error("You should wrap bDropdownItem on a bDropdown");
-    }
-  },
-  methods: {
-    /**
-     * Click listener, select the item.
-     */
-    selectItem() {
-      if (!this.isClickable) return;
-
-      this.$parent.selectItem(this.value);
-      this.$emit("click");
-    }
-  }
 };
 </script>
 
 <style scoped>
-.has-link a.is-active,
-a.dropdown-item.is-active {
-  background-color: var(--blue-600);
-  color: #fff;
-}
-
-.has-link a,
-a.dropdown-item {
+.dropdown-item {
   padding-right: 3rem;
   white-space: nowrap;
   cursor: pointer;
+  color: inherit;
+  text-decoration: inherit;
 }
 
-.dropdown-item,
-.has-link a {
+.dropdown-item {
   color: var(--gray-800);
   display: block;
   line-height: 1.5;
   font-weight: 400;
   padding: 0.375rem 1rem;
   position: relative;
+}
+
+.dropdown-item:hover {
+  background-color: var(--gray-200);
+}
+
+.dropdown-divider {
+  border: 0;
+  border-bottom: 1px solid var(--gray-400);
+  margin: 0.5rem 0;
 }
 </style>

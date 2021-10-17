@@ -5,7 +5,7 @@
       name="file"
       id="file"
       ref="file"
-      class="inputfile"
+      class="file-upload"
       :value="computedValue"
       v-bind="$attrs"
       @change="onFileChange"
@@ -14,46 +14,49 @@
 
     <slot :props="{ files, computedFiles }">
       <div class="is-flex">
-        <TadsButton blue href="#" @click="$refs.file.click()">
-          <TadsIcon name="upload" size="18" />
+        <Button blue href="#" @click.prevent="$refs.file.click()">
+          <Icon name="upload" size="18" />
 
-          <template v-if="files.length === 1">
-            {{ files[0].name }}
+          <template v-if="computedFiles.length === 1">
+            {{ computedFiles[0].name }}
           </template>
 
-          <template v-else-if="files.length > 1">
-            {{ files.length }} files selected
+          <template v-else-if="computedFiles.length > 1">
+            {{ computedFiles.length }} files selected
           </template>
 
           <template v-else>
-            Choose a file
+            {{ label }}
           </template>
-        </TadsButton>
+        </Button>
       </div>
     </slot>
   </div>
 </template>
 
 <script>
-import FormElementMixin from "../utils/FormElementMixin";
-import TadsButton from "./Button";
-import TadsIcon from "./Icon";
+import Button from "./Button"
+import Icon from "./Icon"
+import './file-upload.css'
 
 export default {
   name: "TadsFileUpload",
-  components: { TadsIcon, TadsButton },
-  mixins: [FormElementMixin],
   inheritAttrs: false,
+  components: { Icon, Button },
   props: {
-    value: {
+    modelValue: {
       type: [String, Number],
       default: ""
     },
-    multiple: Boolean
+    label: {
+      type: String,
+      default: 'Choose a file'
+    },
+    multiple: Boolean,
   },
   data() {
     return {
-      newValue: this.value,
+      newValue: this.modelValue,
       files: [],
       fileUrl: ""
     };
@@ -113,7 +116,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss">
-@import "../../assets/sass/components/file-upload";
-</style>

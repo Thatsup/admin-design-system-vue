@@ -4,17 +4,16 @@
       v-model="newValue"
       type="text"
       ref="input"
-      :loading="loading"
       :autocomplete="newAutocomplete"
       v-bind="$attrs"
       @input="onInput"
       @focus="focused"
       @blur="onBlur"
-      @keyup.native.esc.prevent="isActive = false"
-      @keydown.native.tab="tabPressed"
-      @keydown.native.enter.prevent="enterPressed"
-      @keydown.native.up.prevent="keyArrows('up')"
-      @keydown.native.down.prevent="keyArrows('down')"
+      @keydown.esc.prevent="isActive = false"
+      @keydown.tab="tabPressed"
+      @keydown.enter.prevent="enterPressed"
+      @keydown.up.prevent="keyArrows('up')"
+      @keydown.down.prevent="keyArrows('down')"
       :small="small"
       :large="large"
     ></TadsInput>
@@ -31,7 +30,7 @@
             <slot name="header" />
           </div>
           <a
-            v-for="(option, index) in data"
+            v-for="(option, index) in filteredData"
             :key="index"
             class="dropdown-item"
             :class="{ 'is-hovered': option === hovered }"
@@ -65,7 +64,7 @@ export default {
   components: { TadsInput },
   inheritAttrs: false,
   props: {
-    value: {
+    modelValue: {
       type: [String, Number],
       default: ""
     },
@@ -82,6 +81,9 @@ export default {
     openOnFocus: Boolean,
     small: Boolean,
     large: Boolean,
+    filterFunction: {
+      type: Function,
+    },
     position: {
       type: String,
       default: "bottom",
@@ -104,9 +106,9 @@ export default {
   data() {
     return {
       selected: null,
-      hovered: null,
+      hovered: {},
       isActive: false,
-      newValue: this.value,
+      newValue: this.modelValue,
       newAutocomplete: this.autocomplete || "off",
       isListInViewportVertically: true,
       hasFocus: false,
@@ -115,6 +117,18 @@ export default {
     };
   },
   computed: {
+    filteredData() {
+      if (this.filterFunction) {
+        return this.filterFunction(this.data, this.newValue, this.field)
+      }
+
+      return this.data.filter(option => {
+        return option[this.field]
+                .toString()
+                .toLowerCase()
+                .indexOf(this.newValue.toLowerCase()) >= 0
+      });
+    },
     /**
      * White-listed items to not close when clicked.
      * Add input, dropdown and all children.
@@ -138,7 +152,7 @@ export default {
      * Check if exists default slot
      */
     hasDefaultSlot() {
-      return !!this.$scopedSlots.default;
+      return !!this.$slots.default;
     },
 
     /**
@@ -179,7 +193,7 @@ export default {
      *   3. Close dropdown if value is clear or else open it
      */
     newValue(value) {
-      this.$emit("input", value);
+      this.$emit("update:modelValue", value);
       // Check if selected is invalid
       const currentValue = this.getValue(this.selected);
       if (currentValue && !this.clearOnSelect && currentValue !== value) {
@@ -221,7 +235,7 @@ export default {
       this.newValue = this.getValue(this.selected);
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (typeof window !== "undefined") {
       document.removeEventListener("click", this.clickedOutside);
       window.removeEventListener("resize", this.calcDropdownInViewportVertical);
@@ -402,7 +416,7 @@ export default {
       this.hasFocus = false;
       this.$emit("blur", event);
     },
-    onInput(event) {
+    onInput() {
       const currentValue = this.getValue(this.selected);
       if (currentValue && currentValue === this.newValue) return;
       this.$emit("typing", this.newValue);

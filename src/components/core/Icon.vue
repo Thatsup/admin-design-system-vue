@@ -1,8 +1,24 @@
+<template>
+<span>
+      <svg
+          viewBox="0 0 24 24"
+          :style="svgStyle"
+          class="icon"
+          :class="{ solid: solid }"
+          aria-hidden="true"
+          v-bind="$attrs"
+      >
+      <path :d="svgPath" />
+    </svg>
+</span>
+</template>
+
 <script>
 import { icons, aliases } from "../../assets/icons/icons.js";
 
 export default {
   name: "TadsIcon",
+  inheritAttrs: false,
   props: {
     name: {
       type: String,
@@ -10,18 +26,20 @@ export default {
     },
     rotate: {
       type: [Number, String],
-      default: null
+      default: 0
     },
     size: {
       type: [String, Number],
       default: 24
     },
-    solid: Boolean
+    solid: Boolean,
   },
   computed: {
     svgStyle() {
       return {
-        transform: `rotate(${this.rotate}deg)`
+        transform: `rotate(${this.rotate}deg)`,
+        width: this.size + 'px',
+        height: this.size + 'px',
       };
     },
     svgPath() {
@@ -33,27 +51,15 @@ export default {
         return icons[aliases[this.name]];
       }
 
-      return null;
+      return ''
     }
   }
 };
 </script>
 
-<template>
-  <span
-    class="icon"
-    :class="{ solid: solid }"
-    :style="{ width: size + 'px', height: size + 'px' }"
-  >
-    <svg v-bind="$attrs" viewBox="0 0 24 24" :style="svgStyle">
-      <path :d="svgPath" />
-    </svg>
-  </span>
-</template>
-
 <style scoped>
 .icon {
-  display: inline-block;
+  display: block;
 }
 
 .icon svg {

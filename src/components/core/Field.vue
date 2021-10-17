@@ -17,7 +17,7 @@
     <div class="toggleable-content" v-if="toggleable">
       <slot></slot>
     </div>
-    <slot v-else />
+    <slot :has-error="errors.length > 0" v-else />
 
     <div v-if="errors.length" class="error" v-text="errors[0]"></div>
   </div>

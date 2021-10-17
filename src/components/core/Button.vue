@@ -3,35 +3,22 @@
     :is="is"
     class="button"
     :class="buttonClasses"
-    v-bind="$attrs"
-    v-on="listeners"
   >
-    <i v-if="icon" class="icon" :class="'icon-' + icon"></i>
-
-    <slot></slot>
+    <slot />
   </component>
 </template>
 
 <script>
+import "./button.css"
+import TadsIcon from "./Icon";
+
 export default {
   name: "TadsButton",
-  inheritAttrs: false,
+  components: {TadsIcon},
   props: {
-    type: {
-      type: String,
-      default: ""
-    },
-    size: {
-      type: String,
-      default: ""
-    },
-    icon: {
-      type: String,
-      default: ""
-    },
-    rounded: Boolean,
     expanded: Boolean,
     isLoading: Boolean,
+    isOutlined: Boolean,
 
     // Sizes
     small: Boolean,
@@ -45,20 +32,10 @@ export default {
     red: Boolean
   },
   computed: {
-    listeners(event) {
-      return {
-        ...this.$listeners,
-        input: () => {
-          this.$emit("input", event.target.value);
-        }
-      };
-    },
     buttonClasses() {
       return {
-        ["is-" + this.type]: !!this.type, // Deprecated. Use Colors props instead
-        ["is-" + this.size]: !!this.size, // Deprecated. Use Sizes props instead
         "is-fullwidth": this.expanded,
-        "is-rounded": this.rounded,
+        "is-outlined": this.isOutlined,
         "is-loading": this.isLoading,
 
         // Sizes
@@ -79,7 +56,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss">
-@import "../../assets/sass/components/button.scss";
-</style>

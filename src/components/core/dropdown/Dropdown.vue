@@ -8,7 +8,9 @@
       aria-haspopup="true"
       @click="toggle"
     >
-      <slot name="trigger" />
+      <slot name="trigger">
+        <TadsButton blue>Open</TadsButton>
+      </slot>
     </div>
 
     <transition :name="animation">
@@ -31,13 +33,11 @@
 </template>
 
 <script>
+import TadsButton from "../Button";
 export default {
   name: "TadsDropdown",
+  components: {TadsButton},
   props: {
-    value: {
-      type: [String, Number, Boolean, Object, Array, Symbol, Function],
-      default: null
-    },
     disabled: Boolean,
     hoverable: Boolean,
     inline: Boolean,
@@ -69,7 +69,6 @@ export default {
   },
   data() {
     return {
-      selected: this.value,
       isActive: false,
       $isDropdown: true // Used internally by DropdownItem
     };
@@ -96,47 +95,17 @@ export default {
         : null;
     }
   },
-  watch: {
-    /**
-     * When v-model is changed set the new selected item.
-     */
-    value(value) {
-      this.selected = value;
-    },
-
-    /**
-     * Emit event when isActive value is changed.
-     */
-    isActive(value) {
-      this.$emit("active-change", value);
-    }
-  },
   created() {
     if (typeof window !== "undefined") {
       document.addEventListener("click", this.clickedOutside);
     }
   },
-  beforeDestroy() {
+  unmounted() {
     if (typeof window !== "undefined") {
       document.removeEventListener("click", this.clickedOutside);
     }
   },
   methods: {
-    /**
-     * Click listener from DropdownItem.
-     *   1. Set new selected item.
-     *   2. Emit input event to update the user v-model.
-     *   3. Close the dropdown.
-     */
-    selectItem(value) {
-      if (this.selected !== value) {
-        this.$emit("change", value);
-        this.selected = value;
-      }
-      this.$emit("input", value);
-      this.isActive = false;
-    },
-
     /**
      * White-listed items to not close when clicked.
      */

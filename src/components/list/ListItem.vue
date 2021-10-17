@@ -1,11 +1,12 @@
 <template>
-  <div
+  <component
+    :is="$attrs.href ? 'a' : 'div'"
     class="base-list-item"
-    :class="{ 'has-description': !!description, 'is-disabled': disabled }"
+    :class="{ 'has-description': !!description, 'is-disabled': disabled, 'is-clickable': $attrs.onClick || $attrs.href }"
   >
     <slot name="before"></slot>
 
-    <div class="main flex" v-on="listeners">
+    <div class="main flex">
       <slot>
         <div class="title">{{ title }}</div>
         <span v-if="description" class="description">{{ description }}</span>
@@ -13,7 +14,7 @@
     </div>
 
     <slot name="after"></slot>
-  </div>
+  </component>
 </template>
 
 <script>
@@ -29,16 +30,6 @@ export default {
       default: ""
     },
     disabled: Boolean
-  },
-  computed: {
-    listeners(event) {
-      return {
-        ...this.$listeners,
-        input: () => {
-          this.$emit("input", event.target.value);
-        }
-      };
-    }
   }
 };
 </script>
@@ -52,14 +43,23 @@ export default {
   text-decoration: none;
   margin-bottom: 10px;
   background-color: #fff;
+  color: inherit;
   height: 50px;
 }
 .base-list-item:last-child {
   margin-bottom: 0;
 }
 
-.base-list-item:active,
-.base-list-item:focus {
+.base-list-item > *:empty {
+  display: none;
+}
+
+.base-list-item.is-clickable {
+  cursor: pointer;
+}
+
+.base-list-item.is-clickable:active,
+.base-list-item.is-clickable:focus {
   background-color: var(--gray-100);
 }
 
@@ -71,13 +71,12 @@ export default {
   opacity: 0.8;
 }
 
-.base-list-item > div {
+.base-list-item > * {
   padding-top: 7px;
   padding-bottom: 7px;
   color: inherit;
   display: inline-block;
   text-decoration: none;
-  cursor: pointer;
 }
 
 .base-list-item .title {
@@ -104,18 +103,24 @@ export default {
   min-width: 0; /* Bugfix for text-overflow: ellipsis. See https://css-tricks.com/flexbox-truncated-text/ */
 }
 
-.base-list-item .main:not(:last-child) {
-  padding-right: 0;
-}
-
-.base-list-item .main:last-child:not(:first-child) {
-  padding-left: 0;
-}
-
-.base-list-item > div:first-child,
-.base-list-item > div:last-child {
+.base-list-item .main {
   padding-left: var(--navigation-spacing);
   padding-right: var(--navigation-spacing);
+}
+
+.base-list-item > *:first-child {
+  padding-right: var(--navigation-spacing);
+  padding-left: var(--navigation-spacing);
+}
+
+.base-list-item > *:last-child {
+  padding-right: var(--navigation-spacing);
+  padding-left: var(--navigation-spacing);
+}
+
+.base-list-item > *:first-child:not(:empty) + .main {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* Bring the left slot closer to the title */

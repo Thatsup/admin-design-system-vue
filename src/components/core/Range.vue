@@ -2,15 +2,12 @@
   <div class="base-range" :class="wrapperClasses">
     <input
       type="range"
-      :value="computedValue || placeholder"
-      :step="$attrs['step']"
-      v-bind="$attrs"
-      @input="computedValue = $event.target.value"
+      v-model="localValue"
     />
 
     <TadsInput
-      v-if="hasInput"
-      v-model="computedValue"
+      v-if="withInput"
+      v-model="localValue"
       type="number"
       :max="$attrs['max']"
       :min="$attrs['min']"
@@ -26,13 +23,14 @@
 
 <script>
 import TadsInput from "./Input";
+import {computed} from "vue";
 
 export default {
   name: "TadsRange",
-  components: { TadsInput },
   inheritAttrs: false,
+  components: { TadsInput },
   props: {
-    value: {
+    modelValue: {
       type: Number,
       default: null
     },
@@ -42,7 +40,26 @@ export default {
     },
     small: Boolean,
     large: Boolean,
-    hasInput: Boolean
+    withInput: Boolean
+  },
+
+  emits: ['update:modelValue'],
+  setup(props, context) {
+    const localValue = computed({
+      get: () => props.modelValue,
+      set: (value) => {
+        value = parseFloat(value);
+
+        if (isNaN(value)) {
+          value = null;
+        }
+
+        context.emit('update:modelValue', value)
+      }
+    });
+    return {
+      localValue
+    };
   },
 
   data() {
@@ -52,23 +69,9 @@ export default {
   },
 
   computed: {
-    computedValue: {
-        get() {
-            return this.newValue
-        },
-        set(newVal) {
-            let value = parseFloat(newVal);
-
-            if (isNaN(value)) {
-              value = null;
-            }
-            this.newValue = value
-            this.$emit('input', value)
-        }
-    },
     wrapperClasses() {
       return {
-        level: this.hasInput,
+        "has-input": this.withInput,
         "no-value": this.newValue === null
       };
     },
@@ -83,11 +86,6 @@ export default {
         width: widthVal
       };
     }
-  },
-  watch: {
-    value(newVal) {
-        this.newValue = newVal;
-    }
   }
 };
 </script>
@@ -95,6 +93,15 @@ export default {
 <style scoped>
 .base-range {
   padding-bottom: 7px;
+}
+
+.base-range.has-input {
+  display: flex;
+  align-items: center;
+}
+
+.base-range.has-input input[type="range"] {
+  margin-right: 1rem;
 }
 
 input[type="range"] {

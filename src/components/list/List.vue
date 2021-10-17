@@ -21,7 +21,15 @@
 
     <!-- We have data. Show list items! -->
     <div v-else class="base-list">
-      <slot></slot>
+      <template v-if="computedItems.length > 0">
+        <TadsListItem
+            v-for="item in computedItems"
+            :key="item"
+            v-bind="item"
+        />
+      </template>
+
+      <slot v-else></slot>
     </div>
   </div>
 </template>
@@ -35,9 +43,8 @@ export default {
   components: { TadsListItem, TadsIcon },
   props: {
     items: {
-      type: [Array, Boolean, Object],
-      required: false,
-      default: false
+      type: Array,
+      default: () => []
     },
     addHandler: {
       type: Function,
@@ -52,13 +59,10 @@ export default {
       default: 3
     },
     add: Boolean,
-    loading: Boolean
+    isLoading: Boolean
   },
 
   computed: {
-    isLoading() {
-      return this.loading || this.computedItems === null;
-    },
     isEmpty() {
       return this.computedItems === null || this.computedItems.length === 0;
     },
