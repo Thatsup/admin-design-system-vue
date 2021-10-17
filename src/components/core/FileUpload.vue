@@ -81,16 +81,12 @@ export default {
       }
     },
     computedFiles() {
-      let files = [];
-
-      this.files.forEach(file => {
-        files.push({
+      return Array.from(this.files).map(file => {
+        return {
           name: file.name,
           url: URL.createObjectURL(file)
-        });
-      });
-
-      return files;
+        }
+      })
     }
   },
   methods: {
