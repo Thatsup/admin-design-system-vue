@@ -21,7 +21,6 @@
 
     cursor: pointer;
     text-transform: inherit;
-    outline: none;
     border: 1px solid transparent;
     border-radius: var(--radius);
     box-shadow: none;

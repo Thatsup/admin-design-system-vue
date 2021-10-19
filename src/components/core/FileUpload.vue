@@ -10,6 +10,7 @@
       v-bind="$attrs"
       @change="onFileChange"
       :multiple="multiple"
+      tabindex="-1"
     />
 
     <slot :props="{ files, computedFiles }">

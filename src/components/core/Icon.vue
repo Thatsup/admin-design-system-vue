@@ -1,13 +1,11 @@
 <template>
-<span>
-      <svg
-          viewBox="0 0 24 24"
-          :style="svgStyle"
-          class="icon"
-          :class="{ solid: solid }"
-          aria-hidden="true"
-          v-bind="$attrs"
-      >
+<span
+    class="icon"
+    :class="{ solid: solid }"
+    :style="svgStyle"
+    aria-hidden="true"
+>
+      <svg viewBox="0 0 24 24">
       <path :d="svgPath" />
     </svg>
 </span>
@@ -18,7 +16,6 @@ import { icons, aliases } from "../../assets/icons/icons.js";
 
 export default {
   name: "TadsIcon",
-  inheritAttrs: false,
   props: {
     name: {
       type: String,
@@ -59,7 +56,7 @@ export default {
 
 <style scoped>
 .icon {
-  display: block;
+  display: inline-block;
 }
 
 .icon svg {

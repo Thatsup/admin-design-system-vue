@@ -20,7 +20,6 @@
   cursor: pointer;
   box-shadow: none;
   position: relative;
-  outline: 0;
   white-space: nowrap;
   text-decoration: none;
 }
