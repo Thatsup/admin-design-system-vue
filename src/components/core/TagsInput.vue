@@ -12,12 +12,12 @@
           :key="tag"
       >
         <TadsTag
-            :class="{ duplicate: tag.toLowerCase() === duplicate}"
+            :class="{ duplicate: getTagName(tag).toLowerCase() === duplicate}"
             :can-delete="true"
             @deleted="removeTag(index)"
             @click="removeTag(index)"
-            color="blue"
-        >{{ tag }}</TadsTag>
+            :color="tag.tagColor ? tag.tagColor : tagsColor"
+        >{{ getTagName(tag) }}</TadsTag>
       </span>
 
         <input
@@ -43,6 +43,7 @@ import TadsTag from "./Tag";
 import TadsTextarea from "./Textarea";
 
 export default {
+  name: 'TadsTagsInput',
   components: {TadsTextarea, TadsTag, TadsInput},
   emits: ['update:modelValue'],
   inheritAttrs: false,
@@ -54,6 +55,14 @@ export default {
     options: {
       type: [Array, Boolean],
       default: false,
+    },
+    field: {
+      type: String,
+      default: '',
+    },
+    tagsColor: {
+      type: String,
+      default: 'blue',
     },
     allowCustom: {
       type: Boolean,
@@ -70,28 +79,35 @@ export default {
     const newTag = ref("");
     const id = Math.random().toString(36).substring(7);
 
-    const addTag = tag=> {
-      if (!tag) return;
+    const addTag = tagName => {
+      if (!tagName) return;
 
       // Only allow tags in options when allowCustom is false
-      if (!props.allowCustom && !props.options.includes(tag)) return;
+      if (!props.allowCustom && !props.options.includes(tagName)) return;
 
       // Check for duplicate
-      console.log(tags.value)
-      console.log(tags.value.map(v => v.toLowerCase()))
-      console.log(tags.value)
-      console.log(tag)
-      if (tags.value.map(v => v.toLowerCase()).includes(tag.toLowerCase())) {
-        handleDuplicate(tag.toString().toLowerCase());
+      if (tags.value.map(v => getTagName(v).toLowerCase()).includes(tagName.toLowerCase())) {
+        handleDuplicate(tagName.toString().toLowerCase());
         return;
       }
 
-      tags.value.push(tag);
+      // If a field is set, we are working with tag objects
+      if (props.field === '') {
+        tags.value.push(tagName);
+      } else {
+        tags.value.push({
+          [props.field]: tagName
+        });
+      }
+
       newTag.value = "";
     };
     const removeTag = (index) => {
       tags.value.splice(index, 1);
     };
+    const getTagName = tag => {
+      return props.field !== '' ? tag[props.field] : tag
+    }
 
     // Handling duplicates – always in lowercase
     const duplicate = ref(null)
@@ -102,16 +118,8 @@ export default {
     };
 
     // Positioning and handling tag change
-    const paddingLeft = ref(10);
     const tagsUl = ref(null);
     const onTagsChange = () => {
-      // Position cursor
-      const extraCushion = 15;
-      paddingLeft.value = tagsUl.value.clientWidth + extraCushion;
-
-      // Scroll to end of tags
-      tagsUl.value.scrollTo(tagsUl.value.scrollWidth, 0);
-
       // Emit value on tags change
       emit("update:modelValue", tags.value);
     };
@@ -129,7 +137,7 @@ export default {
       newTag,
       addTag,
       removeTag,
-      paddingLeft,
+      getTagName,
       tagsUl,
       availableOptions,
       id,

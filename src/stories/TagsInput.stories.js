@@ -29,6 +29,26 @@ export const Default = Template.bind({});
 Default.args = {
   modelValue: ['Restaurant', 'Bar', 'Night club', 'Cafe', 'Barber', 'Tattoo parlour', 'Mall', 'Food market']
 }
+export const ObjectItems = Template.bind({});
+ObjectItems.args = {
+  field: 'name',
+  modelValue: [
+    {
+      name: 'Default',
+      id: 1,
+    },
+    {
+      name: 'Bar',
+      id: 2,
+      tagColor: 'red'
+    },
+    {
+      name: 'Park',
+      id: 3,
+      tagColor: 'gray'
+    }
+  ]
+}
 export const SetOptions = Template.bind({});
 SetOptions.args = {
   options: ['Google', 'Facebook', 'Tesla', 'Amazon'],
