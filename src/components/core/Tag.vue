@@ -1,13 +1,24 @@
 <template>
   <span class="tag" :class="color">
     <slot />
+    <TadsIcon
+        v-if="canDelete"
+        @click="$emit('deleted')"
+        size="11"
+        name="plus-heavy"
+        rotate="45"
+        class="tag__delete"
+    />
   </span>
 </template>
 
 <script>
+import TadsIcon from "./Icon";
 export default {
   name: "TadsTag",
+  components: {TadsIcon},
   props: {
+    canDelete: Boolean,
     color: {
       type: String,
       default: "gray",
@@ -21,11 +32,14 @@ export default {
 
 <style>
 .tag {
+  display: inline-flex;
+  align-items: center;
+
+  white-space: nowrap;
   border-radius: 20px;
   padding: 4px 13px;
   font-size: 12px;
   font-weight: 700;
-  display: inline-block;
 }
 
 .tag::before {
@@ -35,7 +49,15 @@ export default {
   display: inline-block;
   border-radius: 4px;
   margin-right: 4px;
-  margin-bottom: 1px;
+}
+
+.tag__delete {
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+.tag__delete:hover {
+  opacity: 0.6;
 }
 
 .gray {

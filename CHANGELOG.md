@@ -26,6 +26,8 @@
   * Require the disabled css attribute to have a value
 * **Dropdown**
   * Removed selectable items. Items are only available as links now.
+* **Field**
+  * Added CSS variables to `.field` and `.label`
 * **FileUpload** _New!_
 * **Icon**
   * Added accessibility
@@ -54,6 +56,9 @@
   * Removed `type` prop
   * Removed `size` prop
   * Fixed `disabled` CSS so it needs a value i.e `disabled[type="true"]`
+* **Tags**
+  * Added optional close button
+* **TagsInput** _New!_
 * **Textarea**
   * Changed `expanded` prop to `true` as default
   * Changed `value` prop to only accept `String` value

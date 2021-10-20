@@ -94,7 +94,7 @@ export default {
 
 <style scoped>
 .field {
-  margin-bottom: 10px;
+  margin-bottom: var(--field-spacing, 10px);
 }
 
 .field.is-closed .toggleable-content {
@@ -117,7 +117,7 @@ export default {
   letter-spacing: 1px;
   white-space: nowrap;
   line-height: 1;
-  margin-bottom: 5px;
+  margin-bottom: var(--field-label-spacing, 5px);
 }
 
 .strike > .label {

@@ -1,0 +1,243 @@
+<template>
+  <div class="tag-input" :class="{ 'with-count': showCount }">
+    <datalist v-if="options" :id="id">
+      <option v-for="option in availableOptions" :key="option" :value="option">
+        {{ option }}
+      </option>
+    </datalist>
+
+    <div class="input tags" ref="tagsUl">
+      <span
+          v-for="(tag, index) in tags"
+          :key="tag"
+      >
+        <TadsTag
+            :class="{ duplicate: tag.toLowerCase() === duplicate}"
+            :can-delete="true"
+            @deleted="removeTag(index)"
+            @click="removeTag(index)"
+            color="blue"
+        >{{ tag }}</TadsTag>
+      </span>
+
+        <input
+            v-model="newTag"
+            :list="id"
+            class="tags-input__input"
+            autocomplete="off"
+            @keydown.enter="addTag(newTag)"
+            @keydown.prevent.tab="addTag(newTag)"
+            @keydown.delete="newTag.length || removeTag(tags.length - 1)"
+            v-bind="$attrs"
+        />
+    </div>
+    <div v-if="showCount" class="count">
+      <span>{{ tags.length }}</span> tags
+    </div>
+  </div>
+</template>
+<script>
+import {ref, watch, nextTick, onMounted, computed} from "vue";
+import TadsInput from "./Input";
+import TadsTag from "./Tag";
+import TadsTextarea from "./Textarea";
+
+export default {
+  components: {TadsTextarea, TadsTag, TadsInput},
+  emits: ['update:modelValue'],
+  inheritAttrs: false,
+  props: {
+    modelValue: {
+      type: Array,
+      default: () => [],
+    },
+    options: {
+      type: [Array, Boolean],
+      default: false,
+    },
+    allowCustom: {
+      type: Boolean,
+      default: true,
+    },
+    showCount: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  setup(props, {emit}) {
+    // Tags
+    const tags = ref(props.modelValue);
+    const newTag = ref("");
+    const id = Math.random().toString(36).substring(7);
+
+    const addTag = tag=> {
+      if (!tag) return;
+
+      // Only allow tags in options when allowCustom is false
+      if (!props.allowCustom && !props.options.includes(tag)) return;
+
+      // Check for duplicate
+      console.log(tags.value)
+      console.log(tags.value.map(v => v.toLowerCase()))
+      console.log(tags.value)
+      console.log(tag)
+      if (tags.value.map(v => v.toLowerCase()).includes(tag.toLowerCase())) {
+        handleDuplicate(tag.toString().toLowerCase());
+        return;
+      }
+
+      tags.value.push(tag);
+      newTag.value = "";
+    };
+    const removeTag = (index) => {
+      tags.value.splice(index, 1);
+    };
+
+    // Handling duplicates – always in lowercase
+    const duplicate = ref(null)
+    const handleDuplicate = (tag) => {
+      duplicate.value = tag
+      setTimeout(() => (duplicate.value = null), 1000)
+      newTag.value = ""
+    };
+
+    // Positioning and handling tag change
+    const paddingLeft = ref(10);
+    const tagsUl = ref(null);
+    const onTagsChange = () => {
+      // Position cursor
+      const extraCushion = 15;
+      paddingLeft.value = tagsUl.value.clientWidth + extraCushion;
+
+      // Scroll to end of tags
+      tagsUl.value.scrollTo(tagsUl.value.scrollWidth, 0);
+
+      // Emit value on tags change
+      emit("update:modelValue", tags.value);
+    };
+    watch(tags, () => nextTick(onTagsChange), {deep: true});
+    onMounted(onTagsChange);
+
+    // Options
+    const availableOptions = computed(() => {
+      if (!props.options) return false;
+      return props.options.filter((option) => !tags.value.includes(option));
+    });
+
+    return {
+      tags,
+      newTag,
+      addTag,
+      removeTag,
+      paddingLeft,
+      tagsUl,
+      availableOptions,
+      id,
+      duplicate,
+    };
+  },
+};
+</script>
+<style scoped>
+.tag-input {
+  position: relative;
+}
+
+.tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  height: auto;
+  background: white;
+  padding-top: 8px; /* @TODO Maybe use a CSS variable in input.css? */
+  padding-bottom: 8px; /* @TODO Maybe use a CSS variable in input.css? */
+}
+
+.tags .tag {
+  margin: 1px;
+}
+
+.tags-input__input {
+  border: 0;
+  background: #0000;
+  box-shadow: none;
+  outline: 0;
+  margin-left: 4px;
+  padding: 6px;
+  flex: 1;
+  min-width: 70px;
+  width: 100%;
+  font-size: 14px;
+}
+
+.tags-input__input::placeholder {
+  font-style: italic;
+  color: var(--gray-500);
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+  max-width: 75%;
+  overflow-x: auto;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: scale(0.9) translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: scale(0.9) translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: scale(0.9) translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: scale(0.9) translate3d(4px, 0, 0);
+  }
+}
+
+.tag.duplicate {
+  animation: shake 1s;
+}
+
+.count {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  display: block;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.count span {
+  background: var(--gray-300);
+  padding: 2px 3px;
+  border-radius: 2px;
+}
+
+.with-count input {
+  padding-right: 60px;
+}
+
+.with-count ul {
+  max-width: 60%;
+}
+</style>
