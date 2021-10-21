@@ -4,6 +4,7 @@
         :is="is"
         class="button"
         :class="buttonClasses"
+        v-bind="$attrs"
     >
       <TadsIcon
           v-if="icon"
@@ -26,6 +27,7 @@ import TadsIcon from "./Icon";
 
 export default {
   name: "TadsButton",
+  inheritAttrs: false,
   components: {TadsIcon},
   props: {
     expanded: Boolean,
