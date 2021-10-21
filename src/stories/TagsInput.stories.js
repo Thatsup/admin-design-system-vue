@@ -1,4 +1,5 @@
 import TagsInput from '../components/core/TagsInput.vue';
+import {ref, watch} from "vue";
 
 export default {
   title: 'Core/TagsInput',
@@ -13,13 +14,18 @@ export default {
     }
   },
   args: {
-    placeholder: 'Add tags'
+    placeholder: 'Add tags',
   }
 };
 
 const Template = (args) => ({
   components: { TagsInput },
   setup() {
+
+    setTimeout(() => {
+      args.modelValue = ['hej']
+    },2000)
+
     return { args };
   },
   template: '<TagsInput v-bind="args" />',
