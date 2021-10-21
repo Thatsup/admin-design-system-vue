@@ -82,6 +82,12 @@ export default {
     this.calculateWidth()
   },
 
+  watch: {
+    modelValue(val) {
+      this.selected = val
+    }
+  },
+
   computed: {
     widthStyle() {
       if (this.expanded || (this.transparent && this.label)) {
@@ -124,8 +130,6 @@ export default {
       } else {
         this.dummyText = this.placeholder
       }
-
-      console.log(this.dummyText)
 
       nextTick(() => {
         this.width = this.calculateMaxWidth(this.$refs.dummySelect.offsetWidth)
