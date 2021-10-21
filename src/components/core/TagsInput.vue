@@ -14,7 +14,6 @@
         <TadsTag
             :class="{ duplicate: getTagName(tag).toLowerCase() === duplicate}"
             :can-delete="true"
-            @deleted="removeTag(index)"
             @click="removeTag(index)"
             :color="tag.tagColor ? tag.tagColor : tagsColor"
         >{{ getTagName(tag) }}</TadsTag>
@@ -41,6 +40,7 @@ import {ref, watch, nextTick, onMounted, computed} from "vue";
 import TadsInput from "./Input";
 import TadsTag from "./Tag";
 import TadsTextarea from "./Textarea";
+import {isString} from "lodash/lang";
 
 export default {
   name: 'TadsTagsInput',
@@ -49,7 +49,7 @@ export default {
   inheritAttrs: false,
   props: {
     modelValue: {
-      type: Array,
+      type: [Array, String],
       default: () => [],
     },
     options: {
@@ -80,12 +80,16 @@ export default {
     const newTag = ref("");
     const id = Math.random().toString(36).substring(7);
 
-    const tags = computed({
-      get: () => props.modelValue,
-      set: (value) => {
-        emit('update:modelValue', value)
-      }
-    });
+    let tagsInitialValue = props.modelValue
+
+    if (isString(props.modelValue)) {
+      tagsInitialValue = props.modelValue
+          .split(',')
+          .map(v => v.trim())
+          .filter(v => v !== '');
+    }
+
+    const tags = ref(tagsInitialValue)
 
     const addTag = tagName => {
       if (!tagName) return;
@@ -129,7 +133,13 @@ export default {
     const tagsUl = ref(null);
     const onTagsChange = () => {
       // Emit value on tags change
-      emit("update:modelValue", tags.value);
+      let tagsVal = tags.value
+
+      if (isString(props.modelValue)) {
+        tagsVal = tags.value.join(',');
+      }
+
+      emit('update:modelValue', tagsVal)
     };
     watch(tags, () => nextTick(onTagsChange), {deep: true});
     onMounted(onTagsChange);

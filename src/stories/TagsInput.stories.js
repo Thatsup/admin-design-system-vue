@@ -25,13 +25,14 @@ const Template = (args) => ({
   template: '<TagsInput v-bind="args" />',
 });
 
-export const Default = Template.bind({});
-Default.args = {
+export const ArrayInput = Template.bind({});
+ArrayInput.args = {
   modelValue: ['Restaurant', 'Bar', 'Night club', 'Cafe', 'Barber', 'Tattoo parlour', 'Mall', 'Food market'],
   border: true,
 }
-export const ObjectItems = Template.bind({});
-ObjectItems.args = {
+
+export const ArrayWithObjects = Template.bind({});
+ArrayWithObjects.args = {
   field: 'name',
   modelValue: [
     {
@@ -50,9 +51,16 @@ ObjectItems.args = {
     }
   ]
 }
-export const SetOptions = Template.bind({});
-SetOptions.args = {
+
+export const StringInput = Template.bind({});
+StringInput.args = {
+  modelValue: 'Bar, Restaurant, Cafe',
+}
+
+export const FixedValues = Template.bind({});
+FixedValues.args = {
   options: ['Google', 'Facebook', 'Tesla', 'Amazon'],
   modelValue: ['Tesla'],
+  placeholder: 'Only Google, Facebook or Amazon allowed',
   allowCustom: false,
 }
