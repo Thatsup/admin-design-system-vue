@@ -8,7 +8,8 @@
       <select
         ref="select"
         :dir="dir"
-        v-model="localValue"
+        :value="selected"
+        @input="localValue = $event.target.value"
         v-bind="$attrs"
         :style="widthStyle"
       >
@@ -40,7 +41,7 @@
 
 <script>
 import './select.css'
-import {computed} from "vue";
+import {nextTick} from "vue";
 
 export default {
   name: "TadsSelect",
@@ -68,23 +69,9 @@ export default {
     border: Boolean,
   },
   emits: ['update:modelValue'],
-  setup(props, context) {
-    const localValue = computed({
-      get: () => props.modelValue,
-      set: (value) => {
-        context.emit('update:modelValue', value)
-        this.calculateWidth()
-      }
-    });
-
-    return {
-      localValue
-    };
-  },
-
   data() {
     return {
-      selected: this.value,
+      selected: this.modelValue,
       width: false,
       dummyText: null,
       dir: (this.label && this.transparent) ? 'rtl' : 'ltf'
@@ -103,14 +90,14 @@ export default {
 
       return { width: this.width + "px" };
     },
-    computedValue: {
+    localValue: {
       get() {
-        return this.selected;
+        return this.modelValue
       },
       set(value) {
-        this.selected = value;
+        this.$emit("update:modelValue", value)
+        this.selected = value
         this.calculateWidth()
-        this.$emit("input", value);
       }
     },
 
@@ -138,7 +125,9 @@ export default {
         this.dummyText = this.placeholder
       }
 
-      this.$nextTick(() => {
+      console.log(this.dummyText)
+
+      nextTick(() => {
         this.width = this.calculateMaxWidth(this.$refs.dummySelect.offsetWidth)
       })
     },

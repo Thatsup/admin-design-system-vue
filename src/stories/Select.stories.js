@@ -11,6 +11,7 @@ export default {
   },
   args: {
     modelValue: 0,
+    autoWidth: true,
     options: [
       {value: 0, label: 'Laravel'},
       {value: 1, label: 'CodeIgniter'},
@@ -38,5 +39,5 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Default.args = {
-
+  modelValue: 3
 };

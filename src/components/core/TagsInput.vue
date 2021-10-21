@@ -161,7 +161,7 @@ export default {
 
 .tags {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   height: auto;
   background: white;
