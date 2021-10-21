@@ -6,7 +6,7 @@
       </option>
     </datalist>
 
-    <div class="input tags" ref="tagsUl">
+    <div class="input tags" :class="{'has-border': border}" ref="tagsUl">
       <span
           v-for="(tag, index) in tags"
           :key="tag"
@@ -20,16 +20,16 @@
         >{{ getTagName(tag) }}</TadsTag>
       </span>
 
-        <input
-            v-model="newTag"
-            :list="id"
-            class="tags-input__input"
-            autocomplete="off"
-            @keydown.enter="addTag(newTag)"
-            @keydown.prevent.tab="addTag(newTag)"
-            @keydown.delete="newTag.length || removeTag(tags.length - 1)"
-            v-bind="$attrs"
-        />
+      <input
+          v-model="newTag"
+          :list="id"
+          class="tags-input__input"
+          autocomplete="off"
+          @keydown.enter="addTag(newTag)"
+          @keydown.prevent.tab="addTag(newTag)"
+          @keydown.delete="newTag.length || removeTag(tags.length - 1)"
+          v-bind="$attrs"
+      />
     </div>
     <div v-if="showCount" class="count">
       <span>{{ tags.length }}</span> tags
@@ -72,12 +72,20 @@ export default {
       type: Boolean,
       default: false,
     },
+    border: Boolean,
   },
   setup(props, {emit}) {
     // Tags
-    const tags = ref(props.modelValue);
+    //const tags = ref(props.modelValue);
     const newTag = ref("");
     const id = Math.random().toString(36).substring(7);
+
+    const tags = computed({
+      get: () => props.modelValue,
+      set: (value) => {
+        emit('update:modelValue', value)
+      }
+    });
 
     const addTag = tagName => {
       if (!tagName) return;

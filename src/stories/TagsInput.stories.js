@@ -27,7 +27,8 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  modelValue: ['Restaurant', 'Bar', 'Night club', 'Cafe', 'Barber', 'Tattoo parlour', 'Mall', 'Food market']
+  modelValue: ['Restaurant', 'Bar', 'Night club', 'Cafe', 'Barber', 'Tattoo parlour', 'Mall', 'Food market'],
+  border: true,
 }
 export const ObjectItems = Template.bind({});
 ObjectItems.args = {
