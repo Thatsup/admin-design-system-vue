@@ -1,5 +1,4 @@
 import Switch from '../components/core/Switch.vue';
-import {ref} from "vue";
 
 export default {
   title: 'Core/Switch',
