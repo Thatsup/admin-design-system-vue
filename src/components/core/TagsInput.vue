@@ -36,7 +36,7 @@
   </div>
 </template>
 <script>
-import {ref, watch, nextTick, onMounted, computed} from "vue";
+import {ref, watch, nextTick, onMounted, computed, toRefs} from "vue";
 import TadsInput from "./Input";
 import TadsTag from "./Tag";
 import TadsTextarea from "./Textarea";
@@ -50,7 +50,6 @@ export default {
   props: {
     modelValue: {
       type: [Array, String],
-      default: () => [],
     },
     options: {
       type: [Array, Boolean],
@@ -76,20 +75,21 @@ export default {
   },
   setup(props, {emit}) {
     // Tags
-    //const tags = ref(props.modelValue);
+    const tags = ref([]);
     const newTag = ref("");
     const id = Math.random().toString(36).substring(7);
+    const { modelValue } = toRefs(props)
 
-    let tagsInitialValue = props.modelValue
-
-    if (isString(props.modelValue)) {
-      tagsInitialValue = props.modelValue
-          .split(',')
-          .map(v => v.trim())
-          .filter(v => v !== '');
-    }
-
-    const tags = ref(tagsInitialValue)
+    watch(modelValue, (val) => {
+      if (isString(val)) {
+        tags.value = val
+            .split(',')
+            .map(v => v.trim())
+            .filter(v => v !== '');
+      } else {
+        tags.value = val
+      }
+    }, {deep: true, immediate: true})
 
     const addTag = tagName => {
       if (!tagName) return;
@@ -105,11 +105,11 @@ export default {
 
       // If a field is set, we are working with tag objects
       if (props.field === '') {
-        tags.value.push(tagName);
+        tags.value = [...tags.value, tagName]
       } else {
-        tags.value.push({
+        tags.value = [...tags.value, {
           [props.field]: tagName
-        });
+        }]
       }
 
       newTag.value = "";
@@ -132,14 +132,11 @@ export default {
     // Positioning and handling tag change
     const tagsUl = ref(null);
     const onTagsChange = () => {
-      // Emit value on tags change
-      let tagsVal = tags.value
-
       if (isString(props.modelValue)) {
-        tagsVal = tags.value.join(',');
+        emit('update:modelValue', tags.value.join(','))
+      } else {
+        emit('update:modelValue', tags.value)
       }
-
-      emit('update:modelValue', tagsVal)
     };
     watch(tags, () => nextTick(onTagsChange), {deep: true});
     onMounted(onTagsChange);
