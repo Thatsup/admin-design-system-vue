@@ -15,9 +15,7 @@
 
     <slot :props="{ files, computedFiles }">
       <div class="is-flex">
-        <Button blue href="#" @click.prevent="$refs.file.click()">
-          <Icon name="upload" size="18" />
-
+        <Button blue icon="upload" @click="$refs.file.click()">
           <template v-if="computedFiles.length === 1">
             {{ computedFiles[0].name }}
           </template>

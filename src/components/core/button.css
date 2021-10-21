@@ -4,6 +4,7 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  min-width: 0;
 
   height: var(--input-height);
   font-size: var(--input-font-size);
@@ -30,6 +31,16 @@
 
 .button:active {
   opacity: 0.95;
+}
+
+.button__label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.button__icon {
+  flex-shrink: 0;
 }
 
 .button.color-blue {

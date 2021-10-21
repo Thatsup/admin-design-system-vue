@@ -1,11 +1,23 @@
 <template>
-  <component
-    :is="is"
-    class="button"
-    :class="buttonClasses"
-  >
-    <slot />
-  </component>
+  <div style="display: flex">
+    <component
+        :is="is"
+        class="button"
+        :class="buttonClasses"
+    >
+      <TadsIcon
+          v-if="icon"
+          :name="icon"
+          :size="18"
+          class="button__icon"
+      />
+
+      <span class="button__label">
+        <slot v-if="!label"/>
+        {{ label }}
+      </span>
+    </component>
+  </div>
 </template>
 
 <script>
@@ -19,6 +31,9 @@ export default {
     expanded: Boolean,
     isLoading: Boolean,
     isOutlined: Boolean,
+
+    label: String,
+    icon: String,
 
     // Sizes
     small: Boolean,

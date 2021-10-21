@@ -24,7 +24,7 @@
           :list="id"
           class="tags-input__input"
           autocomplete="off"
-          @keydown.enter="addTag(newTag)"
+          @keydown.prevent.enter="addTag(newTag)"
           @keydown.prevent.tab="addTag(newTag)"
           @keydown.delete="newTag.length || removeTag(tags.length - 1)"
           v-bind="$attrs"
