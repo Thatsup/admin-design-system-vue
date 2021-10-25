@@ -1,8 +1,8 @@
 <template>
   <div class="tag-input" :class="{ 'with-count': showCount }">
     <datalist v-if="options" :id="id">
-      <option v-for="option in availableOptions" :key="option" :value="option">
-        {{ option }}
+      <option v-for="option in availableOptions" :key="option" :value="getTagName(option)">
+        {{ getTagName(option) }}
       </option>
     </datalist>
 
@@ -37,14 +37,12 @@
 </template>
 <script>
 import {ref, watch, nextTick, onMounted, computed, toRefs} from "vue";
-import TadsInput from "./Input";
 import TadsTag from "./Tag";
-import TadsTextarea from "./Textarea";
 import {isString} from "lodash/lang";
 
 export default {
   name: 'TadsTagsInput',
-  components: {TadsTextarea, TadsTag, TadsInput},
+  components: {TadsTag},
   emits: ['update:modelValue'],
   inheritAttrs: false,
   props: {
@@ -91,11 +89,19 @@ export default {
       }
     }, {deep: true, immediate: true})
 
+    const isTagAnOption = tagName => {
+      return props.options.some(option => {
+        return props.field ? option[props.field] === tagName : option === tagName;
+      });
+    }
+
     const addTag = tagName => {
       if (!tagName) return;
 
       // Only allow tags in options when allowCustom is false
-      if (!props.allowCustom && !props.options.includes(tagName)) return;
+      if (!props.allowCustom && !isTagAnOption(tagName)) {
+        return
+      }
 
       // Check for duplicate
       if (tags.value.map(v => getTagName(v).toLowerCase()).includes(tagName.toLowerCase())) {
