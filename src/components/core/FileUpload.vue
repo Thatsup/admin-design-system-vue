@@ -35,13 +35,12 @@
 
 <script>
 import Button from "./Button"
-import Icon from "./Icon"
 import './file-upload.css'
 
 export default {
   name: "TadsFileUpload",
   inheritAttrs: false,
-  components: { Icon, Button },
+  components: { Button },
   props: {
     modelValue: {
       type: [String, Number],
