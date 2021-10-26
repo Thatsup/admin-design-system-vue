@@ -130,6 +130,13 @@
 }
 
 /**
+  Placeholder styling value
+ */
+.select.no-value select {
+    color: var(--blue-gray-500);
+}
+
+/**
   Dummy select
  */
 .select__dummy-wrap {

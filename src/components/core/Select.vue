@@ -15,10 +15,8 @@
       >
         <template v-if="placeholder">
           <option
-            :hidden="required ? 'hidden' : false"
-            :disabled="required ? 'disabled' : false"
-            :value="null"
-            selected
+              value=""
+              :disabled="required"
           >
             {{ placeholder }}
           </option>
@@ -109,6 +107,7 @@ export default {
 
     fieldClasses() {
       return {
+        "no-value": !this.selected,
         "is-small": this.small,
         "is-large": this.large,
         "is-expanded": this.expanded,
