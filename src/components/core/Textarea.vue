@@ -3,6 +3,7 @@
     class="input"
     :class="{
       'has-error': hasError,
+      'has-border': border,
       'input--full-width': expanded,
     }"
     v-model="localValue"
@@ -25,7 +26,8 @@ export default {
       type: Boolean,
       default: true,
     },
-    hasError: Boolean
+    border: Boolean,
+    hasError: Boolean,
   },
   emits: ['update:modelValue'],
   setup(props, context) {
