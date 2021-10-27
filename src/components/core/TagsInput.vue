@@ -39,7 +39,7 @@
 <script>
 import {ref, watch, nextTick, onMounted, computed, toRefs} from "vue";
 import TadsTag from "./Tag";
-import {isString} from "lodash/lang";
+import {isArray, isString} from "lodash";
 
 export default {
   name: 'TadsTagsInput',
@@ -85,7 +85,9 @@ export default {
             .split(',')
             .map(v => v.trim())
             .filter(v => v !== '');
-      } else {
+      }
+
+      if (isArray(val)) {
         tags.value = val
       }
     }, {deep: true, immediate: true})
