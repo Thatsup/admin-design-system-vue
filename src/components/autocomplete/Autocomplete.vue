@@ -83,6 +83,7 @@ export default {
     large: Boolean,
     backend: Boolean,
     isLoading: Boolean,
+    expanded: Boolean,
     filterFunction: {
       type: Function,
     },
