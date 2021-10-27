@@ -19,7 +19,7 @@ export default {
   component: Autocomplete,
   argTypes: {
     'onUpdate:modelValue': { action: 'clicked' },
-    'onSelect': { action: 'clicked' },
+    'onSelected': { action: 'clicked' },
   },
   args: {
     placeholder: 'Search for a Javascript framework',

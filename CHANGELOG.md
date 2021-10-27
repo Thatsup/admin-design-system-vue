@@ -48,6 +48,7 @@
 * **Select**
   * Added `border` prop
   * Changed `placeholder` prop types from [String, Number, Boolean] to String
+  * Changed `select` event to `selected`
   * Changed `label` prop types from [String, Number, Boolean] to String
   * Fixed auto width. It now has to be enabled manually.
   * Changed `maxWidth` prop to `autoWidthMax`

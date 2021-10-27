@@ -60,6 +60,7 @@ import TadsInput from "../core/Input.vue";
 
 export default {
   name: "TadsAutocomplete",
+  emits: ['update:modelValue', 'selected'],
   components: { TadsInput },
   inheritAttrs: false,
   props: {
@@ -264,7 +265,7 @@ export default {
       if (option === undefined) return;
 
       this.selected = option;
-      this.$emit("select", this.selected);
+      this.$emit("selected", this.selected);
       if (this.selected !== null) {
         this.newValue = this.clearOnSelect ? "" : this.getValue(this.selected);
       }
