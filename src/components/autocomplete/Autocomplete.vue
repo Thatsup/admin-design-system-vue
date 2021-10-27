@@ -16,6 +16,7 @@
       @keydown.down.prevent="keyArrows('down')"
       :small="small"
       :large="large"
+      :is-loading="isLoading"
     ></TadsInput>
 
     <transition name="fade">
@@ -55,12 +56,10 @@
 
 <script>
 import { getValueByPath } from "../utils/helpers";
-import FormElementMixin from "../utils/FormElementMixin";
 import TadsInput from "../core/Input.vue";
 
 export default {
   name: "TadsAutocomplete",
-  mixins: [FormElementMixin],
   components: { TadsInput },
   inheritAttrs: false,
   props: {
@@ -81,6 +80,8 @@ export default {
     openOnFocus: Boolean,
     small: Boolean,
     large: Boolean,
+    backend: Boolean,
+    isLoading: Boolean,
     filterFunction: {
       type: Function,
     },
@@ -118,6 +119,10 @@ export default {
   },
   computed: {
     filteredData() {
+      if (this.backend) {
+        return this.data
+      }
+
       if (this.filterFunction) {
         return this.filterFunction(this.data, this.newValue, this.field)
       }

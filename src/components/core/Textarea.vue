@@ -3,7 +3,7 @@
     class="input"
     :class="{
       'has-error': hasError,
-      'full-width': expanded,
+      'input--full-width': expanded,
     }"
     v-model="localValue"
     rows="1"

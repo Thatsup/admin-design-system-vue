@@ -110,12 +110,12 @@
   font-size: var(--input-font-size--large);
 }
 
-.button.is-loading {
+.is-loading {
   color: transparent !important;
   pointer-events: none;
 }
 
-.button.is-loading:after {
+.is-loading:after {
   left: calc(50% - 0.5em);
   animation: spinAround 0.5s infinite linear;
   border: 2px solid transparent;
@@ -129,7 +129,7 @@
   width: 1em;
 }
 
-.button.is-loading:not([class^="color-"]):not([class*=" color-"]):after {
+.is-loading:not([class^="color-"]):not([class*=" color-"]):after {
   border-right-color: var(--blue-600);
   border-top-color: var(--blue-600);
 }

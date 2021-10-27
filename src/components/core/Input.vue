@@ -1,18 +1,21 @@
 <template>
-  <input
-    class="input"
-    :class="{
-      'has-error': hasError,
-      'has-border': border,
-      'input--large': large,
-      'input--small': small,
-      'input--full-width': expanded,
-      'transparent': transparent
-    }"
-    type="text"
-    ref="input"
-    v-model="localValue"
-  />
+  <div class="input-wrapper" :class="{'is-loading': isLoading}">
+    <input
+        class="input"
+        :class="{
+          'has-error': hasError,
+          'has-border': border,
+          'input--large': large,
+          'input--small': small,
+          'input--full-width': expanded,
+          'transparent': transparent
+        }"
+        type="text"
+        ref="input"
+        v-model="localValue"
+        v-bind="$attrs"
+    />
+  </div>
 </template>
 
 <script>
@@ -21,6 +24,7 @@ import {computed} from "vue";
 
 export default {
   name: "TadsInput",
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: [String, Number],
@@ -31,6 +35,7 @@ export default {
     small: Boolean,
     large: Boolean,
     hasError: Boolean,
+    isLoading: Boolean,
     expanded: {
       type: Boolean,
       default: true

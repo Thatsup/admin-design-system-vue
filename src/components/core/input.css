@@ -40,6 +40,26 @@ textarea.input {
     height: auto;
 }
 
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper.is-loading .input {
+    padding-right: 3em;
+}
+
+.input-wrapper.is-loading {
+    pointer-events: auto;
+}
+
+.input-wrapper.is-loading::after {
+    left: auto;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 1.25em;
+}
+
 .input[type="text"] {
     -webkit-appearance: none;
     -moz-appearance: none;
