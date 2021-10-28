@@ -60,7 +60,7 @@ import TadsInput from "../core/Input.vue";
 
 export default {
   name: "TadsAutocomplete",
-  emits: ['update:modelValue', 'selected'],
+  emits: ['update:modelValue', 'selected', 'active', 'typing'],
   components: { TadsInput },
   inheritAttrs: false,
   props: {
@@ -402,7 +402,7 @@ export default {
      * Focus listener.
      * If value is the same as selected, select all text.
      */
-    focused(event) {
+    focused() {
       if (this.getValue(this.selected) === this.newValue) {
         this.$el.querySelector("input").select();
       }
@@ -413,15 +413,13 @@ export default {
         }
       }
       this.hasFocus = true;
-      this.$emit("focus", event);
     },
 
     /**
      * Blur listener.
      */
-    onBlur(event) {
+    onBlur() {
       this.hasFocus = false;
-      this.$emit("blur", event);
     },
     onInput() {
       const currentValue = this.getValue(this.selected);
