@@ -1,7 +1,7 @@
 <template>
   <div class="tag-input" :class="{ 'with-count': showCount }">
     <datalist v-if="options" :id="id">
-      <option v-for="option in availableOptions" :key="option" :value="option">
+      <option v-for="option in availableOptions" :key="option">
         {{ getTagName(option) }}
       </option>
     </datalist>
@@ -27,7 +27,7 @@
           @keydown.prevent.enter="addTag(newTag)"
           @keydown.prevent.tab="addTag(newTag)"
           @keydown.delete="newTag.length || removeTag(tags.length - 1)"
-          @change="addTag"
+          @change="addTag($event.target.value)"
           v-bind="$attrs"
       />
     </div>
@@ -99,6 +99,7 @@ export default {
     }
 
     const addTag = tagName => {
+      console.log(tagName)
       if (!tagName) return;
 
       // Only allow tags in options when allowCustom is false
@@ -114,9 +115,14 @@ export default {
 
       // If a field is set, we are working with tag objects
       if (props.field !== '') {
-        tags.value = [...tags.value, {
-          [props.field]: tagName
-        }]
+        if (availableOptions.value) {
+          const tag = availableOptions.value.find(o => o[props.field] === tagName)
+          tags.value.push(tag)
+        } else {
+          tags.value = [...tags.value, {
+            [props.field]: tagName
+          }]
+        }
       } else {
         tags.value = [...tags.value, tagName]
       }

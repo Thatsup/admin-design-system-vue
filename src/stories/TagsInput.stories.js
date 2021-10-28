@@ -58,9 +58,10 @@ StringInput.args = {
 }
 
 export const FixedValues = Template.bind({});
+let options = [{id: 1, companyName: 'Google'}, {id: 2, companyName: 'Facebook'}, {id: 3, companyName: 'Tesla'}, {id: 4, companyName: 'Amazon'}];
 FixedValues.args = {
-  options: [{companyName: 'Google'}, {companyName: 'Facebook'}, {companyName: 'Tesla'}, {companyName: 'Amazon'}],
-  modelValue: [{companyName: 'Tesla'}],
+  options: options,
+  modelValue: [options[0]],
   field: 'companyName',
   placeholder: 'Only Google, Facebook or Amazon allowed',
   allowCustom: false,
