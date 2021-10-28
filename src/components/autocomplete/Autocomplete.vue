@@ -142,7 +142,7 @@ export default {
      */
     whiteList() {
       const whiteList = [];
-      whiteList.push(this.$refs.input.$el);
+      whiteList.push(this.$refs.input.$refs.input);
       whiteList.push(this.$refs.dropdown);
       // Add all children from dropdown
       if (this.$refs.dropdown !== undefined) {
@@ -368,13 +368,13 @@ export default {
     keyArrows(direction) {
       const sum = direction === "down" ? 1 : -1;
       if (this.isActive) {
-        let index = this.data.indexOf(this.hovered) + sum;
-        index = index > this.data.length - 1 ? this.data.length : index;
+        let index = this.filteredData.indexOf(this.hovered) + sum;
+        index = index > this.filteredData.length - 1 ? this.filteredData.length : index;
         index = index < 0 ? 0 : index;
 
-        this.$emit("active", this.data[index]);
+        this.$emit("active", this.filteredData[index]);
 
-        this.setHovered(this.data[index]);
+        this.setHovered(this.filteredData[index]);
 
         const list = this.$refs.dropdown.querySelector(".dropdown-content");
         const element = list.querySelectorAll(
