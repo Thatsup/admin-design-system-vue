@@ -54,7 +54,7 @@ ArrayWithObjects.args = {
 
 export const StringInput = Template.bind({});
 StringInput.args = {
-  modelValue: 'Bar, Restaurant, Cafe',
+  modelValue: 'Bar, Restaurant, Cafe'
 }
 
 export const FixedValues = Template.bind({});
@@ -73,4 +73,30 @@ FixedStringValues.args = {
   modelValue: ['Tesla'],
   placeholder: 'Only Google, Facebook or Amazon allowed',
   allowCustom: false,
+}
+
+
+export const SortableString = Template.bind({});
+SortableString.args = {
+  modelValue: 'Bar, Restaurant, Cafe',
+  sortable: true
+}
+
+export const SortableArray = Template.bind({});
+SortableArray.args = {
+  options: ['Google', 'Facebook', 'Tesla', 'Amazon'],
+  modelValue: ['Tesla'],
+  placeholder: 'Only Google, Facebook or Amazon allowed',
+  allowCustom: false,
+  sortable: true
+}
+
+export const SortableObjects = Template.bind({});
+SortableObjects.args = {
+  options: options,
+  modelValue: [options[0]],
+  field: 'companyName',
+  placeholder: 'Only Google, Facebook or Amazon allowed',
+  allowCustom: false,
+  sortable: true
 }

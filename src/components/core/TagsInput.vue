@@ -7,17 +7,23 @@
     </datalist>
 
     <div class="input tags" :class="{'has-border': border}" ref="tagsUl">
-      <span
-          v-for="(tag, index) in tags"
-          :key="tag"
+      <draggable
+          v-model="tags"
+          :item-key="sortableKey"
+          :disabled="!sortable"
       >
-        <TadsTag
-            :class="{ duplicate: getTagName(tag).toLowerCase() === duplicate}"
-            :can-delete="true"
-            @click="removeTag(index)"
-            :color="tag.tagColor ? tag.tagColor : tagsColor"
-        >{{ getTagName(tag) }}</TadsTag>
-      </span>
+        <template #item="{element, index}">
+          <TadsTag
+              :class="{
+                'duplicate': getTagName(element).toLowerCase() === duplicate,
+                'cursor-move': !!sortable
+              }"
+              :can-delete="true"
+              :color="element.tagColor ? element.tagColor : tagsColor"
+              @deleted="removeTag(index)"
+          >{{ getTagName(element) }}</TadsTag>
+        </template>
+      </draggable>
 
       <input
           v-model="newTag"
@@ -40,10 +46,11 @@
 import {ref, watch, nextTick, onMounted, computed, toRefs} from "vue";
 import TadsTag from "./Tag";
 import {isArray, isString} from "lodash";
+import draggable from 'vuedraggable'
 
 export default {
   name: 'TadsTagsInput',
-  components: {TadsTag},
+  components: {draggable,TadsTag},
   emits: ['update:modelValue'],
   inheritAttrs: false,
   props: {
@@ -71,6 +78,12 @@ export default {
       default: false,
     },
     border: Boolean,
+    sortable: Boolean,
+    sortableKey: {
+      type: [String, Function],
+      required: false,
+      default: () => (item) => { return JSON.stringify(item) }
+    },
   },
   setup(props, {emit}) {
     // Tags
@@ -99,7 +112,6 @@ export default {
     }
 
     const addTag = tagName => {
-      console.log(tagName)
       if (!tagName) return;
 
       // Only allow tags in options when allowCustom is false
@@ -277,5 +289,8 @@ ul {
 
 .with-count ul {
   max-width: 60%;
+}
+.cursor-move {
+  cursor: move;
 }
 </style>
