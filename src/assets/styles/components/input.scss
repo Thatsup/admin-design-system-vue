@@ -20,6 +20,11 @@
   vertical-align: top;
 }
 
+.input.is-expanded,
+.input.is-expanded input {
+  width: 100%;
+}
+
 .input--large {
   height: var(--input-height--large);
   font-size: var(--input-font-size--large);

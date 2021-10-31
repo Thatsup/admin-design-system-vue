@@ -40,6 +40,8 @@ export default {
   padding: 4px 13px;
   font-size: 12px;
   font-weight: 700;
+
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .tag::before {
@@ -49,6 +51,8 @@ export default {
   display: inline-block;
   border-radius: 4px;
   margin-right: 4px;
+
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .tag__delete {

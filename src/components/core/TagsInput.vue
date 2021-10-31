@@ -1,21 +1,16 @@
 <template>
   <div class="tag-input" :class="{ 'with-count': showCount }">
-    <datalist v-if="options" :id="id">
-      <option v-for="option in availableOptions" :key="option">
-        {{ getTagName(option) }}
-      </option>
-    </datalist>
-
     <div class="input tags" :class="{'has-border': border}" ref="tagsUl">
       <draggable
           v-model="tags"
           :item-key="sortableKey"
           :disabled="!sortable"
+          class="tags"
       >
         <template #item="{element, index}">
           <TadsTag
               :class="{
-                'duplicate': getTagName(element).toLowerCase() === duplicate,
+                'duplicate': getTagId(element).toLowerCase() === duplicate,
                 'cursor-move': !!sortable
               }"
               :can-delete="true"
@@ -23,19 +18,37 @@
               @deleted="removeTag(index)"
           >{{ getTagName(element) }}</TadsTag>
         </template>
+        <template #footer>
+          <input
+              v-if="!options"
+              v-model="newTag"
+              class="tags-input__input"
+              autocomplete="off"
+              @keydown.prevent.enter="addTag(newTag)"
+              @keydown.prevent.tab="addTag(newTag)"
+              @keydown.delete="newTag.length || removeTag(tags.length - 1)"
+              @change="addTag($event.target.value)"
+              v-bind="$attrs"
+          />
+          <span v-else style="flex:1">
+            <Autocomplete
+                v-model="newTag"
+                :data="availableOptions"
+                :field="labelField || field"
+                :allow-custom="allowCustom"
+                style="height: auto; line-height: normal;"
+                v-bind="$attrs"
+                class="tags-input__input"
+                small
+                open-on-focus
+                clear-on-select
+                expanded
+                @keydown.delete="newTag.length || removeTag(tags.length - 1)"
+                @selected="addTag($event)"
+            />
+          </span>
+        </template>
       </draggable>
-
-      <input
-          v-model="newTag"
-          :list="id"
-          class="tags-input__input"
-          autocomplete="off"
-          @keydown.prevent.enter="addTag(newTag)"
-          @keydown.prevent.tab="addTag(newTag)"
-          @keydown.delete="newTag.length || removeTag(tags.length - 1)"
-          @change="addTag($event.target.value)"
-          v-bind="$attrs"
-      />
     </div>
     <div v-if="showCount" class="count">
       <span>{{ tags.length }}</span> tags
@@ -47,10 +60,11 @@ import {ref, watch, nextTick, onMounted, computed, toRefs} from "vue";
 import TadsTag from "./Tag";
 import {isArray, isString} from "lodash";
 import draggable from 'vuedraggable'
+import Autocomplete from "../autocomplete/Autocomplete";
 
 export default {
   name: 'TadsTagsInput',
-  components: {draggable,TadsTag},
+  components: {Autocomplete, draggable,TadsTag},
   emits: ['update:modelValue'],
   inheritAttrs: false,
   props: {
@@ -63,7 +77,15 @@ export default {
     },
     field: {
       type: String,
-      default: '',
+      default: null,
+    },
+    labelField: {
+      type: String,
+      default: null,
+    },
+    idField: {
+      type: String,
+      default: null,
     },
     tagsColor: {
       type: String,
@@ -79,11 +101,7 @@ export default {
     },
     border: Boolean,
     sortable: Boolean,
-    sortableKey: {
-      type: [String, Function],
-      required: false,
-      default: () => (item) => { return JSON.stringify(item) }
-    },
+    allowDuplicates: Boolean
   },
   setup(props, {emit}) {
     // Tags
@@ -91,6 +109,8 @@ export default {
     const newTag = ref("");
     const id = Math.random().toString(36).substring(7);
     const { modelValue } = toRefs(props)
+
+    const datalistOptions = ref([]);
 
     watch(modelValue, (val) => {
       if (isString(val)) {
@@ -105,48 +125,68 @@ export default {
       }
     }, {deep: true, immediate: true})
 
-    const isTagAnOption = tagName => {
-      return props.options.some(option => {
-        return props.field ? option[props.field] === tagName : option === tagName;
-      });
+    const isTagAnOption = tag => {
+      return tag && props.options &&
+          (
+            typeof tag === 'object' ||
+            props.options.includes(tag)
+          );
     }
 
-    const addTag = tagName => {
-      if (!tagName) return;
+    const addTag = tag => {
+      if (!tag) return;
 
+      const tagIsAnOption = isTagAnOption(tag);
       // Only allow tags in options when allowCustom is false
-      if (!props.allowCustom && !isTagAnOption(tagName)) {
+      if (!props.allowCustom && !tagIsAnOption) {
         return
       }
 
       // Check for duplicate
-      if (tags.value.map(v => getTagName(v).toLowerCase()).includes(tagName.toLowerCase())) {
-        handleDuplicate(tagName.toString().toLowerCase());
+      if (!props.allowDuplicates && tags.value.map(v => getTagId(v).toLowerCase()).includes(getTagId(tag).toLowerCase())) {
+        handleDuplicate(getTagId(tag).toLowerCase());
         return;
       }
 
       // If a field is set, we are working with tag objects
-      if (props.field !== '') {
-        if (availableOptions.value) {
-          const tag = availableOptions.value.find(o => o[props.field] === tagName)
-          tags.value.push(tag)
+      if (props.options) {
+        if (tagIsAnOption && availableOptions.value) {
+          const actualTag = availableOptions.value.find(o => getTagId(o) === getTagId(tag)) || tag;
+          tags.value.push(actualTag)
         } else {
           tags.value = [...tags.value, {
-            [props.field]: tagName
+            [props.idField || props.field]: getTagId(tag),
+            [props.labelField || props.field]: getTagName(tag)
           }]
         }
       } else {
-        tags.value = [...tags.value, tagName]
+        tags.value = [...tags.value, tag]
       }
 
-      newTag.value = "";
+     newTag.value = "";
     };
     const removeTag = (index) => {
       tags.value.splice(index, 1);
     };
     const getTagName = tag => {
-      return props.field !== '' ? tag[props.field] : tag
+      if(typeof tag === 'string') {
+        return tag;
+      }
+      return props.labelField? tag[props.labelField] : (props.field? tag[props.field] : tag);
     }
+    const getTagId = tag => {
+      if(!tag) {
+        return null;
+      }
+      if(typeof tag === 'string') {
+        return tag;
+      }
+      return (props.idField? tag[props.idField] : (props.field? tag[props.field] : tag)).toString();
+    }
+
+    const sortableKey = tag => {
+      return getTagId(tag)
+    };
 
     // Handling duplicates – always in lowercase
     const duplicate = ref(null)
@@ -171,7 +211,8 @@ export default {
     // Options
     const availableOptions = computed(() => {
       if (!props.options) return false;
-      return props.options.filter((option) => !tags.value.includes(option));
+      const tagIds = tags.value.map((tag) => getTagId(tag));
+      return props.options.filter((option) => !tagIds.includes(getTagId(option)));
     });
 
     return {
@@ -180,15 +221,18 @@ export default {
       addTag,
       removeTag,
       getTagName,
+      getTagId,
       tagsUl,
       availableOptions,
       id,
       duplicate,
+      datalistOptions,
+      sortableKey
     };
   },
 };
 </script>
-<style scoped>
+<style>
 .tag-input {
   position: relative;
 }
@@ -265,6 +309,11 @@ ul {
 
 .tag.duplicate {
   animation: shake 1s;
+  color: var(--red-600);
+  background: rgba(239, 102, 102, 0.25);
+}
+.tag.duplicate::before {
+  background-color: var(--red-600);
 }
 
 .count {

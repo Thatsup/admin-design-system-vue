@@ -37,7 +37,7 @@
             :class="{ 'is-hovered': option === hovered }"
             @click="setSelected(option)"
           >
-            <slot v-if="hasDefaultSlot" :option="option" :index="index" />
+            <slot v-if="hasDefaultSlot" :option="option" :index="index" :is-hovered="option === hovered" />
             <span v-else>
               {{ getValue(option, true) }}
             </span>
@@ -57,6 +57,7 @@
 <script>
 import { getValueByPath } from "../utils/helpers";
 import TadsInput from "../core/Input.vue";
+import { ref } from 'vue'
 
 export default {
   name: "TadsAutocomplete",
@@ -104,12 +105,13 @@ export default {
       type: [Object, String, Number],
       required: false,
       default: null
-    }
+    },
+    allowCustom: Boolean
   },
   data() {
     return {
       selected: null,
-      hovered: {},
+      // hovered: null,
       isActive: false,
       newValue: this.modelValue,
       newAutocomplete: this.autocomplete || "off",
@@ -119,7 +121,17 @@ export default {
       _elementRef: 'input'
     };
   },
+  setup() {
+    let hoveredIndex = ref(null);
+
+    return {
+      hoveredIndex
+    }
+  },
   computed: {
+    hovered() {
+      return this.hoveredIndex === null? null : this.filteredData[this.hoveredIndex];
+    },
     filteredData() {
       if (this.backend) {
         return this.data
@@ -130,7 +142,7 @@ export default {
       }
 
       return this.data.filter(option => {
-        return option[this.field]
+        return this.getValue(option)
                 .toString()
                 .toLowerCase()
                 .indexOf(this.newValue.toLowerCase()) >= 0
@@ -217,9 +229,9 @@ export default {
      *   1. Update internal value.
      *   2. If it's invalid, validate again.
      */
-    value(value) {
+    modelValue(value) {
       this.newValue = value;
-      !this.isValid && this.$refs.input.checkHtml5Validity();
+      // !this.isValid && this.$refs.input.checkHtml5Validity();
     },
 
     /**
@@ -252,10 +264,8 @@ export default {
     /**
      * Set which option is currently hovered.
      */
-    setHovered(option) {
-      if (option === undefined) return;
-
-      this.hovered = option;
+    setHovered(index) {
+      this.hoveredIndex = index;
     },
 
     /**
@@ -287,7 +297,7 @@ export default {
             this.openOnFocus ||
             (this.newValue !== "" && this.hovered !== options[0])
           ) {
-            this.setHovered(options[0]);
+            this.setHovered(0);
           }
         } else {
           this.setHovered(null);
@@ -300,7 +310,14 @@ export default {
      * Select the hovered option.
      */
     enterPressed() {
-      if (this.hovered === null) return;
+      if (this.hovered === null) {
+        if(this.newValue && this.allowCustom) {
+          return this.setSelected(
+      this.field? {[this.field]: this.newValue} : this.newValue
+          )
+        }
+        return;
+      }
       this.setSelected(this.hovered);
     },
 
@@ -374,7 +391,7 @@ export default {
 
         this.$emit("active", this.filteredData[index]);
 
-        this.setHovered(this.filteredData[index]);
+        this.setHovered(index);
 
         const list = this.$refs.dropdown.querySelector(".dropdown-content");
         const element = list.querySelectorAll(
@@ -433,6 +450,10 @@ export default {
 <style scoped>
 .autocomplete {
   position: relative;
+}
+.autocomplete.is-expanded,
+.autocomplete.is-expanded input {
+ width: 100%;
 }
 
 .autocomplete .dropdown-menu {
