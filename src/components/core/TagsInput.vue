@@ -248,11 +248,11 @@ export default {
   padding-bottom: 8px; /* @TODO Maybe use a CSS variable in input.css? */
 }
 
-.tag-input >>> .tag {
+.tag-input ::v-deep(.tag) {
   margin: 1px;
 }
 
-.tag-input >>> .tags-input__input {
+.tag-input ::v-deep(.tags-input__input) {
   border: 0;
   background: #0000;
   box-shadow: none;
@@ -265,7 +265,7 @@ export default {
   font-size: 14px;
 }
 
-.tag-input >>> .tags-input__input::placeholder {
+.tag-input ::v-deep(.tags-input__input::placeholder) {
   font-style: italic;
   color: var(--gray-500);
 }
@@ -293,12 +293,12 @@ export default {
   }
 }
 
-.tag-input >>> .tag.duplicate {
+.tag-input ::v-deep(.tag.duplicate) {
   animation: shake 1s;
   color: var(--red-600);
   background: rgba(239, 102, 102, 0.25);
 }
-.tag-input >>> .tag.duplicate::before {
+.tag-input ::v-deep(.tag.duplicate::before) {
   background-color: var(--red-600);
 }
 
