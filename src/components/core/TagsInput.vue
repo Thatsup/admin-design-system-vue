@@ -5,7 +5,7 @@
         :item-key="sortableKey"
         :disabled="!sortable"
         class="tags input"
-        :class="{'has-border': border}" ref="tagsUl"
+        :class="{'has-border': border}"
     >
       <template #item="{element, index}">
         <TadsTag
@@ -13,7 +13,7 @@
               'duplicate': getTagId(element).toLowerCase() === duplicate,
               'cursor-move': !!sortable
             }"
-            :can-delete="true"
+            :can-delete="canDelete"
             :color="element.tagColor ? element.tagColor : tagsColor"
             @deleted="removeTag(index)"
         >{{ getTagName(element) }}</TadsTag>
@@ -26,7 +26,7 @@
             autocomplete="off"
             @keydown.prevent.enter="addTag(newTag)"
             @keydown.prevent.tab="addTag(newTag)"
-            @keydown.delete="newTag.length || removeTag(tags.length - 1)"
+            @keydown.delete="deleteOnBackspace && !newTag.length && removeTag(tags.length - 1)"
             @change="addTag($event.target.value)"
             v-bind="$attrs"
         />
@@ -43,7 +43,7 @@
               open-on-focus
               clear-on-select
               expanded
-              @keydown.delete="newTag.length || removeTag(tags.length - 1)"
+              @keydown.delete="deleteOnBackspace && !newTag.length && removeTag(tags.length - 1)"
               @selected="addTag($event)"
           />
         </span>
@@ -55,9 +55,9 @@
   </div>
 </template>
 <script>
-import {ref, watch, nextTick, computed, toRefs} from "vue";
+import { ref, computed } from "vue";
 import TadsTag from "./Tag";
-import {isArray, isString} from "lodash";
+import { isString } from "lodash";
 import draggable from 'vuedraggable'
 import Autocomplete from "../autocomplete/Autocomplete";
 
@@ -100,29 +100,45 @@ export default {
     },
     border: Boolean,
     sortable: Boolean,
-    allowDuplicates: Boolean
+    allowDuplicates: Boolean,
+    canDelete: {
+      type: Boolean,
+      default: true
+    },
+    deleteOnBackspace: {
+      type: Boolean,
+      default: true
+    },
+    glue: {
+      type: String,
+      default: ','
+    }
   },
   setup(props, {emit}) {
-    // Tags
-    const tags = ref([]);
+
     const newTag = ref("");
     const id = Math.random().toString(36).substring(7);
-    const { modelValue } = toRefs(props)
 
-    const datalistOptions = ref([]);
+    const tags = computed({
+      get() {
+        const val = props.modelValue;
+        if (isString(val)) {
+          return val
+              .split(props.glue)
+              .map(v => v.trim())
+              .filter(v => v !== '');
+        }
 
-    watch(modelValue, (val) => {
-      if (isString(val)) {
-        tags.value = val
-            .split(',')
-            .map(v => v.trim())
-            .filter(v => v !== '');
+        return val;
+      },
+      set(newVal) {
+        if (isString(props.modelValue)) {
+          emit('update:modelValue', newVal.join(props.glue))
+        } else {
+          emit('update:modelValue', newVal)
+        }
       }
-
-      if (isArray(val)) {
-        tags.value = val
-      }
-    }, {deep: true, immediate: true})
+    })
 
     const isTagAnOption = tag => {
       return tag && props.options &&
@@ -141,6 +157,7 @@ export default {
         return
       }
 
+      console.log(tags, tags.value);
       // Check for duplicate
       if (!props.allowDuplicates && tags.value.map(v => getTagId(v).toLowerCase()).includes(getTagId(tag).toLowerCase())) {
         handleDuplicate(getTagId(tag).toLowerCase());
@@ -148,22 +165,25 @@ export default {
       }
 
       // If a field is set, we are working with tag objects
-      if (props.options) {
-        if (tagIsAnOption && availableOptions.value) {
+      if (props.options && tagIsAnOption && availableOptions.value) {
           tag = availableOptions.value.find(o => getTagId(o) === getTagId(tag)) || tag;
-        } else {
-          tag = {
-            [props.idField || props.field]: getTagId(tag),
-            [props.labelField || props.field]: getTagName(tag)
-          };
-        }
+      } else if(props.field || props.labelField || props.idField) {
+        tag = {
+          [props.idField || props.field]: getTagId(tag),
+          [props.labelField || props.field]: getTagName(tag)
+        };
       }
       tags.value = [ ...tags.value, tag ]
 
      newTag.value = "";
     };
     const removeTag = (index) => {
-      tags.value.splice(index, 1);
+      if(!props.canDelete) {
+        return;
+      }
+      const newTags = [ ...tags.value ];
+      newTags.splice(index, 1);
+      tags.value = newTags;
     };
     const getTagName = tag => {
       if(typeof tag === 'string') {
@@ -193,17 +213,6 @@ export default {
       newTag.value = ""
     };
 
-    // Positioning and handling tag change
-    const tagsUl = ref(null);
-    const onTagsChange = () => {
-      if (isString(props.modelValue)) {
-        emit('update:modelValue', tags.value.join(','))
-      } else {
-        emit('update:modelValue', tags.value)
-      }
-    };
-    watch(tags, () => nextTick(onTagsChange));
-
     // Options
     const availableOptions = computed(() => {
       if (!props.options) return false;
@@ -218,11 +227,9 @@ export default {
       removeTag,
       getTagName,
       getTagId,
-      tagsUl,
       availableOptions,
       id,
       duplicate,
-      datalistOptions,
       sortableKey
     };
   },

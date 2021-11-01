@@ -1,6 +1,6 @@
 import TagsInput from '../components/core/TagsInput.vue';
 
-import { ref } from 'vue';
+import {computed, ref} from 'vue';
 
 export default {
   title: 'Core/TagsInput',
@@ -22,9 +22,10 @@ export default {
 const Template = (args) => ({
   components: { TagsInput },
   setup() {
-    return { args };
+    const data = ref(args.modelValue);
+    return { args, data };
   },
-  template: '<TagsInput v-bind="args" />',
+  template: '<TagsInput v-bind="args" v-model="data" /><pre>{{data}}</pre>',
 });
 
 export const ArrayInput = Template.bind({});
@@ -64,7 +65,13 @@ ArrayWithDuplicates.args = {
 
 export const StringInput = Template.bind({});
 StringInput.args = {
-  modelValue: 'Bar, Restaurant, Cafe'
+  modelValue: 'Bar,Restaurant,Cafe'
+}
+
+export const StringInputWithGlue = Template.bind({});
+StringInputWithGlue.args = {
+  modelValue: 'Bar - Restaurant - Cafe',
+  glue: ' - '
 }
 
 export const FixedValues = Template.bind({});
@@ -105,13 +112,13 @@ SortableArray.args = {
   modelValue: ['Tesla', 'Facebook'],
   placeholder: 'Only Google, Facebook or Amazon allowed',
   allowCustom: false,
-  sortable: true
+  sortable: true,
 }
 
 export const SortableObjects = Template.bind({});
 SortableObjects.args = {
   options: options,
-  modelValue: [options[0]],
+  modelValue: [options[2]],
   labelField: 'companyName',
   idField: 'id',
   placeholder: 'Only Google, Facebook or Amazon allowed',
