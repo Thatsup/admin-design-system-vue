@@ -1,55 +1,54 @@
 <template>
   <div class="tag-input" :class="{ 'with-count': showCount }">
-    <div class="input tags" :class="{'has-border': border}" ref="tagsUl">
-      <draggable
-          v-model="tags"
-          :item-key="sortableKey"
-          :disabled="!sortable"
-          class="tags"
-      >
-        <template #item="{element, index}">
-          <TadsTag
-              :class="{
-                'duplicate': getTagId(element).toLowerCase() === duplicate,
-                'cursor-move': !!sortable
-              }"
-              :can-delete="true"
-              :color="element.tagColor ? element.tagColor : tagsColor"
-              @deleted="removeTag(index)"
-          >{{ getTagName(element) }}</TadsTag>
-        </template>
-        <template #footer>
-          <input
-              v-if="!options"
+    <draggable
+        v-model="tags"
+        :item-key="sortableKey"
+        :disabled="!sortable"
+        class="tags input"
+        :class="{'has-border': border}" ref="tagsUl"
+    >
+      <template #item="{element, index}">
+        <TadsTag
+            :class="{
+              'duplicate': getTagId(element).toLowerCase() === duplicate,
+              'cursor-move': !!sortable
+            }"
+            :can-delete="true"
+            :color="element.tagColor ? element.tagColor : tagsColor"
+            @deleted="removeTag(index)"
+        >{{ getTagName(element) }}</TadsTag>
+      </template>
+      <template #footer>
+        <input
+            v-if="!options"
+            v-model="newTag"
+            class="tags-input__input"
+            autocomplete="off"
+            @keydown.prevent.enter="addTag(newTag)"
+            @keydown.prevent.tab="addTag(newTag)"
+            @keydown.delete="newTag.length || removeTag(tags.length - 1)"
+            @change="addTag($event.target.value)"
+            v-bind="$attrs"
+        />
+        <span v-else style="flex:1">
+          <Autocomplete
               v-model="newTag"
-              class="tags-input__input"
-              autocomplete="off"
-              @keydown.prevent.enter="addTag(newTag)"
-              @keydown.prevent.tab="addTag(newTag)"
-              @keydown.delete="newTag.length || removeTag(tags.length - 1)"
-              @change="addTag($event.target.value)"
+              :data="availableOptions"
+              :field="labelField || field"
+              :allow-custom="allowCustom"
+              style="height: auto; line-height: normal;"
               v-bind="$attrs"
+              class="tags-input__input"
+              small
+              open-on-focus
+              clear-on-select
+              expanded
+              @keydown.delete="newTag.length || removeTag(tags.length - 1)"
+              @selected="addTag($event)"
           />
-          <span v-else style="flex:1">
-            <Autocomplete
-                v-model="newTag"
-                :data="availableOptions"
-                :field="labelField || field"
-                :allow-custom="allowCustom"
-                style="height: auto; line-height: normal;"
-                v-bind="$attrs"
-                class="tags-input__input"
-                small
-                open-on-focus
-                clear-on-select
-                expanded
-                @keydown.delete="newTag.length || removeTag(tags.length - 1)"
-                @selected="addTag($event)"
-            />
-          </span>
-        </template>
-      </draggable>
-    </div>
+        </span>
+      </template>
+    </draggable>
     <div v-if="showCount" class="count">
       <span>{{ tags.length }}</span> tags
     </div>
@@ -205,8 +204,7 @@ export default {
         emit('update:modelValue', tags.value)
       }
     };
-    watch(tags, () => nextTick(onTagsChange), {deep: true});
-    onMounted(onTagsChange);
+    watch(tags, () => nextTick(onTagsChange));
 
     // Options
     const availableOptions = computed(() => {
