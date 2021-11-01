@@ -55,7 +55,7 @@
   </div>
 </template>
 <script>
-import {ref, watch, nextTick, onMounted, computed, toRefs} from "vue";
+import {ref, watch, nextTick, computed, toRefs} from "vue";
 import TadsTag from "./Tag";
 import {isArray, isString} from "lodash";
 import draggable from 'vuedraggable'
@@ -150,17 +150,15 @@ export default {
       // If a field is set, we are working with tag objects
       if (props.options) {
         if (tagIsAnOption && availableOptions.value) {
-          const actualTag = availableOptions.value.find(o => getTagId(o) === getTagId(tag)) || tag;
-          tags.value.push(actualTag)
+          tag = availableOptions.value.find(o => getTagId(o) === getTagId(tag)) || tag;
         } else {
-          tags.value = [...tags.value, {
+          tag = {
             [props.idField || props.field]: getTagId(tag),
             [props.labelField || props.field]: getTagName(tag)
-          }]
+          };
         }
-      } else {
-        tags.value = [...tags.value, tag]
       }
+      tags.value = [ ...tags.value, tag ]
 
      newTag.value = "";
     };
