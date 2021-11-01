@@ -233,12 +233,12 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .tag-input {
   position: relative;
 }
 
-.tags {
+.tag-input .tags {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
@@ -248,11 +248,11 @@ export default {
   padding-bottom: 8px; /* @TODO Maybe use a CSS variable in input.css? */
 }
 
-.tags .tag {
+.tag-input >>> .tag {
   margin: 1px;
 }
 
-.tags-input__input {
+.tag-input >>> .tags-input__input {
   border: 0;
   background: #0000;
   box-shadow: none;
@@ -265,24 +265,9 @@ export default {
   font-size: 14px;
 }
 
-.tags-input__input::placeholder {
+.tag-input >>> .tags-input__input::placeholder {
   font-style: italic;
   color: var(--gray-500);
-}
-
-ul {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 10px;
-  max-width: 75%;
-  overflow-x: auto;
 }
 
 @keyframes shake {
@@ -308,12 +293,12 @@ ul {
   }
 }
 
-.tag.duplicate {
+.tag-input >>> .tag.duplicate {
   animation: shake 1s;
   color: var(--red-600);
   background: rgba(239, 102, 102, 0.25);
 }
-.tag.duplicate::before {
+.tag-input >>> .tag.duplicate::before {
   background-color: var(--red-600);
 }
 
