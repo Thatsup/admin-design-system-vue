@@ -156,8 +156,6 @@ export default {
       if (!props.allowCustom && !tagIsAnOption) {
         return
       }
-
-      console.log(tags, tags.value);
       // Check for duplicate
       if (!props.allowDuplicates && tags.value.map(v => getTagId(v).toLowerCase()).includes(getTagId(tag).toLowerCase())) {
         handleDuplicate(getTagId(tag).toLowerCase());
