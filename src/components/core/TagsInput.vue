@@ -6,6 +6,7 @@
         :disabled="!sortable"
         class="tags input"
         :class="{'has-border': border}"
+        animation="200"
     >
       <template #item="{element, index}">
         <TadsTag
@@ -240,16 +241,21 @@ export default {
 
 .tag-input .tags {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   height: auto;
+  min-height: var(--input-height);
   background: white;
-  padding-top: 8px; /* @TODO Maybe use a CSS variable in input.css? */
-  padding-bottom: 8px; /* @TODO Maybe use a CSS variable in input.css? */
+  padding-top: 6px; /* @TODO Maybe use a CSS variable in input.css? */
+  padding-bottom: 6px; /* @TODO Maybe use a CSS variable in input.css? */
 }
 
 .tag-input ::v-deep(.tag) {
   margin: 1px;
+}
+
+.sortable-ghost {
+  opacity: 0.5;
 }
 
 .tag-input ::v-deep(.tags-input__input) {
