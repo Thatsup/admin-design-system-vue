@@ -269,6 +269,7 @@ export default {
   min-width: 70px;
   width: 100%;
   font-size: 14px;
+  line-height: 16px;
 }
 
 .tag-input ::v-deep(.tags-input__input::placeholder) {
