@@ -1,24 +1,22 @@
 <template>
-  <div style="display: flex">
-    <component
-        :is="is"
-        class="button"
-        :class="buttonClasses"
-        v-bind="$attrs"
-    >
-      <TadsIcon
-          v-if="icon"
-          :name="icon"
-          :size="18"
-          class="button__icon"
-      />
+  <component
+      :is="is"
+      class="button"
+      :class="buttonClasses"
+      v-bind="$attrs"
+  >
+    <TadsIcon
+        v-if="icon"
+        :name="icon"
+        :size="18"
+        class="button__icon"
+    />
 
-      <span class="button__label">
+    <span class="button__label">
         <slot v-if="!label"/>
         {{ label }}
       </span>
-    </component>
-  </div>
+  </component>
 </template>
 
 <script>
