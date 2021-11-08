@@ -3,6 +3,7 @@
     <input
       type="range"
       v-model="localValue"
+      v-bind="$attrs"
     />
 
     <TadsInput
