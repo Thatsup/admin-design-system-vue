@@ -13,23 +13,32 @@
       tabindex="-1"
     />
 
-    <slot :props="{ files, computedFiles }">
-      <div class="is-flex">
-        <Button blue icon="upload" @click="$refs.file.click()">
-          <template v-if="computedFiles.length === 1">
-            {{ computedFiles[0].name }}
-          </template>
+    <div
+        class="file-upload__dropzone"
+        :class="{'file-upload__dropzone--dragging': isDraggingOver}"
+        @click="$refs.file.click()"
+        @drop.prevent="onDropFile"
+        @dragover.prevent.stop="onDragOver"
+        @dragleave.prevent.stop="onDragLeave"
+    >
+      <slot :props="{ files, computedFiles, isDraggingOver }">
+        <div class="is-flex">
+          <Button blue icon="upload">
+            <template v-if="computedFiles.length === 1">
+              {{ computedFiles[0].name }}
+            </template>
 
-          <template v-else-if="computedFiles.length > 1">
-            {{ computedFiles.length }} files selected
-          </template>
+            <template v-else-if="computedFiles.length > 1">
+              {{ computedFiles.length }} files selected
+            </template>
 
-          <template v-else>
-            {{ label }}
-          </template>
-        </Button>
-      </div>
-    </slot>
+            <template v-else>
+              {{ label }}
+            </template>
+          </Button>
+        </div>
+      </slot>
+    </div>
   </div>
 </template>
 
@@ -56,7 +65,8 @@ export default {
     return {
       newValue: this.modelValue,
       files: [],
-      fileUrl: ""
+      fileUrl: "",
+      isDraggingOver: false,
     };
   },
   watch: {
@@ -66,6 +76,9 @@ export default {
      */
     value(value) {
       this.newValue = value;
+    },
+    isDraggingOver(value) {
+      console.log({isDraggingOver: value})
     }
   },
   computed: {
@@ -88,6 +101,24 @@ export default {
     }
   },
   methods: {
+    onDragLeave(e) {
+      this.isDraggingOver = false
+    },
+    onDragOver(e) {
+      this.isDraggingOver = true
+    },
+    onDropFile(e) {
+      let droppedFiles = e.dataTransfer.files;
+      this.files = droppedFiles
+      this.isDraggingOver = false
+      return;
+
+      if(!droppedFiles) return;
+      // this tip, convert FileList to array, credit: https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
+      ([...droppedFiles]).forEach(f => {
+        this.files.push(f);
+      });
+    },
     onFileChange(event) {
       this.files = event.target.files;
 

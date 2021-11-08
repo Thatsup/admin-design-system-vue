@@ -6,3 +6,7 @@
     position: absolute;
     z-index: -1;
 }
+
+.file-upload__dropzone {
+    position: relative;
+}
