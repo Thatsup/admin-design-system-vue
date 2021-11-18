@@ -9,8 +9,8 @@
         class="mr-1"
       />
       {{ label || '&nbsp;' }}
-      <span v-if="tooltip" v-tooltip="tooltip">
-        <TadsIcon name="info" size="12" />
+      <span class="tooltip-trigger" v-if="tooltip" v-tooltip="tooltip">
+        <TadsIcon name="info" size="12" style="display: block;" />
       </span>
       <slot name="after" />
     </label>
@@ -159,5 +159,9 @@ export default {
   color: var(--red-600);
   font-size: 12px;
   line-height: 17px;
+}
+
+.tooltip-trigger {
+  margin-left: 0.3rem;
 }
 </style>
