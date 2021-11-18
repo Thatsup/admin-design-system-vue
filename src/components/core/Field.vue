@@ -12,10 +12,11 @@
       <span v-if="tooltip" v-tooltip="tooltip">
         <TadsIcon name="info" size="12" />
       </span>
+      <slot name="after" />
     </label>
 
     <div class="toggleable-content" v-if="toggleable">
-      <slot></slot>
+      <slot />
     </div>
     <slot :has-error="errors.length > 0" v-else />
 
