@@ -40,9 +40,11 @@ export default {
     large: Boolean,
 
     // Colors
+    gray: Boolean,
     blue: Boolean,
     green: Boolean,
     yellow: Boolean,
+    orange: Boolean,
     navy: Boolean,
     red: Boolean
   },
