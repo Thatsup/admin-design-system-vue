@@ -61,6 +61,7 @@ import TadsTag from "./Tag";
 import { isString } from "lodash";
 import draggable from 'vuedraggable'
 import Autocomplete from "../autocomplete/Autocomplete";
+import {get} from "lodash/object";
 
 export default {
   name: 'TadsTagsInput',
@@ -188,7 +189,7 @@ export default {
       if(typeof tag === 'string') {
         return tag;
       }
-      return props.labelField? tag[props.labelField] : (props.field? tag[props.field] : tag);
+      return props.labelField? get(tag, props.labelField) : (props.field? get(tag, props.field) : tag);
     }
     const getTagId = tag => {
       if(!tag) {
@@ -197,7 +198,7 @@ export default {
       if(typeof tag === 'string') {
         return tag;
       }
-      return (props.idField? tag[props.idField] : (props.field? tag[props.field] : tag)).toString();
+      return (props.idField? get(tag, props.idField) : (props.field? get(tag, props.field) : tag)).toString();
     }
 
     const sortableKey = tag => {
