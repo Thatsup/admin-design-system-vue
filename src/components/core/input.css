@@ -30,7 +30,8 @@
     padding: 0 12px;
 }
 
-.input--full-width {
+.input--full-width,
+.input--full-width input {
     width: 100%;
 }
 

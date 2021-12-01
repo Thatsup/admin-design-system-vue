@@ -16,6 +16,7 @@
   * Added prop `filterFunction` to create a custom filter for data
 * **Button**
   * Added `outlined` prop
+  * Added gray and orange color
   * Removed deprecated `type` prop
   * Removed deprecated `size` prop
   * Removed `icon` prop
@@ -65,3 +66,6 @@
   * Changed `value` prop to only accept `String` value
   * Removed `loading` prop
   * Removed `transparent` prop
+
+## Colors
+* Added Orange color

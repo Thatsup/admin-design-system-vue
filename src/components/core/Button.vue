@@ -58,9 +58,11 @@ export default {
         "is-large": this.large,
 
         // Colors
+        "color-gray": this.gray,
         "color-blue": this.blue,
         "color-green": this.green,
         "color-yellow": this.yellow,
+        "color-orange": this.orange,
         "color-navy": this.navy,
         "color-red": this.red,
       };

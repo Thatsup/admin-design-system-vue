@@ -1,5 +1,8 @@
 <template>
-  <div class="input-wrapper" :class="{'is-loading': isLoading}">
+  <div class="input-wrapper" :class="{
+    'is-loading': isLoading,
+    'input--full-width': expanded,
+  }">
     <input
         class="input"
         :class="{
@@ -7,7 +10,6 @@
           'has-border': border,
           'input--large': large,
           'input--small': small,
-          'input--full-width': expanded,
           'transparent': transparent
         }"
         type="text"

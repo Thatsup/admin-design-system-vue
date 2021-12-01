@@ -43,6 +43,18 @@
   flex-shrink: 0;
 }
 
+.button.color-gray {
+  background-color: var(--gray-600);
+  border-color: transparent;
+  color: #fff;
+}
+
+.button.color-orange {
+  background-color: var(--orange-600);
+  border-color: transparent;
+  color: #fff;
+}
+
 .button.color-blue {
   background-color: var(--blue-600);
   border-color: transparent;
