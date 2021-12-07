@@ -7,27 +7,29 @@
         <slot />
       </div>
 
-      <template v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
-        <slot name="pagination">
-          <Pagination
-              v-bind="$attrs"
-              :per-page="perPage"
-              :paginated="paginated"
-              :total="newDataTotal"
-              :current="newCurrentPage"
-              @update:current="newCurrentPage = $event"
-              :icon-pack="iconPack"
-              :rounded="paginationRounded"
-              @page-change="(event) => $emit('page-change', event)"
-              :aria-next-label="ariaNextLabel"
-              :aria-previous-label="ariaPreviousLabel"
-              :aria-page-label="ariaPageLabel"
-              :aria-current-label="ariaCurrentLabel"
-          >
-            <slot name="top-left"/>
-          </Pagination>
-        </slot>
-      </template>
+      <div class="table-wrap__top">
+        <slot name="top-left" />
+
+        <template v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
+          <slot name="pagination">
+            <Pagination
+                v-bind="$attrs"
+                :per-page="perPage"
+                :paginated="paginated"
+                :total="newDataTotal"
+                :current="newCurrentPage"
+                @update:current="newCurrentPage = $event"
+                :icon-pack="iconPack"
+                :rounded="paginationRounded"
+                @page-change="(event) => $emit('page-change', event)"
+                :aria-next-label="ariaNextLabel"
+                :aria-previous-label="ariaPreviousLabel"
+                :aria-page-label="ariaPageLabel"
+                :aria-current-label="ariaCurrentLabel"
+            ></Pagination>
+          </slot>
+        </template>
+      </div>
 
       <table
           :tabindex="!focusable ? false : 0"
@@ -53,7 +55,10 @@
               :key="column.newKey + ':' + index + 'header'"
               v-bind="column.thAttrs && column.thAttrs(column)"
               :style="column.style"
-              :class="{'pagination-column--sorted': column.sortable && currentSortColumn === column}"
+              :class="{
+                'pagination-column--sorted': column.sortable && currentSortColumn === column,
+                'pagination-column--sortable': column.sortable,
+              }"
               @click.stop="sort(column, null, $event)">
 
             <template v-if="column.hasHeaderSlot">
@@ -1090,6 +1095,10 @@ export default {
 </script>
 
 <style>
+.table-wrap {
+  --table-column-spacing-left: 28px;
+}
+
 .table-wrap__inner table {
   width: 100%;
   border-collapse: collapse;
@@ -1136,11 +1145,21 @@ export default {
 
 .table-wrap td:first-child,
 .table-wrap th:first-child {
-  padding-left: 28px;
+  padding-left: var(--table-column-spacing-left);
 }
 
 th.pagination-column--sorted {
   color: var(--blue-gray-800);
   border-color: var(--blue-gray-500);
+}
+
+th.pagination-column--sortable {
+  cursor: pointer;
+}
+
+.table-wrap__top {
+  display: flex;
+  align-items: center;
+  padding-left: var(--table-column-spacing-left);
 }
 </style>

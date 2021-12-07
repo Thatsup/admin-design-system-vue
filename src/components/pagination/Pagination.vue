@@ -1,5 +1,6 @@
 <template>
   <nav class="pagination" :class="[rootClasses]">
+    <slot name="foo" />
     <slot
         v-if="hasPreviousSlot"
         name="previous"
@@ -108,18 +109,11 @@ import { defineComponent } from 'vue'
 import PaginationButton from './PaginationButton.vue'
 import TadsIcon from "../core/Icon.vue";
 
-/**
- * A responsive and flexible pagination
- * @displayName Pagination
- * @example ./examples/Pagination.md
- * @style _pagination.scss
- */
 export default defineComponent({
   name: 'TadsPagination',
   components: {
     PaginationButton,
     TadsIcon,
-    [PaginationButton.name]: PaginationButton
   },
   provide() {
     return {
@@ -295,7 +289,7 @@ export default defineComponent({
     },
 
     hasDefaultSlot() {
-      return this.$slots.default().children
+      return this.$slots.default
     },
     hasPreviousSlot() {
       return this.$slots.previous
@@ -429,7 +423,7 @@ export default defineComponent({
   border-color: var(--blue-gray-500);
   color: var(--blue-gray-800);
   min-width: 2.25em;
-  height: 2.25em;
+  height: var(--input-height);
   padding: .5em .5em;
   margin: .25rem;
 }

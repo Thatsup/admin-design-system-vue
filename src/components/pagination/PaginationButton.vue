@@ -18,7 +18,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'OPaginationButton',
+  name: 'TadsPaginationButton',
   inject: ['$pagination'],
   configField: 'pagination',
   props: {
