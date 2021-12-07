@@ -371,7 +371,6 @@ export default defineComponent({
 
 <style>
 .pagination {
-  border-top: 1px solid var(--gray-300);
   align-items: center;
   display: flex;
   text-align: center;
