@@ -13,8 +13,6 @@ const fetchFromApi = async (page, field, direction, searchTerm, year) => {
   let base = `https://api.themoviedb.org/3/discover/movie?api_key=2dc0ebf5f4268adb59b2d7bab4930782`;
   let sort = ''
 
-  console.log({page})
-
   if (searchTerm) {
     sort += `&query=${searchTerm}`
     base = `https://api.themoviedb.org/3/search/movie?api_key=2dc0ebf5f4268adb59b2d7bab4930782`;
@@ -116,6 +114,7 @@ Backend.args = {
     sortField.value = field
     sortOrder.value = direction
     query.value = ''
+    currentPage.value = 1
     updateData(currentPage.value, field, direction, query.value, yearInput.value)
   },
   onChange: page => {

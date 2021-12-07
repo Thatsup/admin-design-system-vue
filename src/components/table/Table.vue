@@ -7,30 +7,31 @@
         <slot />
       </div>
 
-      <div class="table-wrap__top">
-        <slot name="top-left" />
+      <slot name="top-header">
+        <div class="table-header">
+          <slot name="top-left" />
 
-        <template v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
-          <slot name="pagination">
-            <Pagination
-                v-bind="$attrs"
-                :per-page="perPage"
-                :paginated="paginated"
-                :total="newDataTotal"
-                :current="newCurrentPage"
-                @update:current="newCurrentPage = $event"
-                :icon-pack="iconPack"
-                :rounded="paginationRounded"
-                @page-change="(event) => $emit('page-change', event)"
-                :aria-next-label="ariaNextLabel"
-                :aria-previous-label="ariaPreviousLabel"
-                :aria-page-label="ariaPageLabel"
-                :aria-current-label="ariaCurrentLabel"
-            ></Pagination>
-          </slot>
-        </template>
-      </div>
-
+          <template v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
+            <slot name="pagination">
+              <Pagination
+                  v-bind="$attrs"
+                  :per-page="perPage"
+                  :paginated="paginated"
+                  :total="newDataTotal"
+                  :current="newCurrentPage"
+                  @update:current="newCurrentPage = $event"
+                  :icon-pack="iconPack"
+                  :rounded="paginationRounded"
+                  @page-change="(event) => $emit('page-change', event)"
+                  :aria-next-label="ariaNextLabel"
+                  :aria-previous-label="ariaPreviousLabel"
+                  :aria-page-label="ariaPageLabel"
+                  :aria-current-label="ariaCurrentLabel"
+              ></Pagination>
+            </slot>
+          </template>
+        </div>
+      </slot>
       <table
           :tabindex="!focusable ? false : 0"
           @keydown.self.prevent.up="pressedArrow(-1)"
@@ -255,28 +256,32 @@
         </slot>
       </template>
 
-      <template v-if="(checkable && $slots['bottom-left']) ||
-            (paginated && (paginationPosition === 'bottom' || paginationPosition === 'both'))">
-        <slot name="pagination">
-          <Pagination
-              v-bind="$attrs"
-              :per-page="perPage"
-              :paginated="paginated"
-              :total="newDataTotal"
-              :current="newCurrentPage"
-              @update:current="newCurrentPage = $event"
-              :icon-pack="iconPack"
-              :rounded="paginationRounded"
-              @page-change="(event) => $emit('page-change', event)"
-              :aria-next-label="ariaNextLabel"
-              :aria-previous-label="ariaPreviousLabel"
-              :aria-page-label="ariaPageLabel"
-              :aria-current-label="ariaCurrentLabel"
-          >
-            <slot name="bottom-left"/>
-          </Pagination>
-        </slot>
-      </template>
+      <slot name="bottom-footer">
+        <div class="table-footer">
+          <slot name="bottom-left"/>
+
+          <template v-if="(checkable && $slots['bottom-left']) ||
+              (paginated && (paginationPosition === 'bottom' || paginationPosition === 'both'))">
+            <slot name="pagination">
+              <Pagination
+                  v-bind="$attrs"
+                  :per-page="perPage"
+                  :paginated="paginated"
+                  :total="newDataTotal"
+                  :current="newCurrentPage"
+                  @update:current="newCurrentPage = $event"
+                  :icon-pack="iconPack"
+                  :rounded="paginationRounded"
+                  @page-change="(event) => $emit('page-change', event)"
+                  :aria-next-label="ariaNextLabel"
+                  :aria-previous-label="ariaPreviousLabel"
+                  :aria-page-label="ariaPageLabel"
+                  :aria-current-label="ariaCurrentLabel"
+              ></Pagination>
+            </slot>
+          </template>
+        </div>
+      </slot>
     </div>
   </div>
 </template>
@@ -1148,6 +1153,10 @@ export default {
   padding-left: var(--table-column-spacing-left);
 }
 
+.table-header .pagination {
+  border: 0;
+}
+
 th.pagination-column--sorted {
   color: var(--blue-gray-800);
   border-color: var(--blue-gray-500);
@@ -1157,9 +1166,13 @@ th.pagination-column--sortable {
   cursor: pointer;
 }
 
-.table-wrap__top {
+.table-header,
+.table-footer {
   display: flex;
   align-items: center;
+  gap: 16px;
   padding-left: var(--table-column-spacing-left);
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 </style>
