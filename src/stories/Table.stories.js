@@ -23,7 +23,7 @@ const fetchFromApi = async (page, field, direction, searchTerm, year) => {
   }
 
   sort += '&primary_release_year=' + year
-  sort += '&vote_count.gte=5000'
+  sort += '&vote_count.gte=1000'
   sort += '&with_original_language=en'
 
   let url = `${base}&page=${page}${sort}`;
