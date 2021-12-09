@@ -3,6 +3,9 @@ import Button from '../components/core/Button.vue';
 export default {
   title: 'Core/Button',
   component: Button,
+  args: {
+    label: 'Click me!'
+  },
   argTypes: {
     color: { control: 'color' },
     onClick: {},
@@ -18,7 +21,7 @@ const Template = (args) => ({
   setup() {
     return { args };
   },
-  template: '<Button v-bind="args">Click me!</Button>',
+  template: '<Button v-bind="args"></Button>',
 });
 
 export const Default = Template.bind({});
@@ -52,4 +55,15 @@ Loading.args = {
   isLoading: true,
   large: true,
   blue: true,
+};
+
+export const LabelWithIcon = Template.bind({});
+LabelWithIcon.args = {
+  icon: 'eye',
+};
+
+export const Icon = Template.bind({});
+Icon.args = {
+  icon: 'eye',
+  label: null,
 };

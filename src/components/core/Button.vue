@@ -12,7 +12,7 @@
         class="button__icon"
     />
 
-    <span class="button__label">
+    <span class="button__label" v-if="label || $slots.default">
         <slot v-if="!label"/>
         {{ label }}
       </span>

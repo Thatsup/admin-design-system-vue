@@ -94,8 +94,8 @@
   color: var(--red-600);
 }
 
-.button .icon {
-  margin-right: 0.5rem;
+.button .icon + .button__label {
+  margin-left: 0.5rem;
 }
 
 .button.is-fullwidth {
