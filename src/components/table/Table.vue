@@ -15,7 +15,6 @@
           <template v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
             <slot name="pagination">
               <Pagination
-                  v-bind="$attrs"
                   :per-page="perPage"
                   :paginated="paginated"
                   :total="newDataTotal"
@@ -265,7 +264,6 @@
               (paginated && (paginationPosition === 'bottom' || paginationPosition === 'both'))">
             <slot name="pagination">
               <Pagination
-                  v-bind="$attrs"
                   :per-page="perPage"
                   :paginated="paginated"
                   :total="newDataTotal"
