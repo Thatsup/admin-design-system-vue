@@ -58,7 +58,7 @@
 <script>
 import { ref, computed } from "vue";
 import TadsTag from "./Tag";
-import { isString } from "lodash";
+import {isNull, isString} from "lodash";
 import draggable from 'vuedraggable'
 import Autocomplete from "../autocomplete/Autocomplete";
 import {get} from "lodash/object";
@@ -123,7 +123,12 @@ export default {
 
     const tags = computed({
       get() {
-        const val = props.modelValue;
+        let val = props.modelValue
+
+        if (isNull(val)) {
+          val = ''
+        }
+
         if (isString(val)) {
           return val
               .split(props.glue)
