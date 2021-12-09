@@ -1,6 +1,7 @@
 <template>
   <div
       class="table-wrap"
+      :class="tableClasses"
   >
     <div class="table-wrap__inner">
       <div ref="slot" style="display:none">
@@ -1110,9 +1111,6 @@ export default {
 }
 
 .table-wrap {
-  background-color: #fff;
-  border-radius: 6px;
-  border: solid 1px #e0e7ea;
   display: block;
 }
 
@@ -1142,6 +1140,10 @@ export default {
   font-size: 16px;
   font-weight: 500;
   color: var(--blue-gray-800);
+}
+
+.table-wrap.is-striped tbody tr:nth-child(odd) td {
+  background-color: var(--gray-100);
 }
 
 .table-wrap tbody tr:not(:first-child) td {
