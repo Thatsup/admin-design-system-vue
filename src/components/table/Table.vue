@@ -306,6 +306,7 @@ export default {
     }
   },
   components: {TadsInput, TadsCheckbox, BSlotComponent, TadsIcon, Pagination },
+  emits: ['page-change'],
   props: {
     data: {
       type: Array,

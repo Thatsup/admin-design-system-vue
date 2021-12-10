@@ -120,7 +120,7 @@ export default defineComponent({
       $pagination: this
     }
   },
-  emits: ['update:active', 'change', 'update:current'],
+  emits: ['update:active', 'page-change', 'update:current'],
   props: {
     /** Total count of items */
     total: [Number, String],
@@ -334,7 +334,7 @@ export default defineComponent({
 
     changePage(num, event) {
       if (this.current === num || num < 1 || num > this.pageCount) return
-      this.$emit('change', num)
+      this.$emit('page-change', num)
       this.$emit('update:current', num)
 
       // Set focus on element to keep tab order

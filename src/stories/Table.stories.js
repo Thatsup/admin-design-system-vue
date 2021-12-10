@@ -117,7 +117,7 @@ Backend.args = {
     currentPage.value = 1
     updateData(currentPage.value, field, direction, query.value, yearInput.value)
   },
-  onChange: page => {
+  onPageChange: page => {
     if (!isNumber(page)) return
 
     updateData(page, sortField.value, sortOrder.value, query.value, yearInput.value)
