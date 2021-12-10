@@ -14,6 +14,7 @@
     ref="input"
     :value="computedValue"
     v-bind="$attrs"
+    v-on="$listeners"
     @input="onInput"
     @blur="onBlur"
     @focus="onFocus"
