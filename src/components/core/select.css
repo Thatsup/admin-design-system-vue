@@ -108,7 +108,7 @@
   Border
  */
 .select.has-border select {
-    border: 1px solid #e0e7ea;
+    border: 1px solid var(--blue-gray-400);
     border-radius: 6px;
 }
 
