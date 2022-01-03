@@ -14,9 +14,11 @@
 
 <script>
 import TadsIcon from "./Icon";
+
 export default {
   name: "TadsTag",
   components: {TadsIcon},
+  emits: ['deleted'],
   props: {
     canDelete: Boolean,
     color: {

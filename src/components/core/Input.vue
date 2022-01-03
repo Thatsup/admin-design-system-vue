@@ -22,6 +22,7 @@
 
 <script>
 import "./input.css";
+import "../../assets/styles/loading.css"
 import {computed} from "vue";
 
 export default {

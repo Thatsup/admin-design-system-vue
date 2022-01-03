@@ -21,6 +21,7 @@
 
 <script>
 import "./button.css"
+import "../../assets/styles/loading.css"
 import TadsIcon from "./Icon";
 
 export default {
@@ -51,8 +52,8 @@ export default {
   computed: {
     buttonClasses() {
       return {
-        "is-fullwidth": this.expanded,
-        "is-outlined": this.isOutlined,
+        "button--fullwidth": this.expanded,
+        "button--outlined": this.isOutlined,
         "is-loading": this.isLoading,
 
         // Sizes
