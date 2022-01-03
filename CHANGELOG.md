@@ -4,6 +4,7 @@
   * Read about the migration from Vue 2 [here](https://v3.vuejs.org/guide/migration/introduction.html)
 * Fixed consistent attribute inheritance
 * Removed FormElementMixin.js
+* Added new icons
 
 ### Components
 * **Avatar**
