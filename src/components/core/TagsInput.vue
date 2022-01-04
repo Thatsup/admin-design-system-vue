@@ -62,12 +62,12 @@
 </template>
 <script>
 import { ref, computed } from "vue";
-import TadsTag from "./Tag";
+import TadsTag from "./Tag.vue";
 import { isNull, isString } from "lodash";
 import draggable from "vuedraggable";
 import Autocomplete from "../autocomplete/Autocomplete";
 import { get } from "lodash/object";
-import TadsInput from "./Input";
+import TadsInput from "./Input.vue";
 
 export default {
   name: "TadsTagsInput",
