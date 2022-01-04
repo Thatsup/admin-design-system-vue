@@ -99,7 +99,8 @@ export default {
       type: [Object, String, Number],
       required: false,
       default: null
-    }
+    },
+    autocomplete: String
   },
   data() {
     return {
