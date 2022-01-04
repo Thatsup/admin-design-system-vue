@@ -20,7 +20,7 @@ export const regular = () => ({
   },
   template: `
       <TadsField label="What's your name?">
-          <TadsInput :value="value"></TadsInput>
+          <TadsInput autocomplete="off" :value="value"></TadsInput>
       </TadsField> 
   `,
   methods: { action: action("clicked") }
