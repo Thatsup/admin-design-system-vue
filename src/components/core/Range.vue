@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import TadsInput from "./Input";
+import TadsInput from "./Input.vue";
 
 export default {
   name: "TadsRange",

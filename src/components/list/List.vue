@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import TadsIcon from "../core/Icon";
-import TadsListItem from "./ListItem";
+import TadsIcon from "../core/Icon.vue";
+import TadsListItem from "./ListItem.vue";
 
 export default {
   name: "TadList",

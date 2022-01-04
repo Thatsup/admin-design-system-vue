@@ -36,8 +36,8 @@
 
 <script>
 import FormElementMixin from "../utils/FormElementMixin";
-import TadsButton from "./Button";
-import TadsIcon from "./Icon";
+import TadsButton from "./Button.vue";
+import TadsIcon from "./Icon.vue";
 
 export default {
   name: "TadsFileUpload",
