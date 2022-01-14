@@ -10,3 +10,17 @@
 .file-upload__dropzone {
     position: relative;
 }
+
+.file-upload__dropzone__delete {
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    padding: 12px;
+    transition: color 120ms ease-in-out;
+}
+
+.file-upload__dropzone__delete:hover {
+    color: var(--red-600);
+}

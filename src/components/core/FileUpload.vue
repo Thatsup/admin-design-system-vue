@@ -21,6 +21,15 @@
         @dragover.prevent.stop="onDragOver"
         @dragleave.prevent.stop="onDragLeave"
     >
+      <span v-if="computedFiles.length" class="file-upload__dropzone__delete">
+        <TadsButton
+            small
+            red
+            icon="delete"
+            @click.stop="deleteFile"
+        />
+      </span>
+
       <slot :props="{ files, computedFiles, isDraggingOver }">
         <div class="is-flex">
           <Button blue icon="upload">
@@ -45,11 +54,12 @@
 <script>
 import Button from "./Button"
 import './file-upload.css'
+import TadsButton from "./Button";
 
 export default {
   name: "TadsFileUpload",
   inheritAttrs: false,
-  components: { Button },
+  components: {TadsButton, Button },
   props: {
     modelValue: {
       type: [String, Number],
@@ -77,9 +87,6 @@ export default {
     value(value) {
       this.newValue = value;
     },
-    isDraggingOver(value) {
-      console.log({isDraggingOver: value})
-    }
   },
   computed: {
     computedValue: {
@@ -101,23 +108,20 @@ export default {
     }
   },
   methods: {
-    onDragLeave(e) {
+    deleteFile() {
+      this.files = []
+      this.$emit('deleted')
+    },
+    onDragLeave() {
       this.isDraggingOver = false
     },
-    onDragOver(e) {
+    onDragOver() {
       this.isDraggingOver = true
     },
     onDropFile(e) {
       let droppedFiles = e.dataTransfer.files;
       this.files = droppedFiles
       this.isDraggingOver = false
-      return;
-
-      if(!droppedFiles) return;
-      // this tip, convert FileList to array, credit: https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
-      ([...droppedFiles]).forEach(f => {
-        this.files.push(f);
-      });
     },
     onFileChange(event) {
       this.files = event.target.files;
