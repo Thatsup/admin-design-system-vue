@@ -1,0 +1,54 @@
+.image-upload {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.image-upload__dropzone {
+    position: relative;
+    background-color: var(--gray-400);
+    color: var(--gray-600);
+    height: 140px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: var(--radius);
+    overflow: hidden;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.image-upload__dropzone__delete {
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    padding: 12px;
+    transition: all 120ms ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.image-upload__dropzone:hover .image-upload__dropzone__delete {
+    visibility: visible;
+    opacity: 1;
+}
+
+.image-upload__dropzone__image {
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0
+}
+
+.image-upload__dropzone--dragging {
+    background-color: var(--blue-600);
+    color: #fff;
+}

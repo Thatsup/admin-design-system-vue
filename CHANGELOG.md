@@ -30,7 +30,7 @@
   * Removed selectable items. Items are only available as links now.
 * **Field**
   * Added CSS variables to `.field` and `.label`
-* **FileUpload** _New!_
+* **ImageUpload** _New!_
 * **Icon**
   * Added accessibility
   * Fixed attribute inheritance on double elements
