@@ -3,7 +3,7 @@
       :is="is"
       class="button"
       :class="buttonClasses"
-      v-bind="$attrs"
+      v-bind="{...customAttrs, ...$attrs}"
   >
     <TadsIcon
         v-if="icon"
@@ -69,6 +69,15 @@ export default {
         "color-navy": this.navy,
         "color-red": this.red,
       };
+    },
+    customAttrs() {
+      if (this.is === 'button') {
+        return {
+          type: 'button'
+        }
+      }
+
+      return null
     },
     is() {
       return this.$attrs['href'] ? 'a' : 'button'

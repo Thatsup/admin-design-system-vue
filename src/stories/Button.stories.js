@@ -26,6 +26,12 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
+  type: 'submit'
+};
+
+export const Link = Template.bind({});
+Link.args = {
+  href: 'https://google.com'
 };
 
 export const LongLabel = Template.bind({});
