@@ -61,7 +61,6 @@
   </div>
 </template>
 <script>
-import { ref, computed } from "vue";
 import TadsTag from "./Tag.vue";
 import { isNull, isString } from "lodash";
 import draggable from "vuedraggable";
@@ -71,7 +70,7 @@ import TadsInput from "./Input.vue";
 
 export default {
   name: "TadsTagsInput",
-  components: {TadsInput, Autocomplete, draggable, TadsTag },
+  components: { TadsInput, Autocomplete, draggable, TadsTag },
   emits: ["update:modelValue"],
   inheritAttrs: false,
   props: {
@@ -252,146 +251,6 @@ export default {
       setTimeout(() => (this.duplicate = null), 1000);
       this.newTag = "";
     }
-  },
-
-  setup(props, { emit }) {
-    const newTag = ref("");
-    const id = Math.random()
-      .toString(36)
-      .substring(7);
-
-    const tags = computed({
-      get() {
-        let val = props.modelValue;
-
-        if (isNull(val)) {
-          val = "";
-        }
-
-        if (isString(val)) {
-          return val
-            .split(props.glue)
-            .map(v => v.trim())
-            .filter(v => v !== "");
-        }
-
-        return val;
-      },
-      set(newVal) {
-        if (isString(props.modelValue)) {
-          emit("update:modelValue", newVal.join(props.glue));
-        } else {
-          emit("update:modelValue", newVal);
-        }
-      }
-    });
-
-    const isTagAnOption = tag => {
-      return (
-        tag &&
-        props.options &&
-        (typeof tag === "object" || props.options.includes(tag))
-      );
-    };
-
-    const addTag = tag => {
-      if (!tag) return;
-
-      const tagIsAnOption = isTagAnOption(tag);
-      // Only allow tags in options when allowCustom is false
-      if (!props.allowCustom && !tagIsAnOption) {
-        return;
-      }
-      // Check for duplicate
-      if (
-        !props.allowDuplicates &&
-        this.tags
-          .map(v => getTagId(v).toLowerCase())
-          .includes(getTagId(tag).toLowerCase())
-      ) {
-        handleDuplicate(getTagId(tag).toLowerCase());
-        return;
-      }
-
-      // If a field is set, we are working with tag objects
-      if (props.options && tagIsAnOption && availableOptions.value) {
-        tag =
-          availableOptions.value.find(o => getTagId(o) === getTagId(tag)) ||
-          tag;
-      } else if (props.field || props.labelField || props.idField) {
-        tag = {
-          [props.idField || props.field]: getTagId(tag),
-          [props.labelField || props.field]: getTagName(tag)
-        };
-      }
-      this.tags = [...this.tags, tag];
-
-      newTag.value = "";
-    };
-    const removeTag = index => {
-      if (!props.canDelete) {
-        return;
-      }
-      const newTags = [...tags.value];
-      newTags.splice(index, 1);
-      tags.value = newTags;
-    };
-    const getTagName = tag => {
-      if (typeof tag === "string") {
-        return tag;
-      }
-      return props.labelField
-        ? get(tag, props.labelField)
-        : props.field
-        ? get(tag, props.field)
-        : tag;
-    };
-    const getTagId = tag => {
-      if (!tag) {
-        return null;
-      }
-      if (typeof tag === "string") {
-        return tag;
-      }
-      return (props.idField
-        ? get(tag, props.idField)
-        : props.field
-        ? get(tag, props.field)
-        : tag
-      ).toString();
-    };
-
-    const sortableKey = tag => {
-      return getTagId(tag);
-    };
-
-    // Handling duplicates – always in lowercase
-    const duplicate = ref(null);
-    const handleDuplicate = tag => {
-      duplicate.value = tag;
-      setTimeout(() => (duplicate.value = null), 1000);
-      newTag.value = "";
-    };
-
-    // Options
-    const availableOptions = computed(() => {
-      if (!props.options) return false;
-      const tagIds = this.tags.map(tag => getTagId(tag));
-      return props.options.filter(option => !tagIds.includes(getTagId(option)));
-    });
-
-    return {
-      tags,
-      newTag,
-      addTag,
-      removeTag,
-      getTagName,
-      getTagId,
-      availableOptions,
-      id,
-      duplicate,
-      sortableKey
-    };
   }
 };
 </script>
