@@ -5,8 +5,8 @@
     user-select: none;
 }
 
-.base-checkbox.checkbox + .checkbox {
-    margin-left: 0.5em;
+.base-checkbox.checkbox:not(:last-of-type) {
+    margin-right: 0.5em;
 }
 
 .base-checkbox.checkbox input[type="checkbox"] {
