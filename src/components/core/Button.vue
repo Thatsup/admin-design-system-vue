@@ -30,8 +30,8 @@ export default {
   components: {TadsIcon},
   props: {
     expanded: Boolean,
-    isLoading: Boolean,
-    isOutlined: Boolean,
+    loading: Boolean,
+    outlined: Boolean,
 
     label: String,
     icon: String,
@@ -41,33 +41,26 @@ export default {
     large: Boolean,
 
     // Colors
-    gray: Boolean,
-    blue: Boolean,
-    green: Boolean,
-    yellow: Boolean,
-    orange: Boolean,
-    navy: Boolean,
-    red: Boolean
+    color: {
+      type: String,
+      default: 'blue',
+      validator(value) {
+        return ['gray', 'blue', 'green', 'yellow', 'orange', 'navy', 'red', 'white'].indexOf(value) !== -1;
+      }
+    }
   },
   computed: {
     buttonClasses() {
       return {
         "button--fullwidth": this.expanded,
-        "button--outlined": this.isOutlined,
-        "is-loading": this.isLoading,
+        "button--outlined": this.outlined,
+        "is-loading": this.loading,
 
         // Sizes
         "is-small": this.small,
         "is-large": this.large,
 
-        // Colors
-        "color-gray": this.gray,
-        "color-blue": this.blue,
-        "color-green": this.green,
-        "color-yellow": this.yellow,
-        "color-orange": this.orange,
-        "color-navy": this.navy,
-        "color-red": this.red,
+        ['color-' + this.color]: this.color
       };
     },
     customAttrs() {

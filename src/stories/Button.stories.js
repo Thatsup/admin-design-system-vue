@@ -7,12 +7,13 @@ export default {
     label: 'Click me!'
   },
   argTypes: {
-    color: { control: 'color' },
-    onClick: {},
-    size: {
+    color: {
+      defaultValue: 'blue',
+      type: 'string',
       control: { type: 'select' },
-      options: ['small', 'medium', 'large'],
+      options: ['gray', 'blue', 'green', 'yellow', 'orange', 'navy', 'red', 'white'],
     },
+    onClick: {},
   },
 };
 
@@ -40,32 +41,9 @@ LongLabel.args = {
   style: {width: '250px'}
 };
 
-export const Primary = Template.bind({});
-Primary.args = {
-  blue: true,
-};
-
-export const Green = Template.bind({});
-Green.args = {
-  green: true
-};
-
-export const Large = Template.bind({});
-Large.args = {
-  large: true,
-  blue: true,
-};
-
 export const Loading = Template.bind({});
 Loading.args = {
-  isLoading: true,
-  large: true,
-  blue: true,
-};
-
-export const LabelWithIcon = Template.bind({});
-LabelWithIcon.args = {
-  icon: 'eye',
+  loading: true,
 };
 
 export const Icon = Template.bind({});
