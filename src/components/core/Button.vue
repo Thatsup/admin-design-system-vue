@@ -8,7 +8,7 @@
     <TadsIcon
         v-if="icon"
         :name="icon"
-        :size="18"
+        :size="iconSize"
         class="button__icon"
     />
 
@@ -71,6 +71,11 @@ export default {
       }
 
       return null
+    },
+    iconSize() {
+      if (this.small) return 14
+      if (this.large) return 18
+      return 16
     },
     is() {
       return this.$attrs['href'] ? 'a' : 'button'
