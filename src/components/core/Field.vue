@@ -94,7 +94,7 @@ export default {
 </script>
 
 <style scoped>
-.field {
+.field:not(:last-of-type) {
   margin-bottom: var(--field-spacing, 10px);
 }
 
