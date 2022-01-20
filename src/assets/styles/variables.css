@@ -65,6 +65,8 @@
   --input-font-size: 16px;
   --input-font-size--large: 18px;
 
+  --input-border-color: var(--blue-gray-500);
+
   /*
   |--------------------------------------------------------------------------
   | Buttons
