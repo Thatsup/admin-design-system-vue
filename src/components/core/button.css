@@ -15,7 +15,7 @@
 
   color: var(--navy-700);
   background-color: transparent;
-  border: 1px solid transparent;
+  border: 0;
   border-radius: var(--button-radius);
 
   cursor: pointer;
@@ -48,6 +48,11 @@
 
 .button.color-white {
   background-color: #fff;
+}
+
+.button--outlined {
+  border-width: 1px;
+  border-style: solid;
 }
 
 .button--outlined.color-white {
