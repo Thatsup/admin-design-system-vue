@@ -30,8 +30,25 @@ const Template = (args) => ({
   template: '<Field v-bind="args"><Input value="Type something..." /></Field>',
 });
 
+const AfterTemplate = (args) => ({
+  // Components used in your story `template` are defined in the `components` object
+  components: { Field, Input },
+  // The story's `args` need to be mapped into the template through the `setup()` method
+  setup() {
+    return { args };
+  },
+  // And then the `args` are bound to your component with `v-bind="args"`
+  template: '<Field v-bind="args"><template #after>✅</template><Input value="Type something..." /></Field>',
+});
+
 export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Default.args = {
   errors: ['error']
+};
+
+export const WithAfter = AfterTemplate.bind({});
+// More on args: https://storybook.js.org/docs/vue/writing-stories/args
+WithAfter.args = {
+
 };

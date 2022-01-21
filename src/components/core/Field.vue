@@ -2,14 +2,14 @@
   <div :class="fieldClasses" class="field">
     <label v-if="label != null" class="label" @click="labelClick">
       <TadsIcon
+        class="toggleable-icon"
         v-if="toggleable"
         name="caret"
         :rotate="!!isOpen? 90 : 0"
         :size="8"
-        class="mr-1"
       />
       {{ label || '&nbsp;' }}
-      <span class="tooltip-trigger" v-if="tooltip" v-tooltip="tooltip">
+      <span class="tooltip-trigger" v-if="tooltip">
         <TadsIcon name="info" size="12" style="display: block;" />
       </span>
       <slot name="after" />
@@ -104,7 +104,14 @@ export default {
 
 .field.is-toggleable > .label {
   cursor: pointer;
+}
+
+.field.is-toggleable.strike > .label {
   justify-content: space-between;
+}
+
+.toggleable-icon {
+  margin-right: 6px;
 }
 
 .label {
@@ -163,5 +170,6 @@ export default {
 
 .tooltip-trigger {
   margin-left: 0.3rem;
+  margin-right: 0.3rem;
 }
 </style>
