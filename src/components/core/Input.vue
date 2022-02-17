@@ -14,10 +14,7 @@
     ref="input"
     :value="computedValue"
     v-bind="$attrs"
-    v-on="$listeners"
-    @input="onInput"
-    @blur="onBlur"
-    @focus="onFocus"
+    v-on="inputListeners"
   />
 </template>
 
@@ -56,6 +53,14 @@ export default {
     }
   },
   computed: {
+    inputListeners: function() {
+      const vm = this;
+      return Object.assign({}, this.$listeners, {
+        input: function(event) {
+          vm.$emit("input", event.target.value);
+        }
+      });
+    },
     computedValue: {
       get() {
         return this.newValue;
