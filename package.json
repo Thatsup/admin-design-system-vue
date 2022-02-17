@@ -1,6 +1,6 @@
 {
   "name": "tads",
-  "version": "3.0.0--beta12",
+  "version": "3.0.0--beta16",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -8,14 +8,12 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "dependencies": {
+  "devDependencies": {
     "core-js": "3.6.5",
     "lodash": "4.17.21",
     "minireset.css": "0.0.7",
     "vue": "3.2.23",
-    "vuedraggable": "^4.1.0"
-  },
-  "devDependencies": {
+    "vuedraggable": "^4.1.0",
     "@babel/core": "^7.15.8",
     "@storybook/addon-actions": "^6.3.12",
     "@storybook/addon-essentials": "^6.3.12",

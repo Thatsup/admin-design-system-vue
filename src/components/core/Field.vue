@@ -9,7 +9,7 @@
         :size="8"
       />
       {{ label || '&nbsp;' }}
-      <span class="tooltip-trigger" v-if="tooltip">
+      <span class="tooltip-trigger" v-if="tooltip" v-tooltip="tooltip">
         <TadsIcon name="info" size="12" style="display: block;" />
       </span>
       <slot name="after" />
@@ -171,5 +171,6 @@ export default {
 .tooltip-trigger {
   margin-left: 0.3rem;
   margin-right: 0.3rem;
+  cursor: help;
 }
 </style>

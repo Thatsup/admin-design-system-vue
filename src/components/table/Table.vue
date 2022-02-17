@@ -1170,7 +1170,7 @@ th.pagination-column--sortable {
 .table-header,
 .table-footer {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 16px;
   padding-left: var(--table-column-spacing-left);
   padding-top: 16px;
