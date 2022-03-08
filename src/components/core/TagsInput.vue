@@ -64,7 +64,7 @@
 import TadsTag from "./Tag.vue";
 import { isNull, isString } from "lodash";
 import draggable from "vuedraggable";
-import Autocomplete from "../autocomplete/Autocomplete";
+import Autocomplete from "../autocomplete/Autocomplete.vue";
 import { get } from "lodash/object";
 import TadsInput from "./Input.vue";
 
@@ -266,8 +266,6 @@ export default {
   height: auto;
   min-height: 42px;
   background: white;
-  padding-top: 6px;
-  padding-bottom: 6px;
   border-radius: 4px;
   padding-left: 12px;
 }
