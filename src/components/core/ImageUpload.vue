@@ -8,6 +8,7 @@
         class="image-upload"
         @change="onFileChange"
         tabindex="-1"
+        :multiple="multiple"
     />
 
     <div
@@ -55,6 +56,7 @@ export default {
   components: {TadsButton},
   props: {
     src: String,
+    multiple: Boolean,
     modelValue: {
       type: [String, Number],
       default: ""
