@@ -9,6 +9,7 @@
         v-if="icon"
         :name="icon"
         :size="iconSize"
+        :rotate="iconRotate"
         class="button__icon"
     />
 
@@ -35,6 +36,10 @@ export default {
 
     label: String,
     icon: String,
+    iconRotate: {
+      type: Number,
+      default: 0,
+    },
 
     // Sizes
     small: Boolean,
