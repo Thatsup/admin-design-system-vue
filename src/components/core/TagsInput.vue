@@ -41,12 +41,17 @@
               v-bind="$attrs"
               class="tags-input__input"
               small
+              :backend="backend"
               open-on-focus
               clear-on-select
               expanded
               @keydown.delete="deleteOnBackspace && !newTag.length && removeTag(tags.length - 1)"
               @selected="addTag($event)"
-          />
+          >
+            <template v-if="$slots['autocomplete-item']" v-slot="{option}">
+              <slot name="autocomplete-item" :option="option"/>
+            </template>
+          </Autocomplete>
         </span>
       </template>
     </draggable>
@@ -103,6 +108,7 @@ export default {
     border: Boolean,
     sortable: Boolean,
     allowDuplicates: Boolean,
+    backend: Boolean,
     canDelete: {
       type: Boolean,
       default: true
@@ -150,8 +156,8 @@ export default {
     const isTagAnOption = tag => {
       return tag && props.options &&
           (
-            typeof tag === 'object' ||
-            props.options.includes(tag)
+              typeof tag === 'object' ||
+              props.options.includes(tag)
           );
     }
 
@@ -171,7 +177,7 @@ export default {
 
       // If a field is set, we are working with tag objects
       if (props.options && tagIsAnOption && availableOptions.value) {
-          tag = availableOptions.value.find(o => getTagId(o) === getTagId(tag)) || tag;
+        tag = availableOptions.value.find(o => getTagId(o) === getTagId(tag)) || tag;
       } else if(props.field || props.labelField || props.idField) {
         tag = {
           [props.idField || props.field]: getTagId(tag),
@@ -180,7 +186,7 @@ export default {
       }
       tags.value = [ ...tags.value, tag ]
 
-     newTag.value = "";
+      newTag.value = "";
     };
     const removeTag = (index) => {
       if(!props.canDelete) {
