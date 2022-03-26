@@ -66,8 +66,28 @@ export const large = () => ({
 export const number = () => ({
   components: { TadsInput, TadsField },
   template: `
-      <TadsField label="What's your age?">
-          <TadsInput type="number" @input="input" :value="27" large border></TadsInput>
+    <TadsField label="What's your age?">
+    <TadsInput type="number" @input="input" :value="27"></TadsInput>
+    </TadsField>
+  `,
+  methods: { input: action("input") }
+})
+
+export const time = () => ({
+  components: { TadsInput, TadsField },
+  template: `
+      <TadsField label="What's the time?">
+          <TadsInput type="time" @input="input"></TadsInput>
+      </TadsField> 
+  `,
+  methods: { input: action("input") }
+})
+
+export const date = () => ({
+  components: { TadsInput, TadsField },
+  template: `
+      <TadsField label="What's your date of brith?">
+          <TadsInput type="date" @input="input"></TadsInput>
       </TadsField> 
   `,
   methods: { input: action("input") }

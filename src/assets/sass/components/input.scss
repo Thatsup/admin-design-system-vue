@@ -9,6 +9,7 @@
   height: $regularInputHeight;
   padding: 0 15px;
 
+  background: #fff;
   color: var(--navy-700);
   font-size: 16px;
   font-weight: 500;
@@ -20,6 +21,10 @@
   line-height: 1.5;
   position: relative;
   vertical-align: top;
+}
+
+.input.transparent {
+  background: transparent;
 }
 
 .input--large {
@@ -96,4 +101,17 @@ textarea.input {
   padding: 0 5px;
   height: auto;
   text-align: right;
+}
+
+.input[type="date"],
+.input[type="time"],
+.input[type="datetime-local"],
+.input[type="week"],
+.input[type="month"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.input::-webkit-date-and-time-value {
+  text-align: inherit;
 }
