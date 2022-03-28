@@ -19,7 +19,7 @@
             @deleted="removeTag(index)"
         >{{ getTagName(element) }}</TadsTag>
       </template>
-      <template #footer>
+      <template v-if="options || allowCustom" #footer>
         <input
             v-if="!options"
             v-model="newTag"
