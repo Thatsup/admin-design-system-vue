@@ -39,5 +39,5 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Default.args = {
-  modelValue: 3
+  modelValue: 0
 };

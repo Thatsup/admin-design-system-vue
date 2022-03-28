@@ -47,7 +47,7 @@ export default {
   props: {
     modelValue: {
       type: [String, Number, Boolean, Object, Array, Function],
-      default: null
+      default: undefined
     },
     placeholder: {
       type: String,
@@ -107,7 +107,7 @@ export default {
 
     fieldClasses() {
       return {
-        "no-value": !this.selected,
+        "no-value": this.selected === undefined,
         "is-small": this.small,
         "is-large": this.large,
         "is-expanded": this.expanded,
