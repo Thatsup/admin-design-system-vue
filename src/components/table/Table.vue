@@ -232,7 +232,7 @@
           />
         </template>
 
-        <tr v-if="!visibleData.length">
+        <tr v-if="!loading && !visibleData.length">
           <td :colspan="columnCount">
             <slot name="empty"/>
           </td>
