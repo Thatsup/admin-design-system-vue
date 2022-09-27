@@ -1,16 +1,3 @@
-<template>
-<span
-    class="icon"
-    :class="{ solid: solid }"
-    :style="svgStyle"
-    aria-hidden="true"
->
-      <svg viewBox="0 0 24 24">
-      <path :d="svgPath" />
-    </svg>
-</span>
-</template>
-
 <script>
 import { icons, aliases } from "../../assets/icons/icons.js";
 
@@ -53,6 +40,17 @@ export default {
   }
 };
 </script>
+
+<template>
+  <span
+    class="icon"
+    :class="{ solid: solid }"
+    :style="{ width: size + 'px', height: size + 'px' }"
+  >
+    <svg v-bind="$attrs" viewBox="0 0 24 24" :style="svgStyle" v-html="svgPath">
+    </svg>
+  </span>
+</template>
 
 <style scoped>
 .icon {

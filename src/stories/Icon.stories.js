@@ -13,6 +13,12 @@ export default {
       type: 'number',
       defaultValue: 0
     },
+    color: {
+      control: {
+        type: 'color',
+      },
+      defaultValue: '#e5550f'
+    },
     name: false
   },
 };

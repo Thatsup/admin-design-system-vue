@@ -18,6 +18,7 @@
       class="ml-2"
       :small="small"
       :large="large"
+      v-bind="inputProps"
     />
   </div>
 </template>
@@ -41,7 +42,14 @@ export default {
     },
     small: Boolean,
     large: Boolean,
-    withInput: Boolean
+    withInput: Boolean,
+    inputProps: {
+      type: Object,
+      required: false,
+      default: () => ({
+        transparent: true
+      }),
+    }
   },
 
   emits: ['update:modelValue'],
