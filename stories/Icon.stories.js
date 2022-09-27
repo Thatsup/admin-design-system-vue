@@ -17,6 +17,9 @@ export const allIcons = () => ({
     color: {
       default: color("Color", "")
     },
+    backgroundColor: {
+      default: color("Background", "")
+    },
     size: {
       default: number("Size", 24)
     }
@@ -31,6 +34,9 @@ export const allIcons = () => ({
     currentColor() {
       return this.color || 'initial';
     },
+    currentBackgroundColor() {
+      return this.backgroundColor || 'initial';
+    },
     currentSize() {
       return this.size || 24;
     }
@@ -40,8 +46,8 @@ export const allIcons = () => ({
         <p style="margin-bottom: 20px;">There are ${Object.keys(icons).length} icons</p>
         
         <ul style="display: flex;flex-flow: row wrap;list-style: none;" >
-          <li v-for="(icon, name) in icons" style="display: inline-flex;flex-direction: row; align-items: center; flex: 0 1 20%; min-width: 120px; padding: 0px 7.5px 20px;">
-            <TadsIcon :name="name" :size="currentSize" style="margin-right: 10px; flex-shrink: 0;" :style="{ 'color': currentColor }"></TadsIcon>
+          <li v-for="(icon, name) in icons" style="display: inline-flex; flex-direction: row; align-items: center; flex: 0 1 20%; min-width: 120px; padding: 0px 7.5px 20px;">
+            <TadsIcon :name="name" :size="currentSize" style="margin-right: 10px; flex-shrink: 0;background: rgba(0,0,0,0.2); " :style="{ color: currentColor, backgroundColor: currentBackgroundColor }"></TadsIcon>
             {{ name }}
             
             <template v-for="(newname, alias) in aliases" v-if="newname === name">
