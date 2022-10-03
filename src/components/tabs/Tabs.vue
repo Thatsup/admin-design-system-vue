@@ -4,9 +4,8 @@
       <span
         v-for="(tab, index) in tabList"
         :key="index"
-        v-bind="tab.dataAttrs"
-        v-on="tab.$attrs"
         @click="select(index)"
+        v-bind="{...tab.$attrs, ...tab.dataAttrs}"
         :class="[tab.tabClass, {
           active: isActive(index),
           disabled: tab.disabled,
