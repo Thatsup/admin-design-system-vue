@@ -5,7 +5,7 @@
         v-for="(tab, index) in tabList"
         :key="index"
         v-bind="tab.dataAttrs"
-        v-on="tab.$listeners"
+        v-on="tab.$attrs"
         @click="select(index)"
         :class="[tab.tabClass, {
           active: isActive(index),
@@ -57,12 +57,13 @@ export default {
   },
   methods: {
     isActive(index) {
+      console.log(this.activeTabIndex, index);
       return this.activeTabIndex === index;
     },
     select(index) {
       const tab = this.tabList[index];
 
-      if (tab.$listeners.click) {
+      if (tab.$attrs.click) {
         return;
       }
 
