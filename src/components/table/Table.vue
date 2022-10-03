@@ -9,7 +9,7 @@
       </div>
 
       <slot name="top-header">
-        <div class="table-header">
+        <div class="table-header" v-if="(paginated && (paginationPosition === 'top' || paginationPosition === 'both')) || ($slots['top-header'] || $slots['top-left'])">
           <slot name="top-left" />
 
           <template v-if="paginated && (paginationPosition === 'top' || paginationPosition === 'both')">
