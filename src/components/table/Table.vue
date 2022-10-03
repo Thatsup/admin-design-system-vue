@@ -288,13 +288,13 @@
 <script>
 import Pagination from '../pagination/Pagination.vue'
 import {get} from "lodash/object";
-import TadsIcon from "../core/Icon";
-import {escapeRegExpChars} from "../../utils/helpers";
+import TadsIcon from "../core/Icon.vue";
+import {escapeRegExpChars} from "../../utils/helpers.js";
 import {createApp, createVNode, h} from "vue";
 import TableColumn from './TableColumn.vue';
-import BSlotComponent from "../../utils/SlotComponent";
-import TadsCheckbox from "../core/Checkbox";
-import TadsInput from "../core/Input";
+import BSlotComponent from "../../utils/SlotComponent.js";
+import TadsCheckbox from "../core/Checkbox.vue";
+import TadsInput from "../core/Input.vue";
 import {indexOf} from "lodash/array";
 // import NProgress from 'nprogress/nprogress'
 

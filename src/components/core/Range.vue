@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import TadsInput from "./Input";
+import TadsInput from "./Input.vue";
 import {computed} from "vue";
 
 export default {

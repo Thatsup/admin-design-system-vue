@@ -23,7 +23,7 @@
 <script>
 import "./button.css"
 import "../../assets/styles/loading.css"
-import TadsIcon from "./Icon";
+import TadsIcon from "./Icon.vue";
 
 export default {
   name: "TadsButton",

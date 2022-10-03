@@ -1,6 +1,6 @@
-import TadsInput from "../components/core/Input";
-import TadsTable from "../components/table/Table";
-import TadsTableColumn from "../components/table/TableColumn";
+import TadsInput from "../components/core/Input.vue";
+import TadsTable from "../components/table/Table.vue";
+import TadsTableColumn from "../components/table/TableColumn.vue";
 import {ref, watch} from "vue";
 import {isNumber} from "lodash/lang";
 

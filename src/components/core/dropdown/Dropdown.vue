@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import TadsButton from "../Button";
+import TadsButton from "../Button.vue";
 export default {
   name: "TadsDropdown",
   components: {TadsButton},

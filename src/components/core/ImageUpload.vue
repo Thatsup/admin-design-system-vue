@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import TadsButton from "./Button"
+import TadsButton from "./Button.vue"
 import './image-upload.css'
 
 export default {

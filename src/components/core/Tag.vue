@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import TadsIcon from "./Icon";
+import TadsIcon from "./Icon.vue";
 
 export default {
   name: "TadsTag",

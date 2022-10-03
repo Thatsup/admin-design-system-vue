@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import TadsIcon from "../core/Icon";
+import TadsIcon from "../core/Icon.vue";
 export default {
   name: "TadsTabs",
   components: { TadsIcon },
