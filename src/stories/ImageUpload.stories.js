@@ -12,11 +12,16 @@ export default {
 const Template = (args) => ({
   components: { ImageUpload },
   setup() {
-    const src = ref('http://placehold.it/200x500')
-    return { args, src };
+    const src = ref('https://placekitten.com/800/500')
+
+    const uploadImage = (files) => {
+      console.log(files);
+    }
+
+    return { args, src, uploadImage };
   },
   template: `<div style="width: 200px">
-    <ImageUpload :src="src" @delete="src = null" v-bind="args"></ImageUpload>
+    <ImageUpload :src="src" @delete="src = null" @upload="uploadImage" v-bind="args"></ImageUpload>
   </div>`,
 });
 

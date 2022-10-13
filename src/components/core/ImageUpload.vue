@@ -54,6 +54,7 @@ export default {
   name: "TadsImageUpload",
   inheritAttrs: false,
   components: {TadsButton},
+  emits: ['delete', 'upload'],
   props: {
     src: String,
     multiple: Boolean,
@@ -95,6 +96,8 @@ export default {
     onDropFile(e) {
       this.files = e.dataTransfer.files
       this.isDraggingOver = false
+
+      this.$emit("upload", this.files);
     },
     onFileChange(event) {
       this.files = event.target.files;
