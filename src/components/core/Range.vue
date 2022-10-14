@@ -20,6 +20,7 @@
       class="ml-2"
       :small="small"
       :large="large"
+      v-bind="inputProps"
     />
   </div>
 </template>
@@ -42,7 +43,14 @@ export default {
     },
     small: Boolean,
     large: Boolean,
-    hasInput: Boolean
+    hasInput: Boolean,
+    inputProps: {
+      type: Object,
+      required: false,
+      default: () => ({
+        transparent: true
+      })
+    }
   },
 
   data() {

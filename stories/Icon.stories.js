@@ -1,5 +1,5 @@
 import {action} from "@storybook/addon-actions";
-import {withKnobs, text} from "@storybook/addon-knobs";
+import {withKnobs, text, color, number} from "@storybook/addon-knobs";
 
 import TadsIcon from "../src/components/core/Icon.vue";
 import {icons, aliases} from "../src/assets/icons/icons.js";
@@ -11,17 +11,43 @@ export default {
 };
 
 export const allIcons = () => ({
-  data() {
-    return {icons, aliases};
+  components: { TadsIcon },
+  decorators: [withKnobs],
+  props: {
+    color: {
+      default: color("Color", "")
+    },
+    backgroundColor: {
+      default: color("Background", "")
+    },
+    size: {
+      default: number("Size", 24)
+    }
   },
-  components: {TadsIcon},
+  data() {
+    return {
+      icons,
+      aliases
+    };
+  },
+  computed: {
+    currentColor() {
+      return this.color || 'initial';
+    },
+    currentBackgroundColor() {
+      return this.backgroundColor || 'initial';
+    },
+    currentSize() {
+      return this.size || 24;
+    }
+  },
   template: `
       <div style="max-width: 1400px; margin-left: auto; margin-right: auto;">
         <p style="margin-bottom: 20px;">There are ${Object.keys(icons).length} icons</p>
         
-        <ul style="display: flex;flex-flow: row wrap;list-style: none;">
-          <li v-for="(icon, name) in icons" style="display: inline-flex;flex-direction: row; align-items: center; flex: 0 1 20%; min-width: 120px; padding: 0px 7.5px 20px;">
-            <TadsIcon :name="name" style="margin-right: 10px; flex-shrink: 0;"></TadsIcon>
+        <ul style="display: flex;flex-flow: row wrap;list-style: none;" >
+          <li v-for="(icon, name) in icons" style="display: inline-flex; flex-direction: row; align-items: center; flex: 0 1 20%; min-width: 120px; padding: 0px 7.5px 20px;">
+            <TadsIcon :name="name" :size="currentSize" style="margin-right: 10px; flex-shrink: 0;background: rgba(0,0,0,0.2); " :style="{ color: currentColor, backgroundColor: currentBackgroundColor }"></TadsIcon>
             {{ name }}
             
             <template v-for="(newname, alias) in aliases" v-if="newname === name">

@@ -45,8 +45,7 @@ export default {
     :class="{ solid: solid }"
     :style="{ width: size + 'px', height: size + 'px' }"
   >
-    <svg v-bind="$attrs" viewBox="0 0 24 24" :style="svgStyle">
-      <path :d="svgPath" />
+    <svg v-bind="$attrs" viewBox="0 0 24 24" :style="svgStyle" v-html="svgPath">
     </svg>
   </span>
 </template>
