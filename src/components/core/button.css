@@ -194,9 +194,13 @@
 }
 
 .button[disabled="disabled"],
-.button[disabled] {
+.button[disabled]:not([disabled="false"]) {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+a.button[disabled="true"] {
+  pointer-events: none;
 }
 
 .button.is-rounded {

@@ -32,7 +32,9 @@ Default.args = {
 
 export const Link = Template.bind({});
 Link.args = {
-  href: 'https://google.com'
+  href: 'https://google.com',
+  disabled: false,
+  target: '_blank',
 };
 
 export const LongLabel = Template.bind({});
@@ -44,6 +46,7 @@ LongLabel.args = {
 export const Loading = Template.bind({});
 Loading.args = {
   loading: true,
+  disabled: false
 };
 
 export const Icon = Template.bind({});
