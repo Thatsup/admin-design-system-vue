@@ -1,6 +1,6 @@
 <template>
   <div :class="fieldClasses" class="field">
-    <label v-if="label != null" class="label" @click="labelClick">
+    <div v-if="label != null" class="label" @click="labelClick">
       <TadsIcon
         class="toggleable-icon"
         v-if="toggleable"
@@ -13,7 +13,7 @@
         <TadsIcon name="info" size="12" style="display: block;" />
       </span>
       <slot name="after" />
-    </label>
+    </div>
 
     <div class="toggleable-content" v-if="toggleable">
       <slot />
