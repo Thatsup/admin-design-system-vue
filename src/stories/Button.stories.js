@@ -1,5 +1,7 @@
 import Button from '../components/core/Button.vue';
 
+const colorOptions = ['gray', 'blue', 'green', 'yellow', 'orange', 'navy', 'red', 'white'];
+
 export default {
   title: 'Core/Button',
   component: Button,
@@ -8,10 +10,10 @@ export default {
   },
   argTypes: {
     color: {
-      defaultValue: 'blue',
+      defaultValue: null,
       type: 'string',
       control: { type: 'select' },
-      options: ['gray', 'blue', 'green', 'yellow', 'orange', 'navy', 'red', 'white'],
+      options: colorOptions,
     },
     onClick: {},
   },
@@ -20,9 +22,13 @@ export default {
 const Template = (args) => ({
   components: { Button },
   setup() {
-    return { args };
+    return { args, colorOptions };
   },
-  template: '<Button v-bind="args"></Button>',
+  template: `
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px;">
+      <Button v-for="color in colorOptions" v-bind="args" :color="color"></Button>
+    </div>
+  `,
 });
 
 export const Default = Template.bind({});
