@@ -50,6 +50,11 @@
   background-color: #fff;
 }
 
+.button.color-white.is-loading::after {
+  border-right-color: var(--blue-600);
+  border-top-color: var(--blue-600);
+}
+
 .button--outlined {
   border-width: 1px;
   border-style: solid;
