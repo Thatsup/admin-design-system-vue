@@ -1,5 +1,6 @@
 import Icon from '../components/core/Icon.vue';
 import {icons} from "../assets/icons/icons.js";
+import { computed } from "vue";
 
 export default {
   title: 'Core/Icon',
@@ -17,9 +18,16 @@ export default {
       control: {
         type: 'color',
       },
-      defaultValue: '#e5550f'
+      defaultValue: '#2a2a2a'
     },
-    name: false
+    solidBackground: {
+      control: {
+        type: 'color',
+      },
+      defaultValue: '#c4c4c4'
+    },
+    solid: false,
+    name: false,
   },
 };
 
@@ -31,15 +39,23 @@ const Template = (args) => ({
     }
   },
   setup() {
-    return { args };
+    const style = computed(() => {
+      return {
+        color: args.color,
+        'background-color': args.solid ? args.solidBackground : false,
+        'flex-shrink': 0,
+      };
+    })
+
+    return { args, style };
   },
   template: `
     <div style="max-width: 1400px; margin-left: auto; margin-right: auto;">
     <p style="margin-bottom: 20px;">There are <strong>${Object.keys(icons).length}</strong> available icons</p>
 
     <ul style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px">
-      <li v-for="(icon, name) in icons">
-        <Icon v-bind="args" :name="name" style="flex-shrink: 0;"></Icon>
+      <li style="display: flex;align-items: center;" v-for="(icon, name) in icons">
+        <Icon v-bind="args" :name="name" :style="style"></Icon>
         <span style="margin-left: 10px;">{{ name }}</span>
       </li>
     </ul>

@@ -47,7 +47,7 @@ export default {
     :class="{ solid: solid }"
     :style="{ width: size + 'px', height: size + 'px' }"
   >
-    <svg v-bind="$attrs" viewBox="0 0 24 24" :style="svgStyle" v-html="svgPath">
+    <svg viewBox="0 0 24 24" :style="svgStyle" v-html="svgPath">
     </svg>
   </span>
 </template>
@@ -63,6 +63,8 @@ export default {
   transform: translate3d(0, 0, 0);
   fill: currentColor;
   display: block;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .icon path {
