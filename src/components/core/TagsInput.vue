@@ -17,7 +17,14 @@
             :can-delete="canDelete"
             :color="element.tagColor ? element.tagColor : tagsColor"
             @deleted="removeTag(index)"
-        >{{ getTagName(element) }}</TadsTag>
+        >
+          <template v-if="!getTagName(element) && fieldPlaceholder">
+            <i>{{ fieldPlaceholder }}</i>
+          </template>
+          <template v-else>
+            {{ getTagName(element) }}
+          </template>
+        </TadsTag>
       </template>
       <template v-if="options || allowCustom" #footer>
         <input
@@ -86,6 +93,10 @@ export default {
       default: null,
     },
     labelField: {
+      type: String,
+      default: null,
+    },
+    fieldPlaceholder: {
       type: String,
       default: null,
     },

@@ -36,6 +36,7 @@ ArrayInput.args = {
 
 export const ArrayWithObjects = Template.bind({});
 ArrayWithObjects.args = {
+  fieldPlaceholder: 'No title found',
   field: 'name',
   modelValue: [
     {
@@ -50,6 +51,16 @@ ArrayWithObjects.args = {
     {
       name: 'Park',
       id: 3,
+      tagColor: 'gray'
+    },
+    {
+      name: 'Shopping mall',
+      id: 4,
+      tagColor: 'gray'
+    },
+    {
+      name: '',
+      id: 5,
       tagColor: 'gray'
     }
   ]
