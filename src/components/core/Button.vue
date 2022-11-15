@@ -3,6 +3,7 @@
     :is="is"
     class="button"
     :class="buttonClasses"
+    type="button"
     v-bind="$attrs"
     v-on="listeners"
   >
