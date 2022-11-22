@@ -2,6 +2,7 @@ import Autocomplete from '../components/autocomplete/Autocomplete.vue';
 import {ref} from "vue";
 
 const javascriptFrameworks = [
+  {name: 'A really long name of a JavaScript framework'},
   {name: 'AngularJS'},
   {name: 'ReactJS'},
   {name: 'VueJS'},
