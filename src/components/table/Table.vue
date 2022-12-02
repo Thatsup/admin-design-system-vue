@@ -1165,6 +1165,11 @@ export default {
   color: var(--blue-gray-800);
 }
 
+.table-wrap.is-narrow td {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 .table-wrap.is-striped tbody tr:nth-child(odd) td {
   background-color: var(--gray-100);
 }
