@@ -152,6 +152,10 @@
             :key="this.customRowKey ? row[this.customRowKey] : index">
           <tr
               @click="selectRow(row, index)"
+              :class="[rowClass(row, index), {
+                  'is-selected': isRowSelected(row, selected),
+                  'is-checked': isRowChecked(row),
+              }]"
               @dblclick="$emit('dblclick', row)"
               @mouseenter="emitEventForRow('mouseenter', $event, row)"
               @mouseleave="emitEventForRow('mouseleave', $event, row)"

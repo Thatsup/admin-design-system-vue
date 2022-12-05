@@ -66,7 +66,9 @@ let Template = (args) => ({
         :data="data" 
         v-model:currentPage="currentPage" 
         :total="totalResults" 
-        :default-sort="[sortField, sortOrder]">
+        :default-sort="[sortField, sortOrder]"
+        :row-class="(row, index) => 'row-' + index"
+    >
       <template #top-left>
         <TadsInput border :expanded="false" placeholder="Find movie..." v-model="query"></TadsInput>
         <TadsInput type="number" border :expanded="false" placeholder="Year..." v-model="yearInput" max="2099" :min="1900"></TadsInput>
