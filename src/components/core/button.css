@@ -184,6 +184,11 @@
   color: #fff;
 }
 
+.button--outlined.is-loading::after {
+  border-right-color: var(--blue-600);
+  border-top-color: var(--blue-600);
+}
+
 .button .icon + .button__label {
   margin-left: 0.5rem;
 }
