@@ -26,3 +26,8 @@ const Template = (args) => ({
 });
 
 export const Default = Template.bind({});
+export const ClearUpload = Template.bind({});
+ClearUpload.args = {
+  clearUpload: true,
+  src: '',
+}

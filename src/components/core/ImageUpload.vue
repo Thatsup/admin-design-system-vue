@@ -58,6 +58,7 @@ export default {
   props: {
     src: String,
     multiple: Boolean,
+    clearUpload: Boolean,
     modelValue: {
       type: [String, Number],
       default: ""
@@ -101,6 +102,10 @@ export default {
     },
     onFileChange(event) {
       this.files = event.target.files;
+
+      if (this.clearUpload) {
+        this.deleteFile()
+      }
 
       this.$emit("upload", this.files);
     },
