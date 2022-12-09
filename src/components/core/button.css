@@ -218,7 +218,6 @@ a.button[disabled="true"] {
 }
 
 .button.is-small {
-  border-radius: 3px;
   height: var(--input-height--small);
   font-size: var(--input-font-size--small);
 }
