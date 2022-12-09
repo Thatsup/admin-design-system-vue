@@ -97,17 +97,19 @@ export default {
     onDropFile(e) {
       this.files = e.dataTransfer.files
       this.isDraggingOver = false
-
       this.$emit("upload", this.files);
-    },
-    onFileChange(event) {
-      this.files = event.target.files;
 
       if (this.clearUpload) {
         this.deleteFile()
       }
-
+    },
+    onFileChange(event) {
+      this.files = event.target.files;
       this.$emit("upload", this.files);
+
+      if (this.clearUpload) {
+        this.deleteFile()
+      }
     },
   }
 };
