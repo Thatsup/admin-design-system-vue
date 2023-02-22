@@ -21,7 +21,7 @@
 
     <transition name="fade">
       <div
-        v-show="isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot)"
+        v-show="isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot || canCreate)"
         ref="dropdown"
         class="dropdown-menu"
         :class="{ 'is-opened-top': !isListInViewportVertically }"
