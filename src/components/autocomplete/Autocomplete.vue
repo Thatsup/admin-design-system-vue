@@ -43,6 +43,10 @@
               {{ getValue(option, true) }}
             </span>
           </a>
+          <a v-if="canCreate" @click="createItem" class="dropdown-item">
+            <TadsIcon name="plus-heavy" size="14" class="mr-2" />
+            Create new
+          </a>
           <div
             v-if="data.length === 0 && hasEmptySlot"
             class="dropdown-item is-disabled"
@@ -59,11 +63,12 @@
 import { getValueByPath } from "../utils/helpers";
 import TadsInput from "../core/Input.vue";
 import { ref } from 'vue'
+import TadsIcon from "../core/Icon.vue";
 
 export default {
   name: "TadsAutocomplete",
-  emits: ['update:modelValue', 'selected', 'active', 'typing'],
-  components: { TadsInput },
+  emits: ['update:modelValue', 'selected', 'active', 'typing', 'create'],
+  components: { TadsIcon, TadsInput },
   inheritAttrs: false,
   props: {
     modelValue: {
@@ -86,6 +91,7 @@ export default {
     backend: Boolean,
     isLoading: Boolean,
     expanded: Boolean,
+    canCreate: Boolean,
     filterFunction: {
       type: Function,
     },
@@ -262,6 +268,13 @@ export default {
     }
   },
   methods: {
+    /**
+     * Create a new item based on input.
+     */
+    createItem() {
+      this.$emit('create', this.newValue);
+      this.isActive = false;
+    },
     /**
      * Set which option is currently hovered.
      */

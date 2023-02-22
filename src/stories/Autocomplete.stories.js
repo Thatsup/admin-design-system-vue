@@ -58,3 +58,13 @@ CustomFilter.args = {
     });
   }
 }
+
+export const CreateItem = Template.bind({});
+CreateItem.args = {
+  preselected: null,
+  canCreate: true,
+  placeholder: 'Create or search for a Javascript framework',
+  onCreate(value) {
+    console.log(value);
+  },
+}
