@@ -100,7 +100,7 @@ export default {
       default: "bottom",
       validator(value) {
         return (
-          ["bottom", "top"].indexOf(value) > -1
+          ["bottom", "top", "bottom-left", "bottom-right"].indexOf(value) > -1
         );
       }
     },
@@ -473,6 +473,9 @@ export default {
 .autocomplete .dropdown-menu {
   display: block;
   min-width: 100%;
+}
+
+.autocomplete:not(.bottom-left):not(.bottom-right) .dropdown-menu {
   max-width: 100%;
 }
 
@@ -491,6 +494,13 @@ export default {
   bottom: 100%;
   padding-bottom: 4px;
   padding-top: 0;
+}
+
+.autocomplete.bottom-left .dropdown-menu {
+  top: 100%;
+  padding-top: 4px;
+  right: 0;
+  left: auto
 }
 
 .autocomplete .dropdown-content {

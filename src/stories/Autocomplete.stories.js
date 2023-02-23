@@ -21,11 +21,17 @@ export default {
   argTypes: {
     'onUpdate:modelValue': { action: 'clicked' },
     'onSelected': { action: 'clicked' },
+    position: {
+      defaultValue: null,
+      type: 'string',
+      control: { type: 'select' },
+      options: ['top', 'bottom', 'bottom-left', 'bottom-right'],
+    },
   },
   args: {
     placeholder: 'Search for a Javascript framework',
     openOnFocus: true,
-  }
+  },
 };
 
 const Template = (args) => ({
@@ -34,7 +40,13 @@ const Template = (args) => ({
     const data = ref(javascriptFrameworks);
     return { args, data };
   },
-  template: '<Autocomplete :data="data" v-bind="args" />',
+  template: `
+    <div style="display:flex; justify-content: center; align-items: center; height: 300px">
+    <div style="width:250px;">
+      <Autocomplete :data="data" v-bind="args" />
+    </div>
+    </div>
+  `,
 });
 
 export const Default = Template.bind({});
