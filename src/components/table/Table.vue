@@ -1149,6 +1149,7 @@ export default {
 .table-wrap__inner th {
   padding-top: 25px;
   padding-bottom: 14px;
+  padding-left: 5px;
   font-size: 14px;
   font-weight: 500;
   color: var(--blue-gray-600);
@@ -1164,6 +1165,7 @@ export default {
 .table-wrap td {
   padding-top: 16px;
   padding-bottom: 16px;
+  padding-left: 5px;
   font-size: 16px;
   font-weight: 500;
   color: var(--blue-gray-800);
