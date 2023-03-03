@@ -1,22 +1,23 @@
 <template>
   <component
-      :is="is"
-      class="button"
-      :class="buttonClasses"
-      v-bind="{...customAttrs, ...$attrs}"
+    :is="is"
+    class="button"
+    :class="buttonClasses"
+    v-bind="{...customAttrs, ...$attrs}"
+    @click="onHandlerClick"
   >
     <TadsIcon
-        v-if="icon"
-        :name="icon"
-        :size="iconSize"
-        :rotate="iconRotate"
-        class="button__icon"
+      v-if="icon"
+      :name="icon"
+      :size="iconSize"
+      :rotate="iconRotate"
+      class="button__icon"
     />
 
     <span class="button__label" v-if="label || $slots.default">
-        <slot v-if="!label"/>
+        <slot v-if="!label" />
         {{ label }}
-      </span>
+    </span>
   </component>
 </template>
 
@@ -28,7 +29,7 @@ import TadsIcon from "./Icon.vue";
 export default {
   name: "TadsButton",
   inheritAttrs: false,
-  components: {TadsIcon},
+  components: { TadsIcon },
   props: {
     expanded: Boolean,
     loading: Boolean,
@@ -38,7 +39,7 @@ export default {
     icon: String,
     iconRotate: {
       type: Number,
-      default: 0,
+      default: 0
     },
 
     // Sizes
@@ -52,6 +53,37 @@ export default {
       validator(value) {
         return ['gray', 'blue', 'green', 'yellow', 'orange', 'navy', 'red', 'white'].indexOf(value) !== -1;
       }
+    },
+
+    handler: {
+      type: Function[Promise],
+      required: false,
+      default: null
+    }
+  },
+  data() {
+    return {
+      loadingLocal: false
+    };
+  },
+  methods: {
+    onHandlerClick() {
+      if (this.href) return
+
+      if (this.handler && typeof this.handler === "function") {
+        const handler = this.handler();
+
+        if (handler instanceof Promise) {
+          this.loadingLocal = true
+
+          return handler
+            .finally(() => {
+              this.loadingLocal = false
+            });
+        }
+
+        return handler
+      }
     }
   },
   computed: {
@@ -59,7 +91,7 @@ export default {
       return {
         "button--fullwidth": this.expanded,
         "button--outlined": this.outlined,
-        "is-loading": this.loading,
+        "is-loading": this.loading || this.loadingLocal,
 
         // Sizes
         "is-small": this.small,

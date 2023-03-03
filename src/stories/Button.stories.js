@@ -6,7 +6,13 @@ export default {
   title: 'Core/Button',
   component: Button,
   args: {
-    label: 'Click me!'
+    label: 'Click me!',
+    onClick: () => {
+      console.log('Regular click event')
+    },
+    handler() {
+      console.log('Handler click event');
+    }
   },
   argTypes: {
     color: {
@@ -59,4 +65,19 @@ export const Icon = Template.bind({});
 Icon.args = {
   icon: 'eye',
   label: null,
+};
+
+export const Handler = Template.bind({});
+Handler.args = {
+  label: 'Load more',
+  handler: async () => {
+    console.log('Promise click event');
+    await new Promise(r => setTimeout(r, 1000))
+
+    return fetch('https://jsonplaceholder.typicode.com/todos/')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Promise resolved');
+      });
+  },
 };
