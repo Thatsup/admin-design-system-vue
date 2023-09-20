@@ -73,12 +73,6 @@ export default {
     },
   },
   watch: {
-    errors(val) {
-      // Reach into the slot child and set the has-error data.
-      if (this.$children.length && this.$children[0].$data.hasError) {
-        this.$children[0].$data.hasError = !!val.length;
-      }
-    },
     open(newVal) {
       this.isOpen = newVal;
     }
