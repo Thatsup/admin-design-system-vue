@@ -96,6 +96,10 @@ textarea.input {
     line-height: var(--input-height--small);
 }
 
+.input.transparent {
+    background: transparent;
+}
+
 .input[type="number"].transparent::-webkit-inner-spin-button,
 .input[type="number"].transparent::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -105,7 +109,6 @@ textarea.input {
 }
 
 .input[type="number"].transparent {
-    background: transparent;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
