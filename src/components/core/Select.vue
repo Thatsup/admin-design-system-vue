@@ -1,5 +1,5 @@
 <template>
-  <div class="select-wrap">
+  <div class="select-wrap" :class="$attrs.class">
     <span class="select" :style="widthStyle" :class="fieldClasses">
       <span class="label" v-if="label">
         {{ label }}
