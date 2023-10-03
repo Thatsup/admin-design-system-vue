@@ -9,7 +9,7 @@
     @mouseout="isMouseDown = false"
     @blur="isMouseDown = false"
   >
-    <span class="control-label" v-if="label || $slots.default()">
+    <span class="control-label" v-if="label || $slots.default">
       <slot>{{ label }}</slot>
     </span>
     <input
