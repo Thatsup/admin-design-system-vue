@@ -1189,6 +1189,11 @@ export default {
   padding-left: var(--table-column-spacing-left);
 }
 
+.table-wrap td:last-child,
+.table-wrap th:last-child {
+  padding-right: var(--table-column-spacing-left);
+}
+
 .table-header .pagination {
   border: 0;
 }
