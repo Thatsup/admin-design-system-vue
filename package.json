@@ -3,6 +3,7 @@
   "version": "3.0.0--beta.49",
   "scripts": {
     "serve": "vue-cli-service serve",
+    "icons": "node ./src/assets/icons/run.js",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 6006",
