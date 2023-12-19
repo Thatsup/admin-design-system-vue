@@ -8,8 +8,8 @@
       <select
         ref="select"
         :dir="dir"
-        :value="selected"
-        @input="localValue = $event.target.value"
+        v-model="selected"
+        @change="update"
         v-bind="$attrs"
         :style="widthStyle"
       >
@@ -94,16 +94,6 @@ export default {
 
       return { width: this.width + "px" };
     },
-    localValue: {
-      get() {
-        return this.modelValue
-      },
-      set(value) {
-        this.$emit("update:modelValue", value)
-        this.selected = value
-        this.calculateWidth()
-      }
-    },
 
     fieldClasses() {
       return {
@@ -119,6 +109,10 @@ export default {
   },
 
   methods: {
+    update() {
+      this.$emit('update:modelValue', this.selected)
+      this.calculateWidth()
+    },
     calculateWidth() {
       if (!this.autoWidth) return
 

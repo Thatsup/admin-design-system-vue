@@ -1,6 +1,13 @@
 import Select from '../components/core/Select.vue';
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
+let options = [
+  {value: 0, label: 'Laravel'},
+  {value: 1, label: 'CodeIgniter'},
+  {value: 2, label: 'Symfony'},
+  {value: 3, label: 'CakePHP'},
+  {value: 4, label: 'Yii'},
+];
 export default {
   title: 'Core/Select',
   component: Select,
@@ -12,13 +19,7 @@ export default {
   args: {
     modelValue: 0,
     autoWidth: true,
-    options: [
-      {value: 0, label: 'Laravel'},
-      {value: 1, label: 'CodeIgniter'},
-      {value: 2, label: 'Symfony'},
-      {value: 3, label: 'CakePHP'},
-      {value: 4, label: 'Yii'},
-    ]
+    options: options
   },
 };
 
@@ -40,4 +41,22 @@ export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Default.args = {
   modelValue: 0
+};
+
+
+const ObjectTemplate = (args) => ({
+  // Components used in your story `template` are defined in the `components` object
+  components: { Select },
+  // The story's `args` need to be mapped into the template through the `setup()` method
+  setup() {
+    return { args };
+  },
+  // And then the `args` are bound to your component with `v-bind="args"`
+  template: `<Select v-bind="args">
+    <option v-for="option in args.options" :value="option" :key="option.value" v-text="option.label" />
+  </Select>`,
+});
+export const ObjectValue = ObjectTemplate.bind({});
+ObjectValue.args = {
+  modelValue: options[1],
 };
