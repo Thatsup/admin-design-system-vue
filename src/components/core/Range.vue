@@ -18,6 +18,7 @@
       class="ml-2"
       :small="small"
       :large="large"
+      :expanded="false"
       v-bind="inputProps"
     />
   </div>
@@ -107,10 +108,6 @@ export default {
 .base-range.has-input {
   display: flex;
   align-items: center;
-}
-
-.base-range.has-input input[type="range"] {
-  margin-right: 1rem;
 }
 
 input[type="range"] {
