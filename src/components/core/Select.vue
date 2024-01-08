@@ -15,7 +15,7 @@
       >
         <template v-if="placeholder">
           <option
-              value=""
+              :value="null"
               :disabled="required"
           >
             {{ placeholder }}
@@ -47,7 +47,7 @@ export default {
   props: {
     modelValue: {
       type: [String, Number, Boolean, Object, Array, Function],
-      default: undefined
+      default: null
     },
     placeholder: {
       type: String,
@@ -97,7 +97,7 @@ export default {
 
     fieldClasses() {
       return {
-        "no-value": this.selected === undefined,
+        "no-value": this.selected === null,
         "is-small": this.small,
         "is-large": this.large,
         "is-expanded": this.expanded,
