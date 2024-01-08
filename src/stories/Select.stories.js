@@ -17,7 +17,7 @@ export default {
     'onInput': {action: 'clicked'},
   },
   args: {
-    modelValue: 0,
+    placeholder: 'Select something',
     autoWidth: true,
     options: options
   },
@@ -40,7 +40,8 @@ const Template = (args) => ({
 export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Default.args = {
-  modelValue: 0
+  modelValue: null,
+  required: true,
 };
 
 
