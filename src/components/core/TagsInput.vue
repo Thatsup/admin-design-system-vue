@@ -1,11 +1,11 @@
 <template>
-  <div class="tag-input" :class="{ 'with-count': showCount }">
+  <div class="tag-input" :class="{ 'with-count': showCount, 'transparent': transparent }">
     <draggable
         v-model="tags"
         :item-key="sortableKey"
         :disabled="!sortable"
         class="tags input"
-        :class="{'has-border': border}"
+        :class="{'has-border': border, 'transparent': transparent}"
         animation="200"
     >
       <template #item="{element, index}">
@@ -17,6 +17,7 @@
             :can-delete="canDelete"
             :color="element.tagColor ? element.tagColor : tagsColor"
             @deleted="removeTag(index)"
+            @click="tagClicked(element)"
         >
           <template v-if="!getTagName(element) && fieldPlaceholder">
             <i>{{ fieldPlaceholder }}</i>
@@ -78,7 +79,7 @@ import {get} from "lodash/object";
 export default {
   name: 'TadsTagsInput',
   components: {Autocomplete, draggable,TadsTag},
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'click:tag'],
   inheritAttrs: false,
   props: {
     modelValue: {
@@ -131,6 +132,14 @@ export default {
     glue: {
       type: String,
       default: ','
+    },
+    transparent: {
+      type: Boolean,
+      default: false
+    },
+    tagProps: {
+      type: Object,
+      default: () => ({})
     }
   },
   setup(props, {emit}) {
@@ -242,11 +251,18 @@ export default {
       return props.options.filter((option) => !tagIds.includes(getTagId(option)));
     });
 
+    const tagClicked = (tag) => {
+      if (tags.value.includes(tag)) {
+        emit('click:tag', tag)
+      }
+    }
+
     return {
       tags,
       newTag,
       addTag,
       removeTag,
+      tagClicked,
       getTagName,
       getTagId,
       availableOptions,
@@ -271,6 +287,10 @@ export default {
   background: white;
   padding-top: 6px; /* @TODO Maybe use a CSS variable in input.css? */
   padding-bottom: 6px; /* @TODO Maybe use a CSS variable in input.css? */
+}
+
+.tag-input.transparent, .tags.transparent {
+  background: transparent;
 }
 
 .tag-input ::v-deep(.tag) {
