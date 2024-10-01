@@ -25,7 +25,7 @@
           :class="contentClass"
           :role="ariaRoleMenu"
         >
-          <slot />
+          <slot :open="(!disabled && (isActive || hoverable)) || inline" />
         </div>
       </div>
     </transition>
@@ -36,7 +36,7 @@
 import TadsButton from "../Button.vue";
 export default {
   name: "TadsDropdown",
-  components: {TadsButton},
+  components: { TadsButton },
   props: {
     disabled: Boolean,
     hoverable: Boolean,
@@ -48,29 +48,29 @@ export default {
         return (
           ["is-top-right", "is-top-left", "is-bottom-left"].indexOf(value) > -1
         );
-      }
+      },
     },
     mobileModal: {
       type: Boolean,
-      default: false
+      default: false,
     },
     ariaRole: {
       type: String,
-      default: ""
+      default: "",
     },
     animation: {
       type: String,
-      default: "fade"
+      default: "fade",
     },
     contentClass: {
       type: String,
-      default: ""
-    }
+      default: "",
+    },
   },
   data() {
     return {
       isActive: false,
-      $isDropdown: true // Used internally by DropdownItem
+      $isDropdown: true, // Used internally by DropdownItem
     };
   },
   computed: {
@@ -82,8 +82,8 @@ export default {
           "is-hoverable": this.hoverable,
           "is-inline": this.inline,
           "is-active": this.isActive || this.inline,
-          "is-mobile-modal": this.isMobileModal
-        }
+          "is-mobile-modal": this.isMobileModal,
+        },
       ];
     },
     isMobileModal() {
@@ -93,7 +93,7 @@ export default {
       return this.ariaRole === "menu" || this.ariaRole === "list"
         ? this.ariaRole
         : null;
-    }
+    },
   },
   created() {
     if (typeof window !== "undefined") {
@@ -158,8 +158,8 @@ export default {
       } else {
         this.isActive = !this.isActive;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
