@@ -25,7 +25,12 @@
           :class="contentClass"
           :role="ariaRoleMenu"
         >
-          <slot :open="(!disabled && (isActive || hoverable)) || inline" />
+          <slot
+            :open="open"
+            :close="close"
+            :toggle="toggle"
+            :is-open="(!disabled && (isActive || hoverable)) || inline"
+          />
         </div>
       </div>
     </transition>
@@ -158,6 +163,13 @@ export default {
       } else {
         this.isActive = !this.isActive;
       }
+    },
+    close() {
+      this.isActive = false;
+    },
+    open() {
+      if (this.disabled) return;
+      this.isActive = true;
     },
   },
 };

@@ -20,10 +20,14 @@ let Template = (args) => ({
       </TadsButton>
     </template>
     
-    <DropdownItem href="https://google.com?q=Foo" target="_blank">Foo</DropdownItem>
-    <DropdownItem href="https://google.com?q=Bar" target="_blank">Bar</DropdownItem>
-    <DropdownItem separator />
-    <DropdownItem href="https://google.com?q=Boo" target="_blank">Boo</DropdownItem>
+    <template #default="{ close }">
+      <DropdownItem href="https://google.com?q=Foo" target="_blank">Foo</DropdownItem>
+      <DropdownItem href="https://google.com?q=Bar" target="_blank">Bar</DropdownItem>
+      <DropdownItem separator />
+      <DropdownItem href="https://google.com?q=Boo" target="_blank">Boo</DropdownItem>
+      <DropdownItem>I do nothing</DropdownItem>
+      <DropdownItem @click="close">I close the dropdown</DropdownItem>
+      </template>
     </Dropdown>`,
 });
 
