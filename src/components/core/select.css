@@ -36,7 +36,7 @@
     z-index: 4;
     content: " ";
     display: block;
-    margin-top: -3px;
+    transform: translateY(-50%);
     position: absolute;
     top: 50%;
     width: 0;
@@ -51,6 +51,19 @@
 .select .label {
     font-size: 16px;
     margin-right: 1rem;
+}
+
+/**
+  Tiny size
+ */
+.select.is-tiny select {
+    font-size: var(--input-font-size--tiny);
+    height: var(--input-height--small);
+    padding-right: 12px;
+}
+
+.select.is-tiny .label {
+    font-size: var(--input-font-size--small);
 }
 
 /**
@@ -102,6 +115,24 @@
 
 .select.is-transparent::after {
     right: 0;
+}
+
+.select.is-transparent select {
+    padding: 0.085em 0.65em 0.085em 0.5em;
+}
+
+.select.is-transparent::after {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 7px solid var(--navy-700);
+    right: 0.425em;
+}
+
+.select.is-transparent.is-tiny::after,
+.select.is-transparent.is-small::after {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid var(--navy-700);
 }
 
 /**

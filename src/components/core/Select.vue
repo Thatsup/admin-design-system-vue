@@ -58,6 +58,7 @@ export default {
       default: ""
     },
     small: Boolean,
+    tiny: Boolean,
     large: Boolean,
     transparent: Boolean,
     expanded: Boolean,
@@ -99,6 +100,7 @@ export default {
       return {
         "no-value": this.selected === null,
         "is-small": this.small,
+        "is-tiny": this.tiny,
         "is-large": this.large,
         "is-expanded": this.expanded,
         "is-transparent": this.transparent,
@@ -125,7 +127,9 @@ export default {
       }
 
       nextTick(() => {
-        this.width = this.calculateMaxWidth(this.$refs.dummySelect.offsetWidth)
+        const dummySelect = this.$refs.dummySelect
+        const padding = parseInt(window.getComputedStyle(select).paddingLeft) + parseInt(window.getComputedStyle(select).paddingRight)
+        this.width = this.calculateMaxWidth(dummySelect.offsetWidth + padding)
       })
     },
     calculateMaxWidth(width) {
