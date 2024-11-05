@@ -4,6 +4,31 @@
     align-items: center;
     -webkit-touch-callout: none;
     user-select: none;
+    --switch-checked-bg: var(--blue-600);
+    --switch-checked-color: whitesmoke;
+
+    --switch-disabled-bg: var(--gray-300);
+    --switch-disabled-color: whitesmoke;
+
+    --switch-unchecked-bg: var(--blue-gray-500);
+    --switch-unchecked-color: whitesmoke;
+}
+
+.switch.is-warning {
+    --switch-checked-bg: var(--yellow-600);
+    --switch-checked-color: whitesmoke;
+}
+.switch.is-danger {
+    --switch-checked-bg: var(--red-600);
+    --switch-checked-color: whitesmoke;
+}
+.switch.is-success {
+    --switch-checked-bg: var(--green-600);
+    --switch-checked-color: whitesmoke;
+}
+.siwtch.is-info {
+    --switch-checked-bg: var(--blue-600);
+    --switch-checked-color: whitesmoke;
 }
 
 .switch:not(.is-expanded) + .switch {
@@ -26,7 +51,7 @@
     width: 2.75em;
     height: 1.575em;
     padding: 0.2em;
-    background: var(--blue-gray-500);
+    background: var(--switch-unchecked-bg);
     border-radius: 1em;
     transition: background 150ms ease-out;
 }
@@ -37,7 +62,7 @@
     border-radius: 1em;
     width: 1.175em;
     height: 1.175em;
-    background: whitesmoke;
+    background: var(--switch-unchecked-color);
     box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1),
     0 3px 3px 0 rgba(0, 0, 0, 0.05);
     transition: transform 150ms ease-out, width 150ms ease-out;
@@ -49,12 +74,13 @@
 }
 
 .switch input[type="checkbox"]:checked + .check {
-    background: var(--blue-600);
+    background: var(--switch-checked-bg);
 }
 
 .switch input[type="checkbox"]:checked + .check:before {
     -webkit-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0);
+    background: var(--switch-checked-color);
 }
 
 .switch input[type="checkbox"]:indeterminate + .check:before {
@@ -82,8 +108,8 @@
 }
 
 .switch input[type="checkbox"]:focus:checked + .check {
-    -webkit-box-shadow: 0 0 0.5em rgba(48, 166, 216, 0.8);
-    box-shadow: 0 0 0.5em rgba(48, 166, 216, 0.8);
+    -webkit-box-shadow: 0 0 0.5em var(--switch-checked-bg);
+    box-shadow: 0 0 0.5em var(--switch-checked-bg);
 }
 
 .switch .control-label {
@@ -91,11 +117,7 @@
 }
 
 .switch:hover input[type="checkbox"] + .check {
-    background: #c9d8de;
-}
-
-.switch:hover input[type="checkbox"]:checked + .check {
-    background: rgba(48, 166, 216, 0.9);
+    filter: brightness(1.05);
 }
 
 .switch input[type="checkbox"][disabled] + .check {

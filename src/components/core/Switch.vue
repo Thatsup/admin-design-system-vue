@@ -2,7 +2,7 @@
   <label
     ref="label"
     class="switch"
-    :class="{ 'is-expanded': expanded }"
+    :class="[typeClass, { 'is-expanded': expanded }]"
     @keydown.prevent.enter="$refs.label.click"
     @mousedown="isMouseDown = true"
     @mouseup="isMouseDown = false"
@@ -12,22 +12,14 @@
     <span class="control-label" v-if="label || $slots.default">
       <slot>{{ label }}</slot>
     </span>
-    <input
-      v-model="localValue"
-      type="checkbox"
-      @click.stop
-      v-bind="$attrs"
-    />
-    <span
-      class="check"
-      :class="{ 'is-elastic': isMouseDown }"
-    />
+    <input v-model="localValue" type="checkbox" @click.stop v-bind="$attrs" />
+    <span class="check" :class="{ 'is-elastic': isMouseDown }" />
   </label>
 </template>
 
 <script>
-import "./switch.css"
-import {computed, ref} from "vue";
+import "./switch.css";
+import { computed, ref } from "vue";
 
 export default {
   name: "TadsSwitch",
@@ -35,27 +27,46 @@ export default {
   props: {
     modelValue: {
       type: [String, Number, Boolean, Function, Object, Array, Symbol],
-      default: false
+      default: false,
     },
     label: {
       type: String,
-      default: ""
+      default: "",
+    },
+    type: {
+      type: String,
+      default: "info",
     },
     expanded: Boolean,
   },
-  emits: ['update:modelValue'],
+  emits: ["update:modelValue"],
   setup(props, context) {
-    const isMouseDown = ref(false)
+    const isMouseDown = ref(false);
     const localValue = computed({
       get: () => props.modelValue,
       set: (value) => {
-        context.emit('update:modelValue', value)
+        context.emit("update:modelValue", value);
+      },
+    });
+    const typeClass = computed(() => {
+      switch (props.type) {
+        case "success":
+          return "is-success";
+        case "danger":
+          return "is-danger";
+        case "warning":
+          return "is-warning";
+        case "info":
+          return "is-info";
+        default:
+          return "";
       }
     });
     return {
       localValue,
-      isMouseDown
+      isMouseDown,
+      typeClass,
     };
-  }
+  },
 };
 </script>
