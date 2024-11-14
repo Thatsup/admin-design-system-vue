@@ -52,12 +52,20 @@ export default {
       switch (props.type) {
         case "success":
           return "is-success";
+        case "success-off":
+          return "is-success-off";
         case "danger":
           return "is-danger";
+        case "danger-off":
+          return "is-danger-off";
         case "warning":
           return "is-warning";
+        case "warning-off":
+          return "is-warning-off";
         case "info":
           return "is-info";
+        case "info-off":
+          return "is-info-off";
         default:
           return "";
       }
