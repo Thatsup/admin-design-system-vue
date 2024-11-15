@@ -39,6 +39,13 @@ Warning.args = {
   type: "warning",
 };
 
+export const WarningOff = Template.bind({});
+WarningOff.args = {
+  label: "Maybe this should be on?",
+  type: "warning-off",
+  modelValue: false,
+};
+
 export const Danger = Template.bind({});
 Danger.args = {
   label: "It's dangerous to switch this!",

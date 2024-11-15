@@ -18,17 +18,33 @@
     --switch-checked-bg: var(--yellow-600);
     --switch-checked-color: whitesmoke;
 }
+.switch.is-warning-off {
+    --switch-unchecked-bg: var(--yellow-600);
+    --switch-unchecked-color: whitesmoke;
+}
 .switch.is-danger {
     --switch-checked-bg: var(--red-600);
     --switch-checked-color: whitesmoke;
+}
+.switch.is-danger-off {
+    --switch-unchecked-bg: var(--red-600);
+    --switch-unchecked-color: whitesmoke;
 }
 .switch.is-success {
     --switch-checked-bg: var(--green-600);
     --switch-checked-color: whitesmoke;
 }
-.siwtch.is-info {
+.switch.is-success-off {
+    --switch-unchecked-bg: var(--green-600);
+    --switch-unchecked-color: whitesmoke;
+}
+.switch.is-info {
     --switch-checked-bg: var(--blue-600);
     --switch-checked-color: whitesmoke;
+}
+.switch.is-info-off {
+    --switch-unchecked-bg: var(--blue-600);
+    --switch-unchecked-color: whitesmoke;
 }
 
 .switch:not(.is-expanded) + .switch {
