@@ -15,18 +15,19 @@ let Template = (args) => ({
   template: `
     <Dropdown>
     <template #trigger>
-      <TadsButton blue>
+      <TadsButton blue small>
         Open menu
       </TadsButton>
     </template>
     
     <template #default="{ close }">
-      <DropdownItem href="https://google.com?q=Foo" target="_blank">Foo</DropdownItem>
-      <DropdownItem href="https://google.com?q=Bar" target="_blank">Bar</DropdownItem>
+      <DropdownItem icon="settings" href="https://google.com?q=Bar" target="_blank">Settings</DropdownItem>
+      <DropdownItem icon="user-profile">My profile</DropdownItem>
+      <DropdownItem icon="user-simulate" href="https://google.com?q=Boo" target="_blank">Simulate user</DropdownItem>
+      <DropdownItem icon="support-alt">Support</DropdownItem>
+      <DropdownItem icon="trash" @click="close">Test</DropdownItem>
       <DropdownItem separator />
-      <DropdownItem href="https://google.com?q=Boo" target="_blank">Boo</DropdownItem>
-      <DropdownItem>I do nothing</DropdownItem>
-      <DropdownItem @click="close">I close the dropdown</DropdownItem>
+      <DropdownItem icon="log-out">Log out</DropdownItem>
       </template>
     </Dropdown>`,
 });

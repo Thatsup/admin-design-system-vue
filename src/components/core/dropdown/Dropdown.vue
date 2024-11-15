@@ -202,7 +202,7 @@ export default {
 .dropdown-menu {
   display: none;
   left: 0;
-  min-width: 12rem;
+  min-width: 5rem;
   padding-top: 4px;
   position: absolute;
   top: 100%;
@@ -211,10 +211,8 @@ export default {
 
 .dropdown-content {
   background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 2px 3px hsla(0, 0%, 4%, 0.1), 0 0 0 1px hsla(0, 0%, 4%, 0.1);
-  padding-bottom: 0.5rem;
-  padding-top: 0.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.08);
 }
 
 .dropdown-trigger > * {
