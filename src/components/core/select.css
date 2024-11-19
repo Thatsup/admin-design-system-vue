@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: flex-start;
 
-    padding: 0 30px 0 15px;
+    padding: 0 1.875em 0 1em;
     height: var(--input-height);
 
     -webkit-appearance: none;
@@ -59,7 +59,7 @@
 .select.is-tiny select {
     font-size: var(--input-font-size--tiny);
     height: var(--input-height--small);
-    padding-right: 12px;
+    /* padding-right: 12px; */
 }
 
 .select.is-tiny .label {
@@ -72,7 +72,7 @@
 .select.is-small select {
     font-size: var(--input-font-size--small);
     height: var(--input-height--small);
-    padding-right: 23px;
+    /* padding-right: 23px; */
 }
 
 .select.is-small .label {
@@ -85,7 +85,7 @@
 .select.is-large select {
     font-size: var(--input-font-size--large);
     height: var(--input-height--large);
-    padding: 0 36px 0 18px;
+    /* padding: 0 36px 0 18px; */
 }
 
 .select.is-large .label {
@@ -109,23 +109,25 @@
  */
 .select.is-transparent select {
     background: transparent;
-    padding: 0 15px 0 0;
     height: auto;
 }
 
-.select.is-transparent::after {
-    right: 0;
-}
-
 .select.is-transparent select {
-    padding: 0.085em 0.65em 0.085em 0.5em;
+    padding: 0.085em 0.85em 0.085em 0.5em;
 }
 
 .select.is-transparent::after {
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 7px solid var(--navy-700);
-    right: 0.425em;
+}
+
+.select.is-transparent:not(.has-border)::after {
+    right: 0;
+}
+
+.select.is-transparent.has-border select {
+    padding: 0.085em 2.0em 0.085em 0.5em;
 }
 
 .select.is-transparent.is-tiny::after,
