@@ -64,6 +64,10 @@ const SizesTemplate = (args) => ({
       <Select v-bind="args" large>
         <option v-for="option in args.options" :value="option" :key="option.value" v-text="option.label" />
       </Select>
+
+      <Select v-bind="args" large dir="rtl">
+        <option v-for="option in args.options" :value="option" :key="option.value" v-text="option.label" />
+      </Select>
     </div>
 `,
 });

@@ -1,6 +1,6 @@
 {
   "name": "tads",
-  "version": "3.0.0--beta.67",
+  "version": "3.0.0--beta.68",
   "scripts": {
     "serve": "vue-cli-service serve",
     "icons": "node ./src/assets/icons/run.js",
