@@ -1,8 +1,10 @@
 :root {
   /* Blue */
+  --blue-200: #ECF7FF;
   --blue-600: #2ea6d7;
 
   /* Navy blue */
+  --navy-500: #0D3B4E;
   --navy-700: #0d3b4e;
   --navy-800: #001a34;
 
