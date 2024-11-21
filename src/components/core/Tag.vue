@@ -1,13 +1,14 @@
 <template>
-  <span class="tag" :class="color">
+  <span class="tag" :class="[color, { 'tag--with-icon': !!icon }]">
+    <TadsIcon v-if="icon" size="11" :name="icon" class="tag__icon" />
     <slot />
     <TadsIcon
-        v-if="canDelete"
-        @click="$emit('deleted')"
-        size="11"
-        name="plus-heavy"
-        rotate="45"
-        class="tag__delete"
+      v-if="canDelete"
+      @click="$emit('deleted')"
+      size="11"
+      name="plus-heavy"
+      rotate="45"
+      class="tag__delete"
     />
   </span>
 </template>
@@ -17,18 +18,22 @@ import TadsIcon from "./Icon.vue";
 
 export default {
   name: "TadsTag",
-  components: {TadsIcon},
-  emits: ['deleted'],
+  components: { TadsIcon },
+  emits: ["deleted"],
   props: {
     canDelete: Boolean,
     color: {
       type: String,
       default: "gray",
       validator(value) {
-        return ['green', 'yellow', 'blue', 'red', 'gray'].indexOf(value) !== -1;
-      }
-    }
-  }
+        return ["green", "yellow", "blue", "red", "gray"].indexOf(value) !== -1;
+      },
+    },
+    icon: {
+      type: String,
+      default: null,
+    },
+  },
 };
 </script>
 
@@ -46,7 +51,7 @@ export default {
   transition: color 0.2s, background-color 0.2s;
 }
 
-.tag::before {
+.tag:not(.tag--with-icon)::before {
   content: "";
   height: 6px;
   width: 6px;
@@ -55,6 +60,9 @@ export default {
   margin-right: 4px;
 
   transition: color 0.2s, background-color 0.2s;
+}
+.tag__icon {
+  margin-right: 4px;
 }
 
 .tag__delete {

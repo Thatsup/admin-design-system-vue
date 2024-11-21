@@ -113,7 +113,7 @@
 }
 
 .select.is-transparent select {
-    padding: 0.085em 1em 0.085em 0.5em;
+    padding: 0.085em 1em 0.085em 5px;
 }
 
 .select.is-transparent::after {
