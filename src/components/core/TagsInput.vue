@@ -79,7 +79,7 @@ import {get} from "lodash/object";
 export default {
   name: 'TadsTagsInput',
   components: {Autocomplete, draggable,TadsTag},
-  emits: ['update:modelValue', 'click:tag', 'delete:tag'],
+  emits: ['update:modelValue', 'click:tag'],
   inheritAttrs: false,
   props: {
     modelValue: {
@@ -208,28 +208,13 @@ export default {
 
       newTag.value = "";
     };
-    const removeTag = async (index) => {
+    const removeTag = (index) => {
       if(!props.canDelete) {
         return;
       }
-
-      // Emit deleted event with tag and index
-      const tagToDelete = tags.value[index];
-      const shouldDelete = await new Promise(resolve => {
-        emit('delete:tag', {
-          tag: tagToDelete,
-          index,
-          preventDefault: () => resolve(false)
-        });
-        // If preventDefault() wasn't called, allow deletion
-        resolve(true);
-      });
-
-      if (shouldDelete) {
-        const newTags = [...tags.value];
-        newTags.splice(index, 1);
-        tags.value = newTags;
-      }
+      const newTags = [ ...tags.value ];
+      newTags.splice(index, 1);
+      tags.value = newTags;
     };
     const getTagName = tag => {
       if(typeof tag === 'string') {
