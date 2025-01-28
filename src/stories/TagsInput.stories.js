@@ -23,15 +23,21 @@ const Template = (args) => ({
   components: { TagsInput },
   setup() {
     const data = ref(args.modelValue);
-    return { args, data };
+
+    const handleDelete = (event) => {
+      console.log(event);
+    }
+
+    return { args, data, handleDelete };
   },
-  template: '<TagsInput v-bind="args" v-model="data" /><pre>{{data}}</pre>',
+  template: '<TagsInput v-bind="args" v-model="data" @delete:tag="handleDelete" /><pre>{{data}}</pre>',
 });
 
 export const ArrayInput = Template.bind({});
 ArrayInput.args = {
   modelValue: ['Restaurant', 'Bar', 'Night club', 'Café', 'Barber', 'Tattoo parlour', 'Mall', 'Food market'],
   border: true,
+  canDelete: true,
 }
 
 export const ArrayWithObjects = Template.bind({});

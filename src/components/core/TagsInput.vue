@@ -212,6 +212,9 @@ export default {
       if(!props.canDelete) {
         return;
       }
+
+      emit('delete:tag', tags.value[index]);
+
       const newTags = [ ...tags.value ];
       newTags.splice(index, 1);
       tags.value = newTags;
