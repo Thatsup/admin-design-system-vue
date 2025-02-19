@@ -52,6 +52,7 @@
   | */
   --input-height--small: 36px;
   --input-height: 42px;
+  --input-bg-color: #fff;
   --input-height--large: 52px;
 
   --input-font-size--tiny: 12px;
