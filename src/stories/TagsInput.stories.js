@@ -97,13 +97,14 @@ let options = [
   {id: 2, companyName: 'Facebook'},
   {id: 3, companyName: 'Tesla'},
   {id: 4, companyName: 'Amazon'},
-  {id: 5, companyName: 'Thatsúp'}
+  {id: 5, companyName: 'Thatsúp'},
+  {id: 6, companyName: 'Google'}, // Duplicated company to test same name
 ];
 FixedValues.args = {
   options: options,
   modelValue: [options[0]],
   labelField: 'companyName',
-  idField: 'id',
+  field: 'companyName',
   placeholder: 'Only big tech allowed',
   allowCustom: false,
 }

@@ -232,7 +232,10 @@ export default {
       if(typeof tag === 'string') {
         return tag;
       }
-      return (props.idField? get(tag, props.idField) : (props.field? get(tag, props.field) : tag)).toString();
+
+      const objectFromId = get(tag, props.idField || 'id');
+
+      return (objectFromId? objectFromId : (props.field? get(tag, props.field) : tag)).toString();
     }
 
     const sortableKey = tag => {
