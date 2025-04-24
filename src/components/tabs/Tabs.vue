@@ -5,13 +5,16 @@
         v-for="(tab, index) in tabList"
         :key="index"
         @click="select(index)"
-        v-bind="{...tab.$attrs, ...tab.dataAttrs}"
-        :class="[tab.tabClass, {
-          active: isActive(index),
-          disabled: tab.disabled,
-          icon: tab.icon,
-          ['position-' + tab.position]: tab.position
-        }]"
+        v-bind="{ ...tab.$attrs, ...tab.dataAttrs }"
+        :class="[
+          tab.tabClass,
+          {
+            active: isActive(index),
+            disabled: tab.disabled,
+            icon: tab.icon,
+            ['position-' + tab.position]: tab.position,
+          },
+        ]"
       >
         <template v-if="tab.icon">
           <TadsIcon :name="tab.icon" :size="18" />
@@ -35,20 +38,20 @@ export default {
   props: {
     disableContent: {
       type: Boolean,
-      default: false
+      default: false,
     },
     position: {
       type: String,
       default: "center",
       validator(value) {
         return ["left", "center", "right"].indexOf(value) > -1;
-      }
-    }
+      },
+    },
   },
   data() {
     return {
       tabList: [],
-      activeTabIndex: 0
+      activeTabIndex: 0,
     };
   },
   mounted() {
@@ -56,7 +59,6 @@ export default {
   },
   methods: {
     isActive(index) {
-      console.log(this.activeTabIndex, index);
       return this.activeTabIndex === index;
     },
     select(index) {
@@ -74,10 +76,10 @@ export default {
       tab.$emit("selected");
     },
     getInitialActiveTab() {
-      const index = this.tabList.findIndex(tab => tab.active);
+      const index = this.tabList.findIndex((tab) => tab.active);
       return index === -1 ? 0 : index;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -94,7 +96,7 @@ export default {
 
 .tabs > span {
   display: inline-flex;
-  margin-bottom: -1px;
+  /* margin-bottom: -1px; */
   padding: 1.2em 1.2em 0.7em;
   color: var(--gray-600);
   cursor: pointer;
