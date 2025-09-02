@@ -26,7 +26,7 @@ export default {
       type: String,
       default: "gray",
       validator(value) {
-        return ["green", "yellow", "blue", "red", "gray"].indexOf(value) !== -1;
+        return ["green", "yellow", "blue", "red", "gray", "orange"].indexOf(value) !== -1;
       },
     },
     icon: {
@@ -118,4 +118,14 @@ export default {
 .green::before {
   background: var(--green-600);
 }
+
+.orange {
+  color: var(--orange-600);
+  background: rgba(252, 157, 78, 0.27);
+}
+
+.orange::before {
+  background: var(--orange-600);
+}
+
 </style>

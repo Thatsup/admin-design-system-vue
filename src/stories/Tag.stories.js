@@ -7,7 +7,7 @@ export default {
     color: {
       type: "string",
       control: { type: "select" },
-      options: ["green", "yellow", "blue", "red", "gray"],
+      options: ["green", "yellow", "orange", "blue", "red", "gray"],
     },
   },
 };
@@ -32,6 +32,7 @@ const ColorsTemplate = (args) => ({
     <div style="display: flex; gap: 15px;">
       <Tag v-bind="args" color="green">Active</Tag>
       <Tag v-bind="args" color="yellow">Active</Tag>
+      <Tag v-bind="args" color="orange">Active</Tag>
       <Tag v-bind="args" color="blue">Active</Tag>
       <Tag v-bind="args" color="red">Active</Tag>
       <Tag v-bind="args" color="gray">Active</Tag>
