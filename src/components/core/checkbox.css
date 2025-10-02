@@ -65,7 +65,8 @@
     padding-left: 0.5em;
 }
 
-.base-checkbox.checkbox[disabled] {
+.base-checkbox.checkbox input[type="checkbox"]:disabled + .check,
+.base-checkbox.checkbox input[type="checkbox"]:disabled + .check + .control-label {
     opacity: 0.5;
 }
 
