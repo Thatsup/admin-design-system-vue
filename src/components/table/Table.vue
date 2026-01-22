@@ -1157,7 +1157,7 @@ export default {
   text-align: left;
 }
 
-.table-wrap th, . table-wrap td {
+.table-wrap th, .table-wrap td {
   padding-right: 10px;
   font-weight: unset;
 }
