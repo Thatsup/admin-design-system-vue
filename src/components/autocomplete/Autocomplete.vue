@@ -1,5 +1,8 @@
 <template>
-  <div class="autocomplete control" :class="{ 'is-expanded': expanded, [position]: position }">
+  <div
+    class="autocomplete control"
+    :class="{ 'is-expanded': expanded, [position]: position }"
+  >
     <TadsInput
       v-model="newValue"
       type="text"
@@ -21,7 +24,10 @@
 
     <transition name="fade">
       <div
-        v-show="isActive && (data.length > 0 || hasEmptySlot || hasHeaderSlot || canCreate)"
+        v-show="
+          isActive &&
+          (data.length > 0 || hasEmptySlot || hasHeaderSlot || canCreate)
+        "
         ref="dropdown"
         class="dropdown-menu"
         :class="{ 'is-opened-top': !isListInViewportVertically }"
@@ -38,7 +44,12 @@
             :title="getValue(option, true)"
             @click="setSelected(option)"
           >
-            <slot v-if="hasDefaultSlot" :option="option" :index="index" :is-hovered="option === hovered" />
+            <slot
+              v-if="hasDefaultSlot"
+              :option="option"
+              :index="index"
+              :is-hovered="option === hovered"
+            />
             <span v-else>
               {{ getValue(option, true) }}
             </span>
@@ -62,26 +73,26 @@
 <script>
 import { getValueByPath } from "../utils/helpers";
 import TadsInput from "../core/Input.vue";
-import { ref } from 'vue'
+import { ref } from "vue";
 import TadsIcon from "../core/Icon.vue";
 
 export default {
   name: "TadsAutocomplete",
-  emits: ['update:modelValue', 'selected', 'active', 'typing', 'create'],
+  emits: ["update:modelValue", "selected", "active", "typing", "create"],
   components: { TadsIcon, TadsInput },
   inheritAttrs: false,
   props: {
     modelValue: {
       type: [String, Number],
-      default: ""
+      default: "",
     },
     data: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     field: {
       type: String,
-      default: "name"
+      default: "name",
     },
     keepFirst: Boolean,
     clearOnSelect: Boolean,
@@ -102,18 +113,18 @@ export default {
         return (
           ["bottom", "top", "bottom-left", "bottom-right"].indexOf(value) > -1
         );
-      }
+      },
     },
     customFormatter: {
       type: Function,
-      default: undefined
+      default: undefined,
     },
     preselected: {
       type: [Object, String, Number],
       required: false,
-      default: null
+      default: null,
     },
-    allowCustom: Boolean
+    allowCustom: Boolean,
   },
   data() {
     return {
@@ -125,34 +136,38 @@ export default {
       isListInViewportVertically: true,
       hasFocus: false,
       _isAutocomplete: true,
-      _elementRef: 'input'
+      _elementRef: "input",
     };
   },
   setup() {
     let hoveredIndex = ref(null);
 
     return {
-      hoveredIndex
-    }
+      hoveredIndex,
+    };
   },
   computed: {
     hovered() {
-      return this.hoveredIndex === null? null : this.filteredData[this.hoveredIndex];
+      return this.hoveredIndex === null
+        ? null
+        : this.filteredData[this.hoveredIndex];
     },
     filteredData() {
       if (this.backend) {
-        return this.data
+        return this.data;
       }
 
       if (this.filterFunction) {
-        return this.filterFunction(this.data, this.newValue, this.field)
+        return this.filterFunction(this.data, this.newValue, this.field);
       }
 
-      return this.data.filter(option => {
-        return this.getValue(option)
-                .toString()
-                .toLowerCase()
-                .indexOf(this.newValue.toLowerCase()) >= 0
+      return this.data.filter((option) => {
+        return (
+          this.getValue(option)
+            .toString()
+            .toLowerCase()
+            .indexOf(this.newValue.toLowerCase()) >= 0
+        );
       });
     },
     /**
@@ -193,9 +208,20 @@ export default {
      */
     hasHeaderSlot() {
       return !!this.$slots.header;
-    }
+    },
   },
   watch: {
+    /**
+     * When preselected is changed from the outside,
+     * update the selected state and input value.
+     */
+    preselected(newValue) {
+      this.selected = newValue;
+      if (this.selected !== null) {
+        this.newValue = this.clearOnSelect ? "" : this.getValue(this.selected);
+      }
+    },
+
     /**
      * When dropdown is toggled, check the visibility to know when
      * to open upwards.
@@ -249,7 +275,7 @@ export default {
       if (this.keepFirst) {
         this.selectFirstOption(value);
       }
-    }
+    },
   },
   created() {
     if (typeof window !== "undefined") {
@@ -272,7 +298,7 @@ export default {
      * Create a new item based on input.
      */
     createItem() {
-      this.$emit('create', this.newValue);
+      this.$emit("create", this.newValue);
       this.isActive = false;
     },
     /**
@@ -325,10 +351,10 @@ export default {
      */
     enterPressed() {
       if (this.hovered === null) {
-        if(this.newValue && this.allowCustom) {
+        if (this.newValue && this.allowCustom) {
           return this.setSelected(
-      this.field? {[this.field]: this.newValue} : this.newValue
-          )
+            this.field ? { [this.field]: this.newValue } : this.newValue,
+          );
         }
         return;
       }
@@ -400,7 +426,10 @@ export default {
       const sum = direction === "down" ? 1 : -1;
       if (this.isActive) {
         let index = this.filteredData.indexOf(this.hovered) + sum;
-        index = index > this.filteredData.length - 1 ? this.filteredData.length : index;
+        index =
+          index > this.filteredData.length - 1
+            ? this.filteredData.length
+            : index;
         index = index < 0 ? 0 : index;
 
         this.$emit("active", this.filteredData[index]);
@@ -409,7 +438,7 @@ export default {
 
         const list = this.$refs.dropdown.querySelector(".dropdown-content");
         const element = list.querySelectorAll(
-          "a.dropdown-item:not(.is-disabled)"
+          "a.dropdown-item:not(.is-disabled)",
         )[index];
 
         if (!element) return;
@@ -456,8 +485,8 @@ export default {
       const currentValue = this.getValue(this.selected);
       if (currentValue && currentValue === this.newValue) return;
       this.$emit("typing", this.newValue);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -467,7 +496,7 @@ export default {
 }
 .autocomplete.is-expanded,
 .autocomplete.is-expanded input {
- width: 100%;
+  width: 100%;
 }
 
 .autocomplete .dropdown-menu {
@@ -500,7 +529,7 @@ export default {
   top: 100%;
   padding-top: 4px;
   right: 0;
-  left: auto
+  left: auto;
 }
 
 .autocomplete .dropdown-content {
